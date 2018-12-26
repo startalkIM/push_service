@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+
+    <!-- Spring提供的基于的Ehcache实现的缓存管理器 -->
+    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml" />
+        <!--true:单例，一个cacheManager对象共享；false：多个对象独立 -->
+        <property name="shared" value="true" />
+        <property name="cacheManagerName" value="cacheManagerFactory" />
+    </bean>
+    <!--<bean id="ehCache" class="org.springframework.cache.ehcache.EhCacheCacheManager">-->
+        <!--<property name="cacheManager" ref="cacheManagerFactory"/>-->
+    <!--</bean>-->
+     <!--myCache 操作对象-->
+    <bean id="pushinfo_cache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <!--         cacheName对应ehcache.xml中的cache name="myCache" -->
+        <property name="cacheName" value="pushinfo_cache" />
+        <property name="cacheManager" ref="cacheManagerFactory" />
+    </bean>
+    <!-- myCache2 操作对象 -->
+    <bean id="user_group_notify_cache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <!--         cacheName对应ehcache.xml中的cache name="myCache2" -->
+        <property name="cacheName" value="user_group_notify_cache" />
+        <property name="cacheManager" ref="cacheManagerFactory" />
+    </bean>
+    <!-- 自定义ehcache+redis -->
+    <bean id="ehRedisCacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean id="ehRedisCache" class="com.qunar.qchat.caches.EhRedisCache">
+                    <property name="redisTemplate" ref="redisTemplate" />
+                    <property name="ehCache" ref="pushinfo_cache" />
+                    <property name="name" value="pushinfo_cache" />
+                </bean>
+                <bean id="ehRedisCache2" class="com.qunar.qchat.caches.EhRedisCache">
+                    <property name="redisTemplate" ref="redisTemplate" />
+                    <property name="ehCache" ref="user_group_notify_cache" />
+                    <property name="name" value="user_group_notify_cache" />
+                </bean>
+            </set>
+        </property>
+    </bean>
+
+    <!-- ehCache 配置管理器 -->
+    <cache:annotation-driven cache-manager="ehRedisCacheManager" proxy-target-class="true"/>
+</beans>

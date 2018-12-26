@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qunar.qchat.dao.IUserDao">
+
+    <sql id="user_columes">
+        username,
+        name,
+        department,
+        dep1,
+        dep2,
+        dep3,
+        dep4,
+        dep5,
+        fpinyin
+        spinyin
+    </sql>
+
+    <select id="selectAllUser"
+            parameterType="int"
+            resultType="com.qunar.qchat.dao.model.UserModule">
+        SELECT
+        <include refid="user_columes"/>
+         FROM users
+        WHERE hire_flag>0
+    </select>
+
+    <select id="getVirtualUser"
+            parameterType="String"
+            resultType="com.qunar.qchat.dao.model.VirtualUserModule">
+        SELECT
+        username,name,user_type,url,version
+        FROM virtual_users
+        WHERE username=#{username} order by version desc limit 1;
+    </select>
+
+</mapper>

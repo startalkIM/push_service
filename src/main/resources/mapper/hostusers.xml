@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qunar.qchat.dao.IHostUserDao">
+
+    <select id="selectName" resultType="java.lang.String">
+        SELECT user_name FROM ${table} JOIN ${join}
+        ON (${table}.host_id = ${join}.id and host = #{host} and ${table}.user_id = #{user_name})
+    </select>
+
+    <select id="selectMucName" resultType="java.lang.String">
+        SELECT show_name FROM ${table}
+        WHERE muc_name = #{muc_name}
+    </select>
+
+</mapper>

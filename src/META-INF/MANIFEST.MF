@@ -1,0 +1,47 @@
+Manifest-Version: 1.0
+Class-Path: concurrentlinkedhashmap-lru-1.3.1.jar concurrent-trees-1.0
+ .0.jar qtracer-jvm-profile-1.1.1.jar spring-jdbc-4.2.1.RELEASE.jar jo
+ da-time-2.9.3.jar jcl-over-slf4j-1.7.12.jar spring-data-redis-1.8.3.R
+ ELEASE.jar zkclient-0.3.jar slf4j-api-1.7.12.jar metrics-core-2.2.0.j
+ ar spring-aop-4.2.1.RELEASE.jar commons-pool-1.5.4.jar jackson-core-2
+ .7.3.jar qtracer-instrument-asm-1.1.1.jar httpasyncclient-4.1.1.jar a
+ spectjweaver-1.7.4.jar httpclient-4.5.2.jar qtracer-instrument-agent-
+ 1.1.1.jar spring-expression-4.2.1.RELEASE.jar commons-lang-2.5.jar ne
+ tty-3.9.5.Final.jar kafka_2.11-0.8.2.2.jar curator-recipes-2.6.0.jar 
+ spring-context-4.2.1.RELEASE.jar guava-19.0.jar jopt-simple-3.2.jar c
+ urator-client-2.6.0.jar qtracer-instrument-tools-1.1.1.jar commons-db
+ cp-1.4.jar jline-0.9.94.jar jackson-core-asl-1.9.13.jar qmq-client-2.
+ 1.4.jar qmonitor-1.0.5.jar zookeeper-3.4.6.jar hibernate-validator-5.
+ 0.1.Final.jar jboss-logging-3.1.1.GA.jar aopalliance-1.0.jar logback-
+ core-1.0.13.jar disruptor-3.3.0.jar qtracer-common-1.1.1.jar jedis-2.
+ 9.0.jar javax.servlet-api-3.0.1.jar snappy-java-1.1.1.7.jar spring-or
+ m-4.2.1.RELEASE.jar spring-web-4.2.1.RELEASE.jar spring-erlang-1.4.2.
+ RELEASE.jar commons-pool2-2.4.2.jar jinterface-1.5.6.jar common-http-
+ 8.3.1.jar postgresql-42.1.4.jar commons-codec-1.10.jar spring-oxm-3.1
+ .4.RELEASE.jar meerkat-monitor-1.3.9.jar netty-all-4.0.24.Final.jar a
+ sync-http-client-1.9.31.jar validation-api-1.1.0.Final.jar common-api
+ -8.3.1.jar libphonenumber-7.1.1.jar dubbo-3.2.4.jar common-zookeeper-
+ 1.1.4.jar bcprov-jdk16-1.46.jar metrics-core-3.0.2.jar scala-parser-c
+ ombinators_2.11-1.0.2.jar qtracer-instrument-http-1.1.1.jar common-la
+ ng-8.3.1.jar okio-1.6.0.jar javassist-3.18.0-GA.jar httpcore-nio-4.3.
+ jar qmq-common-2.1.4.jar common-rpc-8.3.1.jar qconfig-common-1.1.9.ja
+ r spring-context-support-4.2.1.RELEASE.jar spring-core-4.2.1.RELEASE.
+ jar jackson-mapper-asl-1.9.13.jar scala-xml_2.11-1.0.2.jar jackson-an
+ notations-2.7.3.jar common-core-8.3.1.jar commons-lang3-3.4.jar qconf
+ ig-client-1.1.9.jar asynclogger-1.0.0.jar spring-data-keyvalue-1.2.3.
+ RELEASE.jar qmq-api-2.1.4.jar commons-collections4-4.1.jar jul-to-slf
+ 4j-1.7.12.jar httpmime-4.5.2.jar spring-webmvc-4.2.1.RELEASE.jar scal
+ a-library-2.11.5.jar logback-classic-1.1.3.jar httpcore-4.4.4.jar myb
+ atis-3.3.1.jar qtracer-instrument-annotation-1.1.1.jar fastjson-1.2.2
+ 8.jar kafka-clients-0.8.2.2.jar dom4j-1.6.1.jar xml-apis-1.0.b2.jar l
+ z4-1.2.0.jar log4j-over-slf4j-1.7.12.jar dubbo-async-api-3.2.4.jar ap
+ ns-http2-1.0.3.jar qtracer-instrument-annotation-processor-1.1.1.jar 
+ okhttp-3.2.0.jar spring-beans-4.2.1.RELEASE.jar qtracer-client-1.1.1.
+ jar json-simple-1.1.1.jar MiPush_SDK_Server_2_2_18.jar qtracer-instru
+ ment-lib-1.1.1.jar jackson-databind-2.7.3.jar spring-instrument-4.2.1
+ .RELEASE.jar MiPush_SDK_Server_2_2_18.jar curator-framework-2.6.0.jar
+  spring-tx-3.1.4.RELEASE.jar classmate-0.8.0.jar common-concurrent-8.
+ 3.1.jar commons-io-2.4.jar mybatis-spring-1.2.5.jar spring-aspects-4.
+ 2.1.RELEASE.jar spring-data-commons-1.13.3.RELEASE.jar
+Main-Class: 
+

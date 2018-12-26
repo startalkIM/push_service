@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qunar.qchat.dao.IPlatKeyDao">
+
+    <update id="updatePlatKey">
+        UPDATE ${table}
+        SET mac_key  = #{mac_key},
+            platname = #{platname},
+            pkgname = #{pkgname},
+            version = #{version},
+            update_at = now(),
+            os = #{os}
+        WHERE
+            user_name = #{username} and
+            host = #{domain};
+    </update>
+
+    <update id="updateDelPlatKey">
+        UPDATE ${table}
+        SET mac_key  = '',
+            platname = '',
+            pkgname = '',
+        version = #{version},
+        update_at = now()
+        WHERE
+        user_name = #{username} and
+        host = #{domain} and
+        os = #{os};
+    </update>
+
+    <insert id="insertPlatKey">
+        INSERT INTO ${table}
+            (user_name, host, mac_key, platname, pkgname, push_flag, os, version)
+        VALUES (#{username}, #{domain}, #{mac_key}, #{platname}, #{pkgname}, ${@com.qunar.qchat.constants.MessageSettingsTag@DEFAULT_ALL}, #{os}, #{version});
+    </insert>
+    <resultMap id="pushinfo" type="com.qunar.qchat.dao.model.PushInfo">
+        <!-- 用result属性来映射非主键字段 -->
+        <result property="mac_key" column="mac_key" />
+        <result property="platname" column="platname"/>
+        <result property="pkgname" column="pkgname" />
+        <result property="push_flag" column="push_flag"/>
+        <result property="os" column="os" />
+    </resultMap>
+    <select id="selectPlatKey" resultMap="pushinfo" >
+        SELECT mac_key, platname, pkgname, push_flag, os, version FROM ${table}
+        WHERE user_name = #{username} AND host = #{domain} AND mac_key &lt;&gt; '' AND mac_key &lt;&gt; '(null)'
+    </select>
+
+    <select id="selectShowContent" resultType="java.util.HashMap">
+        SELECT push_flag FROM ${table}
+        WHERE user_name = #{username} AND host = #{domain}
+    </select>
+
+    <update id="updateDelOldMacKey">
+        UPDATE ${table}
+        SET mac_key  = '',
+        version = #{version},
+        update_at = now()
+        WHERE
+        user_name = #{username} and
+        host = #{domain} and
+        os = #{os};
+    </update>
+    <update id="updateShowContent">
+        UPDATE ${table}
+        <set>
+            <if test="version != null and version != '' ">
+                version = #{version},
+            </if>
+            <if test="show_content == 0">
+                <![CDATA[ push_flag = (#{index} | push_flag) # #{index} ]]>,
+            </if>
+            <if test="show_content == 1">
+                <![CDATA[ push_flag = #{index} | push_flag ]]>,
+            </if>
+            update_at = now(),
+            show_content = #{show_content}
+        </set>
+        WHERE
+        user_name = #{username} and
+        host = #{domain} and
+        os = #{os};
+    </update>
+    <update id="updateOnlinePush">
+        UPDATE ${table}
+        <set>
+            <if test="version != null and version != '' ">
+                version = #{version},
+            </if>
+            <if test="online_push == 0">
+                <![CDATA[ push_flag = (#{index} | push_flag) # #{index} ]]>,
+            </if>
+            <if test="online_push == 1">
+                <![CDATA[ push_flag = #{index} | push_flag ]]>,
+            </if>
+            update_at = now()
+        </set>
+        WHERE
+        user_name = #{username} and
+        host = #{domain} and
+        os = #{os};
+    </update>
+    <update id="updateInappSound">
+        UPDATE ${table}
+        <set>
+            <if test="version != null and version != '' ">
+                version = #{version},
+            </if>
+            <if test="inapp_sound == 0">
+                <![CDATA[ push_flag = (#{index} | push_flag) # #{index} ]]>,
+            </if>
+            <if test="inapp_sound == 1">
+                <![CDATA[ push_flag = #{index} | push_flag ]]>,
+            </if>
+            update_at = now()
+        </set>
+        WHERE
+        user_name = #{username} and
+        host = #{domain} and
+        os = #{os};
+    </update>
+    <update id="updateInappVibrate">
+        UPDATE ${table}
+        <set>
+            <if test="version != null and version != '' ">
+                version = #{version},
+            </if>
+            <if test="inapp_vibrate == 0">
+                <![CDATA[ push_flag = (#{index} | push_flag) # #{index} ]]>,
+            </if>
+            <if test="inapp_vibrate == 1">
+                <![CDATA[ push_flag = #{index} | push_flag ]]>,
+            </if>
+            update_at = now()
+        </set>
+        WHERE
+        user_name = #{username} and
+        host = #{domain} and
+        os = #{os};
+    </update>
+
+    <update id="updatePushSwitch">
+        UPDATE ${table}
+        <set>
+            <if test="version != null and version != '' ">
+                version = #{version},
+            </if>
+            <if test="push_switch == 0">
+                <![CDATA[ push_flag = (#{index} | push_flag) # #{index} ]]>,
+            </if>
+            <if test="push_switch == 1">
+                <![CDATA[ push_flag = #{index} | push_flag ]]>,
+            </if>
+            update_at = now()
+        </set>
+        WHERE
+        user_name = #{username} and
+        host = #{domain} and
+        os = #{os};
+    </update>
+
+    <select id="selectMsgSettings" resultType="java.util.HashMap">
+        SELECT push_flag FROM ${table}
+        WHERE user_name = #{username} AND host = #{domain}
+    </select>
+
+    <select id="selectGroupIsSubsribe" resultType="java.lang.String">
+        SELECT subscribe_flag FROM ${table}
+        WHERE username = #{username} AND host = #{domain} AND muc_name = #{muc_name}
+    </select>
+
+    <select id="selectGroupIsSubsribeFromClientConfig" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM
+        ${table}
+        WHERE
+        username = #{username} AND
+        host = #{domain} AND
+        configkey = 'kNoticeStickJidDic' AND
+        subkey = #{muc_name} AND
+        isdel &lt;&gt; 1
+    </select>
+
+    <update id="updateGroupNotification">
+        UPDATE ${table}
+        SET
+        subscribe_flag = #{subscribe_flag}
+        WHERE
+        username = #{username} and
+        host = #{domain} and
+        muc_name = #{muc_name};
+    </update>
+</mapper>
