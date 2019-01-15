@@ -4,6 +4,7 @@ import com.qunar.qchat.constants.Config;
 import com.qunar.qchat.dao.model.NotificationInfo;
 import com.qunar.qchat.utils.JacksonUtils;
 import com.qunar.qchat.utils.ProtoMessageOuterClass;
+import com.qunar.qtalk.ss.common.utils.JsonUtil;
 import com.qunar.qtalk.ss.common.utils.watcher.QMonitor;
 import com.turo.pushy.apns.ApnsClient;
 import com.turo.pushy.apns.ApnsClientBuilder;
@@ -14,8 +15,10 @@ import com.turo.pushy.apns.util.SimpleApnsPushNotification;
 import com.turo.pushy.apns.util.TokenUtil;
 import com.turo.pushy.apns.util.concurrent.PushNotificationFuture;
 import com.turo.pushy.apns.util.concurrent.PushNotificationResponseListener;
+import org.apache.http.util.TextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -30,44 +33,61 @@ import java.util.Map;
 public class IosNewPushService {
     private static final Logger LOGGER = LoggerFactory.getLogger(IosNewPushService.class);
 
+    @Autowired
+    private QIosPushServer qIosPushServer;
+
     private ApnsClient client = null;
     private Map<String, ApnsClient> serviceMap;
-
-    private static final String qtalkdev = Config.class.getClassLoader().getResource(Config.IOS_PUSH_CERT_QTALK_BETA).getPath();
-    private static final String qtalkpro = Config.class.getClassLoader().getResource(Config.IOS_PUSH_CERT_QTALK).getPath();
 
     public void iosPush(NotificationInfo notificationInfo) {
         try {
             if (serviceMap == null) {
                 serviceMap = new HashMap<>();
             }
-            String cert = qtalkpro;
-            if("com.qunar.qtalkDevelop".equalsIgnoreCase(notificationInfo.pkgname)) {//qtalk
-                cert = qtalkdev;
-            } else if("com.qunar.qunartalk".equalsIgnoreCase(notificationInfo.pkgname)) {
-                cert = qtalkpro;
-            }
-            final String fcert = cert;
+
             if (serviceMap.containsKey(notificationInfo.pkgname)) {
                 client = serviceMap.get(notificationInfo.pkgname);
             } else {
                 client = null;
             }
-            if (client == null) {
-
-                if (notificationInfo.pkgname != null && notificationInfo.pkgname.contains("Develop")) {
-                    client = new ApnsClientBuilder()
-                            .setApnsServer(ApnsClientBuilder.DEVELOPMENT_APNS_HOST)
-                            .setClientCredentials(new File(cert), "123456")
-                            .build();
-
-                } else {
-                    client = new ApnsClientBuilder()
-                            .setApnsServer(ApnsClientBuilder.PRODUCTION_APNS_HOST)
-                            .setClientCredentials(new File(cert), "123456")
-                            .build();
+            String cert = "";
+            String pwd = "";
+            if(qIosPushServer.isBeta(notificationInfo.pkgname)) {
+                if(qIosPushServer.getBetaCert(notificationInfo.pkgname) != null) {
+                    cert = qIosPushServer.getBetaCert(notificationInfo.pkgname).certPath;
+                    pwd = qIosPushServer.getBetaCert(notificationInfo.pkgname).certPwd;
+                }
+            } else if(qIosPushServer.isProd(notificationInfo.pkgname)) {
+                if(qIosPushServer.getProCert(notificationInfo.pkgname) != null) {
+                    cert = qIosPushServer.getProCert(notificationInfo.pkgname).certPath;
+                    pwd = qIosPushServer.getProCert(notificationInfo.pkgname).certPwd;
                 }
             }
+            if(TextUtils.isEmpty(cert) || TextUtils.isEmpty(pwd)) {
+                QMonitor.recordOne("send_ios_message_failure_nobid");
+                LOGGER.info("ios push 没找到证书  cert={} pwd={} info ={}", cert, pwd, JsonUtil.obj2String(notificationInfo));
+                return;
+            }
+            if (client == null) {
+                if(qIosPushServer.isBeta(notificationInfo.pkgname)) {
+                    client = new ApnsClientBuilder()
+                            .setApnsServer(ApnsClientBuilder.DEVELOPMENT_APNS_HOST)
+                            .setClientCredentials(new File(cert), pwd)
+                            .build();
+                } else if(qIosPushServer.isProd(notificationInfo.pkgname)) {
+                    client = new ApnsClientBuilder()
+                            .setApnsServer(ApnsClientBuilder.PRODUCTION_APNS_HOST)
+                            .setClientCredentials(new File(cert), pwd)
+                            .build();
+                }
+
+            }
+            if(client == null) {
+                QMonitor.recordOne("send_ios_message_failure_nobid");
+                LOGGER.info("ios push 不存在该bundleid  info ={}", JsonUtil.obj2String(notificationInfo));
+                return;
+            }
+            final String fcert = cert;
             serviceMap.put(notificationInfo.pkgname, client);
 
             final ApnsPayloadBuilder payloadBuilder = new ApnsPayloadBuilder();

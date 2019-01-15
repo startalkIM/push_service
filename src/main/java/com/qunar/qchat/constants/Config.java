@@ -25,9 +25,12 @@ public class Config {
     public static final String OPS_SPOOL_MESSAGE_TOPIC = getProperty("ops.spool.message.topic");
     public static final int OPS_KAFKA_THREADCOUNT = getIntProperty("ops.kafka.threadcount", 1);
 
+    public static final String IOS_PUSH_PKG_QTALK = getProperty("ios_push_bid");
     public static final String IOS_PUSH_CERT_QTALK = getProperty("ios_push_cer_qtalk");
+    public static final String IOS_PUSH_CERT_PWD = getProperty("ios_push_cer_pwd");
+    public static final String IOS_PUSH_PKG_BETA_QTALK = getProperty("ios_push_bid_beta");
     public static final String IOS_PUSH_CERT_QTALK_BETA = getProperty("ios_push_cer_qtalk_beta");
-
+    public static final String IOS_PUSH_CERT_PWD_QTALK_BETA = getProperty("ios_push_cer_pwd_beta");
     /**私有化push接口url*/
     public static final String PRIVATE_PUSH_URL = getProperty("private.push.url");
     /**qtalk 包名 xiaomi secret key*/
