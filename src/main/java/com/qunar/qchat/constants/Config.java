@@ -1,5 +1,7 @@
 package com.qunar.qchat.constants;
 
+import org.apache.http.util.TextUtils;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -9,6 +11,9 @@ import java.util.Properties;
 
 public class Config {
 //    private static final Logger LOGGER = LoggerFactory.getLogger(Config.class);
+
+    public static final String QTALK_PUSH_URL = getProperty("qtalk_push_url");
+    public static final String QTALK_PUSH_KEY = getProperty("qtalk_push_key");
 
     private static Properties props;
 
@@ -93,7 +98,7 @@ public class Config {
 
         int val = defaultVal;
         String valStr = getProperty(name);
-        if (valStr != null) {
+        if (!TextUtils.isEmpty(valStr)) {
             val = Integer.parseInt(valStr);
         }
         return val;

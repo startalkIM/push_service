@@ -8,16 +8,7 @@ import java.util.List;
  * create by hubo.hu (lex) at 2018/2/11
  */
 public class NotificationInfo {
-    /**
-     * @param fromjid
-     * @param platkeys 客户端上传的key
-     * @param platname 客户端平台 如mipush
-     * @param pkgname 客户端包名 qtalk or qchat
-     * @param title 标题
-     * @param description 内容
-     * @param json
-     */
-    /**用来做notifyid*/
+    /**发送人，可用来做notifyid*/
     public String fromjid;
     /**通知标题，消息的from*/
     public String title;
@@ -25,6 +16,8 @@ public class NotificationInfo {
     public String description;
     /**消息内容，根据msgtype转化后的message*/
     public String body;
+    /**消息类型  eg. chat group consult*/
+    public String originType;
     /**消息的msg_type*/
     public int msg_type;
     /**signaltype  根据消息type转化*/
@@ -54,6 +47,10 @@ public class NotificationInfo {
 
     public String messageId;
 
+    /**发送系统 android ios*/
+    public String os;
+    /**星语开放平台注册push key*/
+    public String push_key;
     @Override
     public String toString() {
         return JacksonUtils.obj2String(this);
