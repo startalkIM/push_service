@@ -43,6 +43,9 @@ public class SpoolMessageService {
     @Autowired
     DispatchService mDispatchService;
 
+    @Autowired
+    SendMessageService sendMessageService;
+
     Map<String, Integer> mapPartitions = new HashMap<String, Integer>();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SpoolMessageService.class);
@@ -199,36 +202,49 @@ public class SpoolMessageService {
                 sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
                 return;
             } else {
+                mnotificationInfo.os = info.getOs();
                 LOGGER.info("processChatMessage mnotificationInfo={} isAtMyself={} isHasOtherPlatOnline={} isSubsript={} touser={}", mnotificationInfo.toString(), isAtMyself, isHasOtherPlatOnline, isSubsript, QtalkStringUtils.userId2Jid(toUser, toDomain));
             }
-//        LOGGER.info("测试发送push: [{}]" , JacksonUtils.obj2String(notificationInfo));
-            if ("ios".equalsIgnoreCase(info.getOs())) {
-                iosPushService.iosPush(mnotificationInfo);
-            } else if ("android".equalsIgnoreCase(info.getOs())) {
-                //目前小米支持撤销消息类型
-                if (MessageType.REVOKE.equalsIgnoreCase(type)) {
-                    if (mnotificationInfo.platname.equalsIgnoreCase(AdrPushConstants.NAME_HUAWEI)
-                            || mnotificationInfo.platname.equalsIgnoreCase(AdrPushConstants.NAME_MEIZU)) {
-                        return;
-                    }
-                }
-                if (mnotificationInfo.platname.contains(AdrPushConstants.NAME_THIRD)) {
-                    sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
-                }
-                androidPushService.notifyPushMesg(mnotificationInfo);
+
+            if(!TextUtils.isEmpty(Config.QTALK_PUSH_URL) && !TextUtils.isEmpty(Config.QTALK_PUSH_KEY)) {
+                sendMessageService.sendMessage(mnotificationInfo);
             }
-            if("qunar-message".equalsIgnoreCase(QtalkStringUtils.parseId(mnotificationInfo.fromjid))) {
-                QMonitor.recordOne("PUSH_OPS_MSG_TOTAL");
-                QMonitor.recordOne("PUSH_OPS_MSG_qunar-message");
-            } else if("ivrmsg".equalsIgnoreCase(QtalkStringUtils.parseId(mnotificationInfo.fromjid))) {
-                QMonitor.recordOne("PUSH_OPS_MSG_TOTAL");
-                QMonitor.recordOne("PUSH_OPS_MSG_ivrmsg");
+            if("android".equalsIgnoreCase(info.getOs()) && mnotificationInfo.platname.contains(AdrPushConstants.NAME_THIRD)) {
+                sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
             }
+
             QMonitor.recordOne("PUSH_SEND_TOTAL_MSG");
         } catch (Exception e) {
             LOGGER.error("getMesaageToSend Exception={} msg={} touser={}", e, JSON.toJSONString(chatMessage), QtalkStringUtils.userId2Jid(toUser, toDomain));
             QMonitor.recordOne("SendPushException");
             sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
+        }
+    }
+
+    /**
+     * 发送push
+     * @param mnotificationInfo 通知消息对戏
+     */
+    public void sendMessagePush(NotificationInfo mnotificationInfo) {
+        if ("ios".equalsIgnoreCase(mnotificationInfo.os)) {
+            iosPushService.iosPush(mnotificationInfo);
+        } else if ("android".equalsIgnoreCase(mnotificationInfo.os)) {
+            //目前小米支持撤销消息类型
+            if (MessageType.REVOKE.equalsIgnoreCase(mnotificationInfo.originType)) {
+                if (mnotificationInfo.platname.equalsIgnoreCase(AdrPushConstants.NAME_HUAWEI)
+                        || mnotificationInfo.platname.equalsIgnoreCase(AdrPushConstants.NAME_MEIZU)) {
+                    return;
+                }
+            }
+
+            androidPushService.notifyPushMesg(mnotificationInfo);
+        }
+        if("qunar-message".equalsIgnoreCase(QtalkStringUtils.parseId(mnotificationInfo.fromjid))) {
+            QMonitor.recordOne("PUSH_OPS_MSG_TOTAL");
+            QMonitor.recordOne("PUSH_OPS_MSG_qunar-message");
+        } else if("ivrmsg".equalsIgnoreCase(QtalkStringUtils.parseId(mnotificationInfo.fromjid))) {
+            QMonitor.recordOne("PUSH_OPS_MSG_TOTAL");
+            QMonitor.recordOne("PUSH_OPS_MSG_ivrmsg");
         }
     }
 
@@ -561,6 +577,7 @@ public class SpoolMessageService {
             notificationInfo.fromjid = notifyid;
             notificationInfo.fromName = from;
             notificationInfo.fromHost = fromhost;
+            notificationInfo.originType = key;
             notificationInfo.msg_type = msg_type;
             notificationInfo.type = QtalkStringUtils.getSignalType(type);
             notificationInfo.chatid = chatid;

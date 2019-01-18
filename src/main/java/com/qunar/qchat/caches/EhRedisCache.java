@@ -13,6 +13,7 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -68,6 +69,11 @@ public class EhRedisCache implements Cache {
     public <T> T get(Object key, Class<T> type) {
 
 //        LOG.info("Cache L1 (ehcache) :{}={}", key, type);
+        return null;
+    }
+
+    @Override
+    public <T> T get(Object o, Callable<T> callable) {
         return null;
     }
 

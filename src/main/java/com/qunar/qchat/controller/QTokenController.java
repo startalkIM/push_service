@@ -9,20 +9,21 @@ import com.qunar.qchat.dao.IPlatKeyDao;
 import com.qunar.qchat.model.JsonResult;
 import com.qunar.qchat.service.DispatchService;
 import com.qunar.qchat.service.PushInfoServiceImpl;
+import com.qunar.qchat.service.SpoolMessageService;
 import com.qunar.qchat.utils.CommonRedisUtil;
+import com.qunar.qchat.utils.JacksonUtils;
 import com.qunar.qchat.utils.JsonResultUtils;
 import com.qunar.qchat.utils.QtalkStringUtils;
 import com.qunar.qtalk.ss.common.utils.watcher.QMonitor;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.http.util.TextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 @RequestMapping("/qtapi/token/")
@@ -37,6 +38,9 @@ public class QTokenController {
     DispatchService mDispatchService;
     @Autowired
     private PushInfoServiceImpl pushInfoService;
+
+    @Autowired
+    private SpoolMessageService spoolMessageService;
 
     @RequestMapping(value = "/setpersonmackey.qunar", method = RequestMethod.GET)
     @RecordAccessLog
@@ -286,4 +290,31 @@ public class QTokenController {
 
         return JsonResultUtils.success();
     }
+
+    @RequestMapping(value = "/sendMessageToPush.qunar", produces = "application/json", method = {RequestMethod.POST, RequestMethod.GET})
+    @RecordAccessLog
+    public JsonResult<?> sendMessageToPush(@RequestBody String message) {
+
+        try {
+            LOGGER.info("接口sendMessageToPush消息msg:[{}]", message);
+            QMonitor.recordOne(QMonitorConstants.SEND_MESSAGE_PUSH);
+            Map<String, Object> chatMessage = JacksonUtils.string2Obj(message, Map.class);
+            if(chatMessage == null) return JsonResultUtils.fail(0, "消息异常msg:" + message);
+            String type = "";
+            if(chatMessage.containsKey("topic") && chatMessage.get("topic") != null) {
+                type = chatMessage.get("topic").toString();
+            }
+            if(TextUtils.isEmpty(type)) {
+                return JsonResultUtils.fail(0, "topic is null 消息异常msg:" + message);
+            }
+            spoolMessageService.processChatMessage(type, chatMessage);
+        } catch (Exception e) {
+            LOGGER.debug("sendMessageToPush catch error ", e);
+            return JsonResultUtils.fail(0, "服务器操作异常:\n " + ExceptionUtils.getStackTrace(e));
+        }
+
+        return JsonResultUtils.success();
+    }
+
+
 }

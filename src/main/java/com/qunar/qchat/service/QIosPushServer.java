@@ -2,6 +2,7 @@ package com.qunar.qchat.service;
 
 import com.qunar.qchat.constants.Config;
 import com.qunar.qchat.model.IosPushModel;
+import org.apache.http.util.TextUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -23,14 +24,22 @@ public class QIosPushServer {
         if(serviceMap == null) {
             serviceMap = new HashMap<>();
             //prid
-            final String qtalkpro = Config.class.getClassLoader().getResource(Config.IOS_PUSH_CERT_QTALK).getPath();
-            serviceMap.put(Config.IOS_PUSH_PKG_QTALK, new IosPushModel(qtalkpro, Config.IOS_PUSH_CERT_PWD));
+            if(!TextUtils.isEmpty(Config.IOS_PUSH_CERT_QTALK)
+                    && !TextUtils.isEmpty(Config.IOS_PUSH_PKG_QTALK)
+                    && !TextUtils.isEmpty(Config.IOS_PUSH_CERT_PWD)) {
+                final String qtalkpro = Config.class.getClassLoader().getResource(Config.IOS_PUSH_CERT_QTALK).getPath();
+                serviceMap.put(Config.IOS_PUSH_PKG_QTALK, new IosPushModel(qtalkpro, Config.IOS_PUSH_CERT_PWD));
+            }
         }
         if(serviceMapBeta == null) {
             serviceMapBeta = new HashMap<>();
             //beta
-            final String qtalkdev = Config.class.getClassLoader().getResource(Config.IOS_PUSH_CERT_QTALK_BETA).getPath();
-            serviceMapBeta.put(Config.IOS_PUSH_PKG_BETA_QTALK, new IosPushModel(qtalkdev, Config.IOS_PUSH_CERT_PWD_QTALK_BETA));
+            if(!TextUtils.isEmpty(Config.IOS_PUSH_CERT_QTALK_BETA)
+                    && !TextUtils.isEmpty(Config.IOS_PUSH_PKG_BETA_QTALK)
+                    && !TextUtils.isEmpty(Config.IOS_PUSH_CERT_PWD)) {
+                final String qtalkdev = Config.class.getClassLoader().getResource(Config.IOS_PUSH_CERT_QTALK_BETA).getPath();
+                serviceMapBeta.put(Config.IOS_PUSH_PKG_BETA_QTALK, new IosPushModel(qtalkdev, Config.IOS_PUSH_CERT_PWD));
+            }
         }
     }
 

@@ -2,6 +2,7 @@ package com.qunar.qchat.constants;
 
 public class QMonitorConstants {
     public static final String QTALK_CONSUME = "qtalk_consume";
+    public static final String SEND_MESSAGE_PUSH = "send_message_push";
     public static final String HOSTS_QTALK_CONSUME = "hosts_qtalk_consume";
     public static final String QTALK_GROUP_CONSUME = "qtalk_group_consume";
     public static final String QTALK_HOSTS_GROUP_CONSUME = "qtalk_hosts_group_consume";
