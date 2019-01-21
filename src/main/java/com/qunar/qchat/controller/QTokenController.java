@@ -291,7 +291,7 @@ public class QTokenController {
         return JsonResultUtils.success();
     }
 
-    @RequestMapping(value = "/sendMessageToPush.qunar", produces = "application/json", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/sendMessageToPush.qunar", method = RequestMethod.POST)
     @RecordAccessLog
     public JsonResult<?> sendMessageToPush(@RequestBody String message) {
 
