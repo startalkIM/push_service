@@ -18,7 +18,7 @@ ops.kafka.threadcount=
 ### topic配置
 ```
 ops.spool.message.topic.qtalk_chat=单人消息topic
-<br>ops.spool.message.topic.qtalk_group=群消息topic
+ops.spool.message.topic.qtalk_group=群消息topic
 ```
 
 ## Android和IOS证书配置
