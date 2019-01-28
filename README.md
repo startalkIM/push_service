@@ -9,10 +9,10 @@ push服务支持qtalk消息push，同时也支持接入自己的push服务
 
 ```
 ops.producer.broker.connect.params=
-<br>ops.consumer.zookeeper.params=
-<br>ops.kafka.aeskey=
-<br>ops.hosts.groupid=
-<br>ops.kafka.threadcount=
+ops.consumer.zookeeper.params=
+ops.kafka.aeskey=
+ops.hosts.groupid=
+ops.kafka.threadcount=
 ```
 
 ### topic配置
@@ -29,15 +29,15 @@ ops.spool.message.topic.qtalk_chat=单人消息topic
 
 ```
 ios_push_cer_qtalk=线上证书
-<br>ios_push_cer_qtalk_beta=beta证书
+ios_push_cer_qtalk_beta=beta证书
 ```
 
 ### Android配置
 
 ```
 adr.qtalk.pkgname=应用包名
-<br>adr.mipush.qtalk.key=mipush key
-<br>adr.hwpush.qtalk.key=hwpush key
+adr.mipush.qtalk.key=mipush key
+adr.hwpush.qtalk.key=hwpush key
 ```
 
 ## 私有化配置
@@ -54,10 +54,10 @@ private.push.url=
 
 ```
 map.put("From", ");//发送人/群
-<br>map.put("To", "");//接收人
-<br>map.put("Body", "");//消息内容(单人【消息内容】；群【说话人：消息内容】)
-<br>map.put("Mtype", 1);//消息类型
-<br>map.put("Message", "xml"");//原始消息，可自己解析自定义
+map.put("To", "");//接收人
+map.put("Body", "");//消息内容(单人【消息内容】；群【说话人：消息内容】)
+map.put("Mtype", 1);//消息类型
+map.put("Message", "xml"");//原始消息，可自己解析自定义
 ```
 
 ## 问题反馈
