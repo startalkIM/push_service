@@ -16,6 +16,7 @@ push服务支持qtalk消息push，同时也支持接入自己的push服务
 （因为app push证书在团队内），
 此时您需要支付一定的服务器公摊费用，但是肯定比短信便宜的多！详情可以联系我们的客服人员。
 
+***
 
 ## 共用push系统
 对于已经私有化部署的用户来说比较简单，不需要下载，更新服务，只需要按照如下步骤执行即可.
@@ -48,6 +49,8 @@ $./startalk/tomcat/push_service/startup.sh
 
 ```
 
+***
+
 ## 私有化部署push
 
 全程只需要修改一个配置文件，重启下服务即可。
@@ -56,18 +59,18 @@ $./startalk/tomcat/push_service/startup.sh
 
 /startalk/tomcat/push_service/webapps/push_service/WEB-INF/classes/app.properties
 
-## Android和IOS证书配置
+### Android和IOS证书配置
 
 如果需要使用服务支持的push，Android需要自己去小米和华为开发平台注册自己应用的app_key,Ios需要生产签名证书，配置如下：
 
-### ios push 证书
+#### ios push 证书
 
 ```
 ios_push_cer_qtalk=线上证书所在路径
 ios_push_cer_qtalk_beta=beta证书所在路径
 ```
 
-### Android配置
+#### Android配置
 
 ```
 adr.qtalk.pkgname=应用包名
@@ -75,9 +78,7 @@ adr.mipush.qtalk.key=mipush key(是个文本)
 adr.hwpush.qtalk.key=hwpush key(是个文本)
 ```
 
-## 私有化配置
-
-如果要使用自己的push服务，那么请自定义一接口，配置到下面
+***
 
 ## 自有push系统
 
@@ -113,7 +114,7 @@ post body是个json,内容为类似这样的形式:
 }
 
 ```
-
+***
 
 ## 问题反馈
 
