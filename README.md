@@ -1,4 +1,4 @@
-#QTalk push服务
+# QTalk push服务
 
 IM后端的push服务，支持IOS apns协议推送，android 小米，华为，魅族，oppo厂商推送
 push服务支持qtalk消息push，同时也支持接入自己的push服务
@@ -7,6 +7,7 @@ push服务支持qtalk消息push，同时也支持接入自己的push服务
 ## 能力范围
 
 * 如果您自己有build app的能力，那么请自己生成、部署app,并自己部署push；
+* 您有已经在应用的push服务器，需要复用自己的push服务器;
 * 如果您并不打算部署app，只想用开源版本的startalk，那么可以接入我们的公共push服务器（因为app push证书在团队内），
 此时您需要支付一定的服务器公摊费用，但是肯定比短信便宜的多！详情可以联系我们的客服人员。
 
