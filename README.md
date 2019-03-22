@@ -6,7 +6,7 @@ push服务支持qtalk消息push，同时也支持接入自己的push服务
 
 ## 能力范围
 
-* 如果您自己有build app的能力，那么请自己生成、部署app,并[自己部署push](# 私有化部署push)；
+* 如果您自己有build app的能力，那么请自己生成、部署app,并[自己部署push](#私有化部署push)；
 * 您有已经在应用的push服务器，需要[复用自己的push服务器](##自有push系统);
 * 如果您并不打算部署app，只想用开源版本的startalk，那么可以接入我们的[公共push服务器](## 共用push系统)
 
