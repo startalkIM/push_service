@@ -5,7 +5,6 @@ import com.qunar.qchat.constants.Config;
 import com.qunar.qchat.dao.model.NotificationInfo;
 import com.qunar.qchat.utils.HttpClientUtils;
 import com.qunar.qchat.utils.JacksonUtils;
-import com.qunar.qtalk.ss.common.utils.watcher.QMonitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,6 @@ public class SendMessageService {
         notificationInfo.push_key = Config.QTALK_PUSH_KEY;
         String res = HttpClientUtils.postJson(Config.QTALK_PUSH_URL, JSON.toJSONString(notificationInfo));
         LOGGER.info("startalk push send result={} notifInfo={} mapjson={} touser={}", res, JacksonUtils.obj2String(notificationInfo), notificationInfo.toUserName);
-        QMonitor.recordOne("send_startalk_message");
     }
 
 }

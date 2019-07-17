@@ -7,7 +7,6 @@ import com.qunar.qchat.utils.HttpClientUtils;
 import com.qunar.qchat.utils.JacksonUtils;
 import com.qunar.qchat.utils.ProtoMessageOuterClass;
 import com.qunar.qchat.utils.QtalkStringUtils;
-import com.qunar.qtalk.ss.common.utils.watcher.QMonitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -44,7 +43,6 @@ public class PubimPrivatePushService {
 
         String res = HttpClientUtils.postJson(Config.PRIVATE_PUSH_URL, JSON.toJSONString(map));
         LOGGER.info("pubimprivate push send result={} type={} notifInfo={} mapjson={} touser={}", res, info.type, JacksonUtils.obj2String(info), JSON.toJSONString(map), info.toUserName);
-        QMonitor.recordOne("send_pubimprivate_message");
     }
 
 }

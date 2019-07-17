@@ -3,7 +3,6 @@ package com.qunar.qchat.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.qunar.qchat.adrpushserver.*;
-import com.qunar.qchat.component.Opsproducer;
 import com.qunar.qchat.constants.AdrPushConstants;
 import com.qunar.qchat.constants.Config;
 import com.qunar.qchat.constants.MessageSettingsTag;
@@ -11,9 +10,7 @@ import com.qunar.qchat.constants.MessageType;
 import com.qunar.qchat.dao.model.NotificationInfo;
 import com.qunar.qchat.dao.model.PushInfo;
 import com.qunar.qchat.utils.*;
-import com.qunar.qtalk.ss.common.utils.watcher.QMonitor;
 import org.apache.http.util.TextUtils;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,7 +108,6 @@ public class SpoolMessageService {
 
         } catch (Exception e) {
             LOGGER.error("processChatMessage Exception={} msg={}", e, JSON.toJSONString(chatMessage));
-            QMonitor.recordOne("SendPushException");
         }
     }
 
@@ -140,14 +136,12 @@ public class SpoolMessageService {
             //获取push_info end
             //push开关
             if (!MessageSettingsTag.isExistTag(status, MessageSettingsTag.PUSH_SWITCH)) {
-                sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
                 LOGGER.info("processChatMessage push_switch={} touser={}", false, QtalkStringUtils.userId2Jid(toUser, toDomain));
                 return;
             }
             //解析消息
             NotificationInfo notificationInfo = formatBaseNotification(type, chatMessage, toUser, toDomain);
             if (notificationInfo == null) {
-                sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
                 LOGGER.info("processChatMessage notificationInfo={} touser={}", "", QtalkStringUtils.userId2Jid(toUser, toDomain));
                 LOGGER.info("processChatMessage 解析消息异常 touser={}", QtalkStringUtils.userId2Jid(toUser, toDomain));
                 return;
@@ -171,7 +165,6 @@ public class SpoolMessageService {
                 //未订阅不通知
                 isSubsript = mDispatchService.getServiceByDomain(toDomain).isSubscribGroup(toUser, toDomain, notificationInfo.fromjid);
                 if (!isSubsript) {
-                    sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
                     LOGGER.info("processChatMessage 群消息未订阅 isSubscribGroup={} touser={}", isSubsript, QtalkStringUtils.userId2Jid(toUser, toDomain));
                     return;
                 }
@@ -183,7 +176,6 @@ public class SpoolMessageService {
                     //modify 20181219 在线push开关关闭情况下，在线就不发push，不判离开状态
                     if (isHasOtherPlatOnline) {//没有离开&有在线的不发
                         LOGGER.info("processChatMessage isAtMyself={} isHasOtherPlatOnline={} touser={}", isAtMyself, isHasOtherPlatOnline, QtalkStringUtils.userId2Jid(toUser, toDomain));
-//                        sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
                         return;
                     }
                 }
@@ -199,7 +191,6 @@ public class SpoolMessageService {
             NotificationInfo mnotificationInfo = formatNotification(info, notificationInfo);
             if (mnotificationInfo == null) {
                 LOGGER.info("processChatMessage notificationInfo={} isAtMyself={} isHasOtherPlatOnline={} isSubsript={} touser={}", notificationInfo.toString(), isAtMyself, isHasOtherPlatOnline, isSubsript, QtalkStringUtils.userId2Jid(toUser, toDomain));
-                sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
                 return;
             } else {
                 mnotificationInfo.os = info.getOs();
@@ -209,15 +200,9 @@ public class SpoolMessageService {
             if(!TextUtils.isEmpty(Config.QTALK_PUSH_URL) && !TextUtils.isEmpty(Config.QTALK_PUSH_KEY)) {
                 sendMessageService.sendMessage(mnotificationInfo);
             }
-            if("android".equalsIgnoreCase(info.getOs()) && mnotificationInfo.platname.contains(AdrPushConstants.NAME_THIRD)) {
-                sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
-            }
 
-            QMonitor.recordOne("PUSH_SEND_TOTAL_MSG");
         } catch (Exception e) {
             LOGGER.error("getMesaageToSend Exception={} msg={} touser={}", e, JSON.toJSONString(chatMessage), QtalkStringUtils.userId2Jid(toUser, toDomain));
-            QMonitor.recordOne("SendPushException");
-            sendUnpushMsgToOpsquene(toUser, toDomain, type, chatMessage);
         }
     }
 
@@ -240,11 +225,7 @@ public class SpoolMessageService {
             androidPushService.notifyPushMesg(mnotificationInfo);
         }
         if("qunar-message".equalsIgnoreCase(QtalkStringUtils.parseId(mnotificationInfo.fromjid))) {
-            QMonitor.recordOne("PUSH_OPS_MSG_TOTAL");
-            QMonitor.recordOne("PUSH_OPS_MSG_qunar-message");
         } else if("ivrmsg".equalsIgnoreCase(QtalkStringUtils.parseId(mnotificationInfo.fromjid))) {
-            QMonitor.recordOne("PUSH_OPS_MSG_TOTAL");
-            QMonitor.recordOne("PUSH_OPS_MSG_ivrmsg");
         }
     }
 
@@ -592,54 +573,7 @@ public class SpoolMessageService {
             return notificationInfo;
         } catch (Exception e) {
             LOGGER.error("formatBaseNotification Exception={} msg={}", e, JSON.toJSONString(chatMessage));
-            QMonitor.recordOne("FormatBaseNotificationException");
         }
         return null;
-    }
-
-    /**
-     * 未发送push的消息插入队列
-     *
-     * @param toUser
-     * @param toDomain
-     * @param key
-     * @param chatMessage
-     */
-    private void sendUnpushMsgToOpsquene(String toUser, String toDomain, String key, Map<String, Object> chatMessage) {
-        if ("ejabhost1".equalsIgnoreCase(toDomain)) {
-            //放入不发push消息队列，目前ops短信业务使用
-            QMonitor.recordOne("UNPUSH_MSG_QTALK");
-            chatMessage.put("touser", QtalkStringUtils.userId2Jid(toUser, toDomain));//未收到push用户
-            Opsproducer.getProducer().send(new ProducerRecord<>(
-                    Config.OPS_RESEND_MESSAGE_TOPIC_QTALK,
-                    getRandomPartitionByTopic(Config.OPS_RESEND_MESSAGE_TOPIC_QTALK), key, JacksonUtils.obj2String(chatMessage)));
-
-            if (chatMessage.containsKey("m_from")) {
-                String from = chatMessage.get("m_from").toString();
-                if("qunar-message".equalsIgnoreCase(from)) {
-                    QMonitor.recordOne("UNPUSH_OPS_MSG_TOTAL");
-                    QMonitor.recordOne("UNPUSH_OPS_MSG_qunar-message");
-                } else if("ivrmsg".equalsIgnoreCase(from)) {
-                    QMonitor.recordOne("UNPUSH_OPS_MSG_TOTAL");
-                    QMonitor.recordOne("UNPUSH_OPS_MSG_ivrmsg");
-                }
-            }
-        }
-        QMonitor.recordOne("UNPUSH_MSG_TOTAL");
-    }
-
-    private int getPartitionByTopic(String topic) {
-        try {
-            int partition = 0;
-            partition = mapPartitions.get(topic);
-            return partition;
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    private int getRandomPartitionByTopic(String topic) {
-        int partition = getPartitionByTopic(topic);
-        return (int) (Math.random() * partition);
     }
 }

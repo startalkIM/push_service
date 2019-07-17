@@ -3,7 +3,6 @@ package com.qunar.qchat.adrpushserver;
 import com.qunar.qchat.dao.model.NotificationInfo;
 import com.qunar.qchat.service.SpoolMessageService;
 import com.qunar.qchat.utils.JacksonUtils;
-import com.qunar.qtalk.ss.common.utils.watcher.QMonitor;
 import org.apache.http.util.TextUtils;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
@@ -62,7 +61,6 @@ public class QPushServer {
 //                LOGGER.info("android push1 send notificationInfo={} touser={}", JacksonUtils.obj2String(notificationInfo), notificationInfo.toUserName);
                 item.sendNotifyToAlias(notificationInfo);
                 LOGGER.info("android push send notificationInfo={} touser={}", JacksonUtils.obj2String(notificationInfo), notificationInfo.toUserName);
-                QMonitor.recordOne("send_adr_message");
             }
         }
     }

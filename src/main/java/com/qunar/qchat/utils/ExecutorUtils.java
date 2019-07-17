@@ -1,7 +1,5 @@
 package com.qunar.qchat.utils;
 
-import com.qunar.qchat.constants.QMonitorConstants;
-import com.qunar.qtalk.ss.common.utils.watcher.QMonitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +23,6 @@ public class ExecutorUtils {
                         @Override
                         public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
                             super.rejectedExecution(r, e);
-                            QMonitor.recordOne(QMonitorConstants.THREA_POOL_REJECTEDEXECUTION);
                             LOGGER.warn("线程池满了，执行拒绝策略 t.count={}", e.getQueue().size());
                         }
                     });//拒绝策略，抛弃最老的任务
