@@ -1,11 +1,10 @@
 package com.qunar.qchat.service;
 
+import com.alibaba.fastjson.JSON;
 import com.qunar.qchat.constants.Config;
 import com.qunar.qchat.dao.model.NotificationInfo;
 import com.qunar.qchat.utils.JacksonUtils;
 import com.qunar.qchat.utils.ProtoMessageOuterClass;
-import com.qunar.qtalk.ss.common.utils.JsonUtil;
-import com.qunar.qtalk.ss.common.utils.watcher.QMonitor;
 import com.turo.pushy.apns.ApnsClient;
 import com.turo.pushy.apns.ApnsClientBuilder;
 import com.turo.pushy.apns.DeliveryPriority;
@@ -64,8 +63,7 @@ public class IosNewPushService {
                 }
             }
             if(TextUtils.isEmpty(cert) || TextUtils.isEmpty(pwd)) {
-                QMonitor.recordOne("send_ios_message_failure_nobid");
-                LOGGER.info("ios push 没找到证书  cert={} pwd={} info ={}", cert, pwd, JsonUtil.obj2String(notificationInfo));
+                LOGGER.info("ios push 没找到证书  cert={} pwd={} info ={}", cert, pwd, JSON.toJSONString(notificationInfo));
                 return;
             }
             if (client == null) {
@@ -83,8 +81,7 @@ public class IosNewPushService {
 
             }
             if(client == null) {
-                QMonitor.recordOne("send_ios_message_failure_nobid");
-                LOGGER.info("ios push 不存在该bundleid  info ={}", JsonUtil.obj2String(notificationInfo));
+                LOGGER.info("ios push 不存在该bundleid  info ={}", JSON.toJSONString(notificationInfo));
                 return;
             }
             final String fcert = cert;
@@ -145,7 +142,6 @@ public class IosNewPushService {
                                 result += "\t…and the token is invalid as of " + pushNotificationResponse.getTokenInvalidationTimestamp();
                             }
                         }
-                        QMonitor.recordOne("send_ios_message");
                         LOGGER.info("ios push send result={} cerpath={} notificationinfo={} touser={}", result, fcert, JacksonUtils.obj2String(notificationInfo), notificationInfo.toUserName);
 
                         // Handle the push notification response as before from here.
@@ -153,7 +149,6 @@ public class IosNewPushService {
                         // Something went wrong when trying to send the notification to the
                         // APNs gateway. We can find the exception that caused the failure
                         // by getting future.cause().
-                        QMonitor.recordOne("send_ios_message_failure");
                         LOGGER.info("ios push send failure reuslt={}", future.cause().getMessage());
                     }
                 }

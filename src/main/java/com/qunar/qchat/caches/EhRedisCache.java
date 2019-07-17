@@ -1,7 +1,6 @@
 package com.qunar.qchat.caches;
 
 import com.qunar.qchat.utils.RedisUtil;
-import com.qunar.qtalk.ss.common.utils.watcher.QMonitor;
 import net.sf.ehcache.Element;
 import org.apache.http.util.TextUtils;
 import org.slf4j.Logger;
@@ -60,7 +59,6 @@ public class EhRedisCache implements Cache {
             return new SimpleValueWrapper(objectValue);
         } catch (Exception e) {
             LOG.error("processChatMessage Exception={} ", e);
-            QMonitor.recordOne("SendPushException");
         }
         return null;
     }

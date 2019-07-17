@@ -1,5 +1,6 @@
 package com.qunar.qchat.aspect;
 
+import com.alibaba.fastjson.JSON;
 import com.qunar.qchat.utils.DateUtil;
 import com.qunar.qchat.utils.JacksonUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -51,7 +52,7 @@ public class LogAspect {
         String agent = request.getHeader("User-Agent");
         String optTime = DateUtil.longToString(startTimeMillis, "yyyy-MM-dd HH:mm:ss");
         pushInfoAppender.info("登录用户:{}, 请求地址: {}, UA: {}, 请求时间:{}, 用时: {}, 输入:{}, 输出:{}",userName, requestPath, agent, optTime,
-                (endTimeMillis - startTimeMillis) + "ms", JacksonUtils.obj2String(inputParamMap), JacksonUtils.obj2String(result));
+                (endTimeMillis - startTimeMillis) + "ms", JSON.toJSONString(inputParamMap), JSON.toJSONString(result));
         return result;
     }
 }
