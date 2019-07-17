@@ -1,10 +1,8 @@
 package com.qunar.qchat.service;
 
-import com.qunar.qtalk.ss.common.utils.watcher.QMonitor;
 import com.qunar.qchat.component.Opsconsumer;
 import com.qunar.qchat.constants.Config;
 import com.qunar.qchat.constants.MessageType;
-import com.qunar.qchat.constants.QMonitorConstants;
 import com.qunar.qchat.consumeevent.MessageHandler;
 import com.qunar.qchat.utils.ExecutorUtils;
 import com.qunar.qchat.utils.JacksonUtils;
@@ -51,14 +49,12 @@ public class ConsumerService {
                     return;
                 }
                 LOGGER.info("MQ消息key:[{}],msg:[{}] receiveChatSpoolQueue", key, msg);
-                QMonitor.recordOne(QMonitorConstants.QTALK_CONSUME);
 //                Map<String, Object> ∂ = JacksonUtils.string2Map(msg);
                 Map<String, Object> chatMessage = JacksonUtils.string2Obj(msg, Map.class);
                 if(chatMessage == null) return;
                 spoolMessageService.processChatMessage(key, chatMessage);
             }catch (Exception e){
                 LOGGER.error("receiveChatSpoolQueue Exception={} ", e);
-                QMonitor.recordOne("ReceiveChatSpoolQueueException");
             }
         }, ExecutorUtils.newLimitedCachedThreadPool());
         cps.add(cp);
@@ -74,14 +70,12 @@ public class ConsumerService {
                     return;
                 }
                 LOGGER.info("MQ消息key:[{}],msg:[{}] receiveGroupSpoolQueue", key, msg);
-                QMonitor.recordOne(QMonitorConstants.QTALK_GROUP_CONSUME);
 //                Map<String, Object> ∂ = JacksonUtils.string2Map(msg);
                 Map<String, Object> chatMessage = JacksonUtils.string2Obj(msg, Map.class);
                 if(chatMessage == null) return;
                 spoolMessageService.processChatMessage(key, chatMessage);
             }catch (Exception e){
                 LOGGER.error("receiveGroupSpoolQueue Exception={} ", e);
-                QMonitor.recordOne("ReceiveGroupSpoolQueueException");
             }
         }, ExecutorUtils.newLimitedCachedThreadPool());
         cps.add(cp);
@@ -149,11 +143,9 @@ public class ConsumerService {
         do {
             try {
 
-                QMonitor.recordOne("PUSH_RECIEVE_TOTAL_MSG");
                 cp.executor.execute(() -> cp.messageHandler.handle(key, msg));
                 isSuccess= true;
             } catch (Exception e) {
-                QMonitor.recordOne(QMonitorConstants.THREA_POOL_EXCEPTION);
                 LOGGER.warn("MQ消息topic:[{}], key:[{}],msg:[{}]执行异常，失败重试次数{} ", cp.topic,key, msg, ++count, e);
                 try {
                     Thread.sleep(5000l);
