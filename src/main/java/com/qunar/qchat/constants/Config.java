@@ -38,7 +38,7 @@ public class Config {
     public static final String IOS_PUSH_CERT_PWD_QTALK_BETA = getProperty("ios_push_cer_pwd_beta");
     /**私有化push接口url*/
     public static final String PRIVATE_PUSH_URL = getProperty("private.push.url");
-    /**qtalk 包名 xiaomi secret key*/
+    /**包名 xiaomi secret key*/
     public static final String QT_PACKAGE_NAME = getProperty("adr.qtalk.pkgname");
     public static final String MIPUSH_QT_SECRET_KEY = getProperty("adr.mipush.qtalk.key");
     public static final String HWPUSH_QT_SECRET_APPID = getProperty("adr.hwpush.qtalk.appid");
@@ -47,6 +47,9 @@ public class Config {
     public static final String OPUSH_QT_SECRET_KEY = getProperty("adr.opush.qtalk.key");
     public static final int MZPUSH_QT_SECRET_APPID = getIntProperty("adr.mzpush.qtalk.appid", 0);
     public static final String MZPUSH_QT_SECRET_KEY = getProperty("adr.mzpush.qtalk.key");
+    public static final int VPUSH_QT_APP_ID = getIntProperty("adr.vpush.qtalk.appid", 0);
+    public static final String VPUSH_QT_APP_KEY = getProperty("adr.vpush.qtalk.app_key", "");
+    public static final String VPUSH_QT_APP_SECRET_KEY = getProperty("adr.vpush.qtalk.app_secret_key", "");
     private synchronized static void init() {
         if (props != null) {
             return;
