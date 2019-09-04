@@ -119,6 +119,7 @@ public class OPushServerManager implements QPushServerManager {
         notification.setTimeZone("GMT+08:00");
         // 0：不限联网方式, 1：仅wifi推送
         notification.setNetworkType(0);
+        notification.setChannelId("消息通知");
         return notification;
     }
 

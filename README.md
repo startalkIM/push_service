@@ -116,6 +116,10 @@ post body是个json,内容为类似这样的形式:
 ```
 ***
 
-## 问题反馈
+#使用QTalk/Startalk客户端的情况如要使用push，需要联系客服配置下面信息
+<br>qtalk_push_url=
+<br>#使用星语push key
+<br>qtalk_push_key=
 
+## 问题反馈
 **qchat@qunar.com（邮件）**

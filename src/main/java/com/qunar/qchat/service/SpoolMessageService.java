@@ -66,6 +66,10 @@ public class SpoolMessageService {
         if (!TextUtils.isEmpty(Config.QT_PACKAGE_NAME) && !TextUtils.isEmpty(Config.MZPUSH_QT_SECRET_KEY)) {
             QPushServer.addPushServerManager(new MZPushServerManager(Config.QT_PACKAGE_NAME, Config.MZPUSH_QT_SECRET_KEY));
         }
+        //vivo
+        if (!TextUtils.isEmpty(Config.VPUSH_QT_APP_SECRET_KEY) && !TextUtils.isEmpty(Config.VPUSH_QT_APP_KEY) && Config.VPUSH_QT_APP_ID > 0) {
+            QPushServer.addPushServerManager(new VivoPushServerManager(Config.QT_PACKAGE_NAME, Config.VPUSH_QT_APP_ID, Config.VPUSH_QT_APP_KEY, Config.VPUSH_QT_APP_SECRET_KEY));
+        }
     }
 
 
@@ -199,6 +203,8 @@ public class SpoolMessageService {
 
             if(!TextUtils.isEmpty(Config.QTALK_PUSH_URL) && !TextUtils.isEmpty(Config.QTALK_PUSH_KEY)) {
                 sendMessageService.sendMessage(mnotificationInfo);
+            } else {
+                sendMessagePush(mnotificationInfo);
             }
 
         } catch (Exception e) {

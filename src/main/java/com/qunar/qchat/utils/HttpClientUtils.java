@@ -27,10 +27,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -135,7 +132,43 @@ public class HttpClientUtils {
         }
         return res;
     }
-/**
+
+    /**
+     * post方法传递json带header
+     * @param url
+     * @param jsonBody
+     * @param headerMap
+     * @return
+     */
+    public static String postJsonWithHeader(String url, String jsonBody, Map<String, String> headerMap) {
+        checkArgument((StringUtils.isNotEmpty(url) && StringUtils.isNotEmpty(jsonBody)), "url or jsonBody should not be null or empty");
+        HttpClient hc = initHttpClient();
+        HttpPost post = new HttpPost(url);
+        Iterator headerIterator = headerMap.entrySet().iterator();          //循环增加header
+        while(headerIterator.hasNext()){
+            Map.Entry<String,String> elem = (Map.Entry<String, String>) headerIterator.next();
+            post.addHeader(elem.getKey(),elem.getValue());
+        }
+        HttpEntity entity = new StringEntity(jsonBody, ContentType.APPLICATION_JSON);
+        post.setEntity(entity);
+        String res = null;
+        try {
+            HttpResponse response = hc.execute(post);
+            int status = response.getStatusLine().getStatusCode();
+            if (status == HttpStatus.SC_OK) {
+                res = EntityUtils.toString(response.getEntity());
+            } else {
+                LOGGER.info("post json is not ok,status:{},url:{},jsonBody:{}", status, url, jsonBody);
+            }
+        } catch (IOException e) {
+            LOGGER.info("post json error,url:{},jsonBody:{}", url, jsonBody, e);
+        } finally {
+            post.releaseConnection();
+        }
+        return res;
+    }
+
+    /**
      * post方法传递json
      *
      * @param url      url
