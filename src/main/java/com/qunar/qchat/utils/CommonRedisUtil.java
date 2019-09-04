@@ -115,10 +115,15 @@ public class CommonRedisUtil {
             LOGGER.info("isSubscriptGroup try key={} value={} touser={}", stringBuilder.toString(), isSubscript, QtalkStringUtils.userId2Jid(username, host));
         } catch (Exception e) {
             String value = RedisUtil.get(EhRedisCache.REDIS_PUSH_TABLE, stringBuilder.toString(), String.class);
-            LOGGER.info("isSubscriptGroup catch e={} key={} value={} touser={}", e.getMessage(), stringBuilder.toString(), isSubscript, QtalkStringUtils.userId2Jid(username, host));
+            LOGGER.info("isSubscriptGroup catch e={} key={} isSubscript={} value={} touser={}", e, stringBuilder.toString(), isSubscript, value, QtalkStringUtils.userId2Jid(username, host));
             if(!TextUtils.isEmpty(value)) {
-                isSubscript = "true".equalsIgnoreCase(value) ? 1 : 0;
-                setSubscriptGrop(username, host, mucname, isSubscript);
+                if("true".equalsIgnoreCase(value)) {
+                    isSubscript = 1;
+                    setSubscriptGrop(username, host, mucname, isSubscript);
+                } else if("false".equalsIgnoreCase(value)) {
+                    isSubscript = 0;
+                    setSubscriptGrop(username, host, mucname, isSubscript);
+                }
             }
         }
         LOGGER.info("isSubscriptGroup key={} value={} touser={}", stringBuilder.toString(), isSubscript, QtalkStringUtils.userId2Jid(username, host));

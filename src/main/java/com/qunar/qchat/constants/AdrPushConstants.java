@@ -13,6 +13,7 @@ public class AdrPushConstants {
     public static final String NAME_HUAWEI = "hwpush";
     public static final String NAME_MEIZU = "mzpush";
     public static final String NAME_OPPO = "oppopush";
+    public static final String NAME_VIVO = "vivopush";
     public static final String NAME_THIRD = "thirdpush";
 
 }
