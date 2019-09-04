@@ -1,38 +1,120 @@
-#QTalk push服务
+# QTalk push服务
 
-IM后端的push服务，支持IOS apns协议推送，android 小米，华为，魅族，oppo，vivo厂商推送
-<br>push服务支持qtalk消息push，同时也支持接入自己的push服务
-<br>##需要配置如下：
-<br>###kafka配置
-<br>ops.producer.broker.connect.params=
-<br>ops.consumer.zookeeper.params=
-<br>ops.kafka.aeskey=
-<br>ops.hosts.groupid=
-<br>ops.kafka.threadcount=
-<br>###topic配置
-<br>ops.spool.message.topic.qtalk_chat=单人消息topic
-<br>ops.spool.message.topic.qtalk_group=群消息topic
+如果您按照后端的部署文档，或者使用我们的一键部署包完成了部署，那么只看这篇文档就可以
+完善push能力了，并不需要单独下载和部署任何内容。
 
-##Android和IOS证书配置
-<br>如果需要使用服务支持的push，Android需要自己去小米和华为开发平台注册自己应用的app_key,Ios需要生产签名证书，配置如下：
-<br>###ios push 证书
-<br>ios_push_cer_qtalk=线上证书
-<br>ios_push_cer_qtalk_beta=beta证书
-<br>###Android配置
-<br>adr.qtalk.pkgname=应用包名
-<br>adr.mipush.qtalk.key=mipush key
-<br>adr.hwpush.qtalk.key=hwpush key
+IM后端的push服务，支持IOS apns协议推送，android 小米，华为，魅族，oppo厂商推送
+push服务支持qtalk消息push，同时也支持接入自己的push服务
 
-##私有化配置
-<br>如果已经有了自己的push服务，那么可以自定义自己的接口，如果配置则会请求下面的url
-<br>###私有化push接口
-<br>private.push.url=
-<br>###接口参数如下：
-<br>map.put("From", ");//发送人/群
-<br>map.put("To", "");//接收人
-<br>map.put("Body", "");//消息内容(单人【消息内容】；群【说话人：消息内容】)
-<br>map.put("Mtype", 1);//消息类型
-<br>map.put("Message", "xml"");//原始消息，可自己解析自定义
+
+## 能力范围
+
+* 如果您自己有build app的能力，那么请自己生成、部署app,并[自己部署push](#私有化部署push)；
+* 您有已经在应用的push服务器，需要[复用自己的push服务器](#自有push系统);
+* 如果您并不打算部署app，只想用开源版本的startalk，那么可以接入我们的[公共push服务器](#共用push系统)
+
+（因为app push证书在团队内），
+此时您需要支付一定的服务器公摊费用，但是肯定比短信便宜的多！详情可以联系我们的客服人员。
+
+***
+
+## 共用push系统
+对于已经私有化部署的用户来说比较简单，不需要下载，更新服务，只需要按照如下步骤执行即可.
+全程只需要修改一个配置文件，重启下服务即可。
+一共有四步：
+```
+第一步：
+$ vim /startalk/tomcat/push_service/webapps/push_service/WEB-INF/classes/app.properties
+
+第二步：
+在配置文件中，找到:
+qtalk_push_url=
+
+将您收到的邮件或者信息中的公有url填入，填写完成之后应该看起来是这样的：
+(没有空格)
+qtalk_push_url=https://xxx.xx.com/xxx/push/sendPush.xxx
+
+第三步：
+在配置文件中，找到：
+qtalk_push_key=
+
+将您收到的邮件或者信息中的push key填入，填写完成之后应该看起来是这样的：
+(没有空格)
+qtalk_push_key=xxxxxxxx
+
+第四步：
+杀掉服务，并重启服务
+
+$./startalk/tomcat/push_service/startup.sh
+
+```
+
+***
+
+## 私有化部署push
+
+全程只需要修改一个配置文件，重启下服务即可。
+
+文件位置在：
+
+/startalk/tomcat/push_service/webapps/push_service/WEB-INF/classes/app.properties
+
+### Android和IOS证书配置
+
+如果需要使用服务支持的push，Android需要自己去小米和华为开发平台注册自己应用的app_key,Ios需要生产签名证书，配置如下：
+
+#### ios push 证书
+
+```
+ios_push_cer_qtalk=线上证书所在路径
+ios_push_cer_qtalk_beta=beta证书所在路径
+```
+
+#### Android配置
+
+```
+adr.qtalk.pkgname=应用包名
+adr.mipush.qtalk.key=mipush key(是个文本)
+adr.hwpush.qtalk.key=hwpush key(是个文本)
+```
+
+***
+
+## 自有push系统
+
+全程只需要修改一个配置文件，重启下服务即可。
+
+文件位置在：
+
+/startalk/tomcat/push_service/webapps/push_service/WEB-INF/classes/app.properties
+
+```
+private.push.url=这里指向您的push服务的接收方法
+```
+
+此时，push服务将作为客户端，将需要发送的push内容推向你现有的push服务器。
+
+你服务器中需要实现上面提到的方法。其中：
+
+http request 的 Header中，
+
+```
+Content-Type:application/json
+```
+
+post body是个json,内容为类似这样的形式:
+
+```
+{
+    "From":"ming.xiao",
+    "To":"hong.xiao",
+    "Body":"明天去哪儿玩儿？",
+    "Mtype":1,
+    "Message":"xml"
+}
+
+```
+***
 
 #使用QTalk/Startalk客户端的情况如要使用push，需要联系客服配置下面信息
 <br>qtalk_push_url=
