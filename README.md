@@ -35,9 +35,9 @@ map.put("From", ");//发送人/群
 <br>map.put("Message", "xml"");//原始消息，可自己解析自定义
 
 #使用QTalk/Startalk客户端的情况如要使用push，需要联系客服配置下面信息
-qtalk_push_url=
+<br>qtalk_push_url=
 #使用星语push key
-qtalk_push_key=
+<br>qtalk_push_key=
 
 ## 问题反馈
 **qchat@qunar.com（邮件）**
