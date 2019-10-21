@@ -560,7 +560,7 @@ public class SpoolMessageService {
                 title = title.substring(0, 32);
             }
             notificationInfo.title = title;
-            notificationInfo.description = message.length() > 100 ? message.substring(0, 100) : message;
+            notificationInfo.description = message.length() > 50 ? message.substring(0, 50) : message;
             notificationInfo.fromjid = notifyid;
             notificationInfo.fromName = from;
             notificationInfo.fromHost = fromhost;
@@ -570,7 +570,7 @@ public class SpoolMessageService {
             notificationInfo.chatid = chatid;
             notificationInfo.realjid = realjid;
             notificationInfo.cctext = cctext;
-            notificationInfo.body = message.length() > 100 ? message.substring(0, 100) : message;
+            notificationInfo.body = message.length() > 50 ? message.substring(0, 50) : message;
             notificationInfo.msgxml = xml;
             notificationInfo.json = json;
             notificationInfo.toUserName = toUserName;
