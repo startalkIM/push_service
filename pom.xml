@@ -18,7 +18,7 @@
         <org.slf4j.version>1.7.12</org.slf4j.version>
         <spring.version>4.3.18.RELEASE</spring.version>
         <kafka.version>0.8.2.2</kafka.version>
-        <jackson.version>2.9.9</jackson.version>
+        <jackson.version>2.9.10</jackson.version>
         <!-- mybatis版本 -->
         <mybatis.version>3.3.1</mybatis.version>
         <!-- mybatis-spring版本 -->
@@ -344,7 +344,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
+            <version>1.2.60</version>
         </dependency>
 
     </dependencies>
