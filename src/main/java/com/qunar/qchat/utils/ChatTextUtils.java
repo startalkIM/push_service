@@ -12,6 +12,7 @@ public class ChatTextUtils {
     public final static int PREDICTION_MSG = 668;
     public final static int EXTEND_OPS_MSG = 667;
     public final static int REVOKE_MESSAGE = -1;
+    public final static int CONSULT_REVOKE_MESSAGE = -2;
     public final static int TEXT_MESSAGE = 1;
     public final static int IMAGE_MESSAGE = 3;
     public final static int VOICE_MESSAGE = 2;
@@ -94,6 +95,7 @@ public class ChatTextUtils {
         defaultMsg.put(EXTEND_OPS_MSG,"[链接]");
         defaultMsg.put(PREDICTION_MSG,"[链接]");
         defaultMsg.put(REVOKE_MESSAGE,"[撤销消息]");
+        defaultMsg.put(CONSULT_REVOKE_MESSAGE,"[撤销消息]");
         defaultMsg.put(MSG_TYPE_WEBRTC,"[实时视频]");
         defaultMsg.put(MSG_TYPE_WEBRTC_AUDIO,"[实时音频]");
 //        defaultMsg.put(MSG_ROBOT,"[机器人消息]");

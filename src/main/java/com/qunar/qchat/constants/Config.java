@@ -50,6 +50,7 @@ public class Config {
     public static final int VPUSH_QT_APP_ID = getIntProperty("adr.vpush.qtalk.appid", 0);
     public static final String VPUSH_QT_APP_KEY = getProperty("adr.vpush.qtalk.app_key", "");
     public static final String VPUSH_QT_APP_SECRET_KEY = getProperty("adr.vpush.qtalk.app_secret_key", "");
+    public static final String FCMPUSH_QT_SERVER_KEY = getProperty("adr.fcmpush.qtalk.serverkey", "");
     private synchronized static void init() {
         if (props != null) {
             return;

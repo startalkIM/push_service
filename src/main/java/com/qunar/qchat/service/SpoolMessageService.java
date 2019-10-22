@@ -70,6 +70,10 @@ public class SpoolMessageService {
         if (!TextUtils.isEmpty(Config.VPUSH_QT_APP_SECRET_KEY) && !TextUtils.isEmpty(Config.VPUSH_QT_APP_KEY) && Config.VPUSH_QT_APP_ID > 0) {
             QPushServer.addPushServerManager(new VivoPushServerManager(Config.QT_PACKAGE_NAME, Config.VPUSH_QT_APP_ID, Config.VPUSH_QT_APP_KEY, Config.VPUSH_QT_APP_SECRET_KEY));
         }
+        //fcm
+        if (!TextUtils.isEmpty(Config.FCMPUSH_QT_SERVER_KEY)) {
+            QPushServer.addPushServerManager(new FCMPushServerManager(Config.QT_PACKAGE_NAME, Config.FCMPUSH_QT_SERVER_KEY));
+        }
     }
 
 
