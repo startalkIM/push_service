@@ -1,130 +1,133 @@
 package com.qunar.qchat.utils;
 
+import com.qunar.qchat.dao.model.PushInfo;
 import org.apache.http.util.TextUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ChatTextUtils {
-    public final static int EXTEND_MSG = 666;
-    public final static int PREDICTION_MSG = 668;
-    public final static int EXTEND_OPS_MSG = 667;
-    public final static int REVOKE_MESSAGE = -1;
-    public final static int CONSULT_REVOKE_MESSAGE = -2;
-    public final static int TEXT_MESSAGE = 1;
-    public final static int IMAGE_MESSAGE = 3;
-    public final static int VOICE_MESSAGE = 2;
-    public final static int FILE_MESSAGE = 5;
-    public static final int MSG_ACTION = 6;
-    public static final int MSG_RICH_TEXT = 7;
-    public static final int MSG_ACTION_RICH_TEXT = 8;
-    public final static int COMMENT_MESSAGE = 9;
-    public static final int SHAKE_MESSAGE = 10;
-    public static final int MSG_NOTE = 11;
-    public static final int MSG_GROUP_AT = 12;
     public static final int AUTO_REPLY_MESSAGE = 13;
-    public static final int INVITE_MESSAGE = 15;
-    public final static int LOCATION_MESSAGE = 16;
-    public final static int IMAGE_NO_BACKGROUD = 30;
-    public final static int VIDEO_MESSAGE = 32;
-    public final static int ROBOT_ANSWER_MESSAGE = 47;
-    public final static int CODE_MESSAGE = 64;
-    public final static int READ_TO_DESTROY_MESSAGE = 128;
-    public final static int MessageTypeMessageTypeCardShare = 256;
-    public static final int MSG_ACTIVITY_MESSAGE = 511;
-    public static final int MSG_AA_MESSAGE = 513;
-    public static final int MSG_HONGBAO_MESSAGE = 512;
-    public static final int MSG_AA_PROMPT = 1025;
-    public static final int TRANSFER_TO_SERVER = 1002;
-    public static final int TRANSFER_TO_CUSTOMER = 1001;
-    public static final int MSG_HONGBAO_PROMPT = 1024;
-    public static final int MSG_PRODUCT_CARD = 4096;
-    public static final int MSG_ROBOT_ = 65536;
-    public static final int MSG_ROBOT = 65537;
-    public static final int SHARE_LOCATION = 8192;
-    public static final int MSG_TYPE_RBT_SYSTEM = 268435456;
-    public static final int MSG_TYPE_RBT_NOTICE = 134217728;
-    public static final int MSG_TYPE_RUNSHING_ORDER = 2001;
 
-    public static final int MSG_TYPE_ROB_ORDER = 2003;//qchat抢单
-    public static final int MSG_TYPE_ROB_ORDER_RESPONSE = 2004;//qchat抢单状态
-    public static final int MSG_TYPE_ZHONG_BAO = 2005;//qchat 众包消息
-    public static final int MSG_TYPE_CALL_CENTER_CMD = 16384<<1;
-    public static final int MSG_TYPE_WEBRTC = MSG_TYPE_CALL_CENTER_CMD<<1;
-    public static final int MSG_TYPE_WEBRTC_AUDIO = MSG_TYPE_WEBRTC<<1;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ChatTextUtils.class);
 
 
-    
     private final static Map<Integer,String> defaultMsg = new HashMap<Integer,String>();
 
     private final static String objPattern = "\\[obj type=\"([\\w]+)\" value=\"([\\S]+)\"([\\w|=|\\s|\\.]+)?\\]";
     private final static Pattern compiledPattern = Pattern.compile(objPattern);
 
     static {
-        defaultMsg.put(IMAGE_MESSAGE,"[图片]");
-        defaultMsg.put(IMAGE_NO_BACKGROUD,"[图片]");
-        defaultMsg.put(FILE_MESSAGE,"[文件]");
-        defaultMsg.put(LOCATION_MESSAGE,"[位置]");
-        defaultMsg.put(MSG_ACTION,"[新消息]");
-        defaultMsg.put(MSG_ACTION_RICH_TEXT,"[富文本消息]");
-        defaultMsg.put(MSG_RICH_TEXT,"[富文本消息]");
-        defaultMsg.put(MSG_TYPE_RBT_NOTICE,"[通知消息]");
-        defaultMsg.put(MSG_TYPE_RBT_SYSTEM,"[系统消息]");
-        defaultMsg.put(READ_TO_DESTROY_MESSAGE,"[阅后即焚]");
-        defaultMsg.put(MessageTypeMessageTypeCardShare,"[名片]");
-        defaultMsg.put(VIDEO_MESSAGE,"[视频]");
-        defaultMsg.put(ROBOT_ANSWER_MESSAGE,"[机器人回复]");
-        defaultMsg.put(VOICE_MESSAGE,"[语音]");
-        defaultMsg.put(CODE_MESSAGE,"[给您发送了一段代码]");
-        defaultMsg.put(COMMENT_MESSAGE,"[给您发送了一条消息]");
-        defaultMsg.put(SHAKE_MESSAGE,"[窗口抖动]");
-        defaultMsg.put(MSG_HONGBAO_MESSAGE,"[红包]");
-        defaultMsg.put(MSG_HONGBAO_PROMPT,"[红包领取通知]");
-        defaultMsg.put(MSG_ACTIVITY_MESSAGE,"[活动消息]");
-        defaultMsg.put(MSG_AA_MESSAGE,"[AA收款]");
-        defaultMsg.put(MSG_AA_PROMPT,"[AA收款通知]");
-        defaultMsg.put(MSG_NOTE,"[咨询]");
-        defaultMsg.put(SHARE_LOCATION,"[共享位置]");
-        defaultMsg.put(MSG_PRODUCT_CARD,"[产品链接]");
-        defaultMsg.put(TRANSFER_TO_SERVER,"[会话转移]");
-        defaultMsg.put(TRANSFER_TO_CUSTOMER,"[会话转移]");
-        defaultMsg.put(MSG_TYPE_RUNSHING_ORDER,"[来生意了]");
-        defaultMsg.put(EXTEND_MSG,"[链接]");
-        defaultMsg.put(EXTEND_OPS_MSG,"[链接]");
-        defaultMsg.put(PREDICTION_MSG,"[链接]");
-        defaultMsg.put(REVOKE_MESSAGE,"[撤销消息]");
-        defaultMsg.put(CONSULT_REVOKE_MESSAGE,"[撤销消息]");
-        defaultMsg.put(MSG_TYPE_WEBRTC,"[实时视频]");
-        defaultMsg.put(MSG_TYPE_WEBRTC_AUDIO,"[实时音频]");
-//        defaultMsg.put(MSG_ROBOT,"[机器人消息]");
-//        defaultMsg.put(MSG_ROBOT_,"[机器人消息]");
-        defaultMsg.put(MSG_TYPE_ROB_ORDER,"[抢单消息]");
-        defaultMsg.put(MSG_TYPE_ROB_ORDER_RESPONSE,"[抢单消息]");
-        defaultMsg.put(MSG_TYPE_ZHONG_BAO,"[抢单消息]");
-
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeFile_VALUE, "msg.notification.file");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeLocalShare_VALUE, "msg.notification.location");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeTopic_VALUE, "msg.notification.newmsg");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeActionRichText_VALUE, "msg.notification.rich");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeRichText_VALUE, "msg.notification.rich");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeNotice_VALUE, "msg.notification.notification");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeSystem_VALUE, "msg.notification.system");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeBurnAfterRead_VALUE, "msg.notification.burn");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeSmallVideo_VALUE, "msg.notification.videomsg");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeRobotAnswer_VALUE, "msg.notification.robotmsg");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeVoice_VALUE, "msg.notification.voice");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeShock_VALUE, "msg.notification.shake");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeRedPack_VALUE, "msg.notification.redpkg");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeRedPackInfo_VALUE, "msg.notification.redpkgnoc");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeActivity_VALUE, "msg.notification.activity");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeAA_VALUE, "msg.notification.aapay");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeAAInfo_VALUE, "msg.notification.aapaynoc");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeNote_VALUE, "msg.notification.productdtl");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeShareLocation_VALUE, "msg.notification.sharelocation");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeProduct_VALUE, "msg.notification.productlink");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeTransChatToCustomerService_VALUE, "msg.notification.sestransfer");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeTransChatToCustomer_VALUE, "msg.notification.sestransfer");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeConsult_VALUE, "[来生意了]");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeCommonTrdInfo_VALUE, "msg.notification.linkcard");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeRevoke_VALUE, "msg.notification.recall");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeRevoke_VALUE, "msg.notification.recall");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.WebRTC_MsgType_VideoCall_VALUE, "msg.notification.videocall");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.WebRTC_MsgType_Video_Group_VALUE, "msg.notification.videogroup");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.WebRTC_MsgType_Video_VALUE, "atom_ui_tip_client_too_low");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.WebRTC_MsgType_Audio_VALUE, "atom_ui_tip_client_too_low");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeRobotQuestionList_VALUE, "msg.notification.questionlist");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeRobotTurnToUser_VALUE, "msg.notification.turntocs");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.WebRTC_MsgType_AudioCall_VALUE, "msg.notification.audiocall");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeGrabMenuVcard_VALUE, "msg.notification.grabmsg");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeGrabMenuResult_VALUE, "msg.notification.grabmsg");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeImageNew_VALUE, "msg.notification.sticker");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeMeetingRemind_VALUE, "msg.notification.meetinginvite");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeEncrypt_VALUE, "msg.notification.encryptmsg");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypeSourceCode_VALUE, "msg.notification.sourcecode");
+        defaultMsg.put(ProtoMessageOuterClass.MessageType.MessageTypePhoto_VALUE, "msg.notification.photo");
 
     }
 
-    static public String showContentType(String strText, int msgType) {
+    public static String showContentType(String strText, int msgType, PushInfo info) {
+
         if (strText == null)
             return "";
-        if(msgType == INVITE_MESSAGE) return strText;
-        String result=defaultMsg.get(msgType);
-
-        if((msgType == TEXT_MESSAGE || msgType == MSG_GROUP_AT)&&result == null)
-            result = replaceSpecialChar(strText);
+        if(msgType == ProtoMessageOuterClass.MessageType.MessageTypeGroupNotify_VALUE) return strText;
+        String result = defaultMsg.get(msgType);
+        if(!TextUtils.isEmpty(result)) {
+            result = getContentByKeyAndLang(result, info.getPlatname());
+        }
+        if((msgType == ProtoMessageOuterClass.MessageType.MessageTypeText_VALUE
+                || msgType == ProtoMessageOuterClass.MessageType.MessageTypeGroupAt_VALUE)
+                && TextUtils.isEmpty(result))
+            result = replaceSpecialChar(strText, info.getPlatname());
         if(AUTO_REPLY_MESSAGE == msgType)
             result = strText;
-        if(result == null&&!TextUtils.isEmpty(strText))
+        if(TextUtils.isEmpty(result) && !TextUtils.isEmpty(strText))
             result = strText;
-        if(result==null)
-            result = "[不支持该类型消息，请升级到最新版]";
+        if(TextUtils.isEmpty(result))
+            result = getContentByKeyAndLang("msg.notification.versionlow", info.getPlatname());
         return result;
     }
 
-    private static String replaceSpecialChar(String srcObj) {
+    /**
+     *
+     * @param key
+     * @param platname 里面截取 "_" 获取language和country
+     * @return
+     */
+    public static String getContentByKeyAndLang(String key, String platname) {
+        String[] strs = platname.split("_");
+        Locale locale ;
+        if(strs.length >= 2) {
+            String language = strs[1];
+            locale = new Locale(language);
+//            String country = strs[2];
+//            locale = new Locale(language, country);
+        } else {
+            locale = Locale.CHINESE;
+        }
+
+        return getStringByLocale(key, locale);
+    }
+
+
+    public static String getStringByLocale(String key, Locale locale) {
+        LOGGER.info("getContentByKeyAndLang  key={} locale={}", key, locale.toString());
+        try {
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n.messages", locale);
+            if(resourceBundle != null) {
+                //防止中文乱码
+//                return new String(resourceBundle.getString(key).getBytes("ISO-8859-1"), "UTF-8");
+                return resourceBundle.getString(key);
+            }
+        } catch (Exception e) {
+            LOGGER.error("catch error={} ", e);
+        }
+        return "";
+    }
+
+
+    private static String replaceSpecialChar(String srcObj, String platname) {
         if (srcObj == null) {
             return "";
         }
@@ -139,10 +142,10 @@ public class ChatTextUtils {
             String type = m.group(1);
 
             if (type.equals("image")) {
-                srcObj = srcObj.replace(oldStr, "[图片]");
+                srcObj = srcObj.replace(oldStr, getContentByKeyAndLang("msg.notification.photo", platname));
             } else if (type.equals("emoticon")) {
 //                String shortcut = m.group(2);
-                srcObj = srcObj.replace(oldStr, "[表情]");
+                srcObj = srcObj.replace(oldStr, getContentByKeyAndLang("msg.notification.sticker", platname));
             } else if (type.equals("url")) {
                 srcObj = srcObj.replace(oldStr, m.group(2));
             }

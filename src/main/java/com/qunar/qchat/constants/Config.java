@@ -38,6 +38,10 @@ public class Config {
     public static final String IOS_PUSH_CERT_PWD_QTALK_BETA = getProperty("ios_push_cer_pwd_beta");
     /**私有化push接口url*/
     public static final String PRIVATE_PUSH_URL = getProperty("private.push.url");
+
+    /**应用推送图标和颜色*/
+    public static final String NOTIFICATION_ICON_NAME = getProperty("adr.notification.icon.name", "");
+    public static final String NOTIFICATION_ICON_COLOR = getProperty("adr.notification.icon.color", "");
     /**包名 xiaomi secret key*/
     public static final String QT_PACKAGE_NAME = getProperty("adr.qtalk.pkgname");
     public static final String MIPUSH_QT_SECRET_KEY = getProperty("adr.mipush.qtalk.key");

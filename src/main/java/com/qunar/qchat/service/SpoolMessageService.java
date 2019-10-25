@@ -140,6 +140,9 @@ public class SpoolMessageService {
             if (info != null) {
                 status = Integer.valueOf(info.getPush_flag());
                 LOGGER.info("processChatMessage PushInfo={} touser={}", JSON.toJSONString(info), QtalkStringUtils.userId2Jid(toUser, toDomain));
+            } else {
+                info = new PushInfo();
+                LOGGER.info("processChatMessage push no regist touser={}", QtalkStringUtils.userId2Jid(toUser, toDomain));
             }
             //获取push_info end
             //push开关
@@ -148,7 +151,7 @@ public class SpoolMessageService {
                 return;
             }
             //解析消息
-            NotificationInfo notificationInfo = formatBaseNotification(type, chatMessage, toUser, toDomain);
+            NotificationInfo notificationInfo = formatBaseNotification(type, chatMessage, toUser, toDomain, info);
             if (notificationInfo == null) {
                 LOGGER.info("processChatMessage notificationInfo={} touser={}", "", QtalkStringUtils.userId2Jid(toUser, toDomain));
                 LOGGER.info("processChatMessage 解析消息异常 touser={}", QtalkStringUtils.userId2Jid(toUser, toDomain));
@@ -156,13 +159,9 @@ public class SpoolMessageService {
             }
             //push不显示明文
             if (!MessageSettingsTag.isExistTag(status, MessageSettingsTag.SHOW_CONTENT)) {
-                if ("ejabhost2".equalsIgnoreCase(toDomain)) {
-                    notificationInfo.title = "QChat";
-                } else {
-                    notificationInfo.title = "QTalk";
-                }
-                notificationInfo.description = "您有新消息，点击查看";
-                notificationInfo.body = "您有新消息，点击查看";
+                notificationInfo.title = "Startalk";
+                notificationInfo.description = ChatTextUtils.getContentByKeyAndLang("msg.notification.defaultcontent", info.getPlatname());
+                notificationInfo.body = ChatTextUtils.getContentByKeyAndLang("msg.notification.defaultcontent", info.getPlatname());;
             }
             //是否@自己
             boolean isAtMyself = isAtMyself(type, chatMessage, toUser, toDomain, notificationInfo);
@@ -180,7 +179,6 @@ public class SpoolMessageService {
                 if (!MessageSettingsTag.isExistTag(status, MessageSettingsTag.PUSH_ONLINE)) {
 //                    isHasAnyAway = CommonRedisUtil.isHasPlatAway(toUser, toDomain);
                     isHasOtherPlatOnline = CommonRedisUtil.isHasPlatOnline(toUser, toDomain);
-//                LOGGER.info("getMesaageToSend isHasAnyAway={} isHasOtherPlatOnline={} touser={}", isHasAnyAway, isHasOtherPlatOnline, QtalkStringUtils.userId2Jid(toUser, toDomain));
                     //modify 20181219 在线push开关关闭情况下，在线就不发push，不判离开状态
                     if (isHasOtherPlatOnline) {//没有离开&有在线的不发
                         LOGGER.info("processChatMessage isAtMyself={} isHasOtherPlatOnline={} touser={}", isAtMyself, isHasOtherPlatOnline, QtalkStringUtils.userId2Jid(toUser, toDomain));
@@ -358,7 +356,7 @@ public class SpoolMessageService {
         return null;
     }
 
-    private NotificationInfo formatBaseNotification(String key, Map<String, Object> chatMessage, String toUser, String toDomain) {
+    private NotificationInfo formatBaseNotification(String key, Map<String, Object> chatMessage, String toUser, String toDomain, PushInfo info) {
         try {
             NotificationInfo notificationInfo = new NotificationInfo();
             String from = "";
@@ -427,32 +425,37 @@ public class SpoolMessageService {
             }
             String toUserName = QtalkStringUtils.userId2Jid(toUser, toDomain);
             String fromNick = "";
-           if (MessageType.GROUPCHAT.equals(key)) {
+            if (MessageType.GROUPCHAT.equals(key)) {
                 if (chatMessage.containsKey("nick") && chatMessage.get("nick") != null) {
                     fromNick = chatMessage.get("nick").toString();
                 }
             } /*else if (MessageType.CHAT.equals(key)) {
             } */
 
-                //根据msgtype转换文字
-            message = ChatTextUtils.showContentType(message, msg_type);
-            if (msg_type == ChatTextUtils.EXTEND_MSG
-                    || msg_type == ChatTextUtils.PREDICTION_MSG
-                    || msg_type == ChatTextUtils.EXTEND_OPS_MSG) {
+            //根据msgtype转换文字
+            message = ChatTextUtils.showContentType(message, msg_type, info);
+            if (body.get("extendInfo") != null) {
                 String extendInfo = body.get("extendInfo").toString();
                 if (!TextUtils.isEmpty(extendInfo)) {
-                    Map<String, String> extInfo = JSON.parseObject(extendInfo, Map.class);
-                    if (extInfo.containsKey("pushtext") && extInfo.get("pushtext") != null) {
-                        //有pushtext字段显示pushtext字段
-                        message = extInfo.get("pushtext").toString();
-                    } else {
+                    try {
+
+                        Map<String, String> extInfo = JSON.parseObject(extendInfo, new TypeReference<Map<String, String>>() {});
+                        if (extInfo.containsKey("pushtext") && extInfo.get("pushtext") != null) {
+                            //有pushtext字段显示pushtext字段
+                            message = extInfo.get("pushtext").toString();
+                        }/* else {
                         message = message + extInfo.get("title").toString();
+                    }*/
+                    } catch (Exception e) {
+                        LOGGER.info("formatBaseNotification extendInfo parse error={} from={} touser={}", JSON.toJSON(chatMessage), from, QtalkStringUtils.userId2Jid(toUser, toDomain));
                     }
                 }
             }
-            if ((msg_type == ChatTextUtils.MSG_ROBOT || msg_type == ChatTextUtils.MSG_ROBOT_) && fromhost.equalsIgnoreCase("ejabhost2")) {
+            if ((msg_type == ProtoMessageOuterClass.MessageType.MessageTypeRobotTurnToUser_VALUE
+                    || msg_type == ProtoMessageOuterClass.MessageType.MessageTypeRobotQuestionList_VALUE)
+                    && fromhost.equalsIgnoreCase("ejabhost2")) {
                 //qchat ejabhost2 展示机器人消息
-                message = "[机器人消息]";
+                message = ChatTextUtils.getContentByKeyAndLang("msg.notification.rbtmsg", info.getPlatname());
             }
             if (MessageType.COLLECTION.equalsIgnoreCase(type)) {//代收消息
                 String orginto = "";
@@ -508,7 +511,7 @@ public class SpoolMessageService {
                 }
                 notifyid = cfrom;
             } else if (MessageType.HEADLINE.equalsIgnoreCase(type) || "subscription".equalsIgnoreCase(type)) {
-                fromName = "系统消息";
+                fromName = ChatTextUtils.getContentByKeyAndLang("msg.notification.system", info.getPlatname());
             } else {
                 if (MessageType.CHAT.equals(type) || (MessageType.REVOKE.equalsIgnoreCase(key) && MessageType.CHAT.equalsIgnoreCase(chatMessage.get("subtype").toString()))) {
                     String tempName = mDispatchService.getServiceByDomain(fromhost).getUserName(from, fromhost);

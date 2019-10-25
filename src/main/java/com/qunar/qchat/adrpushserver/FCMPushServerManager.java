@@ -1,6 +1,7 @@
 package com.qunar.qchat.adrpushserver;
 
 import com.qunar.qchat.constants.AdrPushConstants;
+import com.qunar.qchat.constants.Config;
 import com.qunar.qchat.dao.model.NotificationInfo;
 import com.qunar.qchat.utils.HttpClientUtils;
 import com.qunar.qchat.utils.JacksonUtils;
@@ -59,15 +60,20 @@ public class FCMPushServerManager implements QPushServerManager {
                 Map<String, String> notification = new HashMap<>();
                 notification.put("title", notificationInfo.title);
                 notification.put("body", notificationInfo.description);
-                notification.put("click_action", "intent:#Intent;component=" + notificationInfo.pkgname + "/com.qunar.im.ui.activity.TabMainActivity;S.jid="
-                        + notificationInfo.fromjid
-                        + ";i.type="+notificationInfo.type
-                        + ";S.chatid="+notificationInfo.chatid
-                        + ";S.realjid="+notificationInfo.realjid
-                        + ";end");
+                notification.put("click_action", notificationInfo.pkgname + ".notification_start");
                 notification.put("tag", String.valueOf(Math.abs(SecurityUtils.transformStringToInt(notificationInfo.messageId))));
+                notification.put("icon", Config.NOTIFICATION_ICON_NAME);
+                notification.put("color", Config.NOTIFICATION_ICON_COLOR);
 
                 msg.put("notification", notification);
+
+                Map<String, String> data = new HashMap<>();
+                data.put("jid", notificationInfo.fromjid);
+                data.put("type", notificationInfo.type + "");
+                data.put("chatid", notificationInfo.chatid);
+                data.put("realjid", notificationInfo.realjid);
+
+                msg.put("data", data);
 
                 Map<String, String> header = new HashMap<>();
                 header.put("Content-Type", "application/json");
