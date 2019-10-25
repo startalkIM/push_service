@@ -8,2299 +8,2734 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class ProtoMessageOuterClass {
-  private ProtoMessageOuterClass() {}
+    private ProtoMessageOuterClass() {}
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(ProtoMessageOuterClass.class);
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-  }
-  /**
-   * Protobuf enum {@code SignalType}
-   */
-  public enum SignalType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>SignalTypePresence = 1;</code>
-     */
-    SignalTypePresence(0, 1),
-    /**
-     * <code>SignalTypeIQ = 2;</code>
-     */
-    SignalTypeIQ(1, 2),
-    /**
-     * <code>SignalTypeIQResponse = 3;</code>
-     */
-    SignalTypeIQResponse(2, 3),
-    /**
-     * <code>SignalTypeSucceededResponse = 4;</code>
-     */
-    SignalTypeSucceededResponse(3, 4),
-    /**
-     * <code>SignalTypeFailureResponse = 5;</code>
-     */
-    SignalTypeFailureResponse(4, 5),
-    /**
-     * <code>SignalTypeChat = 6;</code>
-     *
-     * <pre>
-     * 二人消息
-     * </pre>
-     */
-    SignalTypeChat(5, 6),
-    /**
-     * <code>SignalTypeGroupChat = 7;</code>
-     *
-     * <pre>
-     * 群消息
-     * </pre>
-     */
-    SignalTypeGroupChat(6, 7),
-    /**
-     * <code>SignalTypeNormal = 8;</code>
-     *
-     * <pre>
-     * 不知干啥的
-     * </pre>
-     */
-    SignalTypeNormal(7, 8),
-    /**
-     * <code>SignalTypeError = 9;</code>
-     *
-     * <pre>
-     * 不知干啥的
-     * </pre>
-     */
-    SignalTypeError(8, 9),
-    /**
-     * <code>SignalTypeTyping = 10;</code>
-     *
-     * <pre>
-     * 正在输入中
-     * </pre>
-     */
-    SignalTypeTyping(9, 10),
-    /**
-     * <code>SignalTypeNote = 11;</code>
-     *
-     * <pre>
-     * 来生意了
-     * </pre>
-     */
-    SignalTypeNote(10, 11),
-    /**
-     * <code>SignalTypeTransfor = 12;</code>
-     *
-     * <pre>
-     * 会话转移
-     * </pre>
-     */
-    SignalTypeTransfor(11, 12),
-    /**
-     * <code>SignalTypeReadmark = 13;</code>
-     *
-     * <pre>
-     * 阅读指针
-     * </pre>
-     */
-    SignalTypeReadmark(12, 13),
-    /**
-     * <code>SignalTypeRevoke = 14;</code>
-     *
-     * <pre>
-     * 撤销消息
-     * </pre>
-     */
-    SignalTypeRevoke(13, 14),
-    /**
-     * <code>SignalTypeSubscription = 15;</code>
-     *
-     * <pre>
-     * 机器人消息
-     * </pre>
-     */
-    SignalTypeSubscription(14, 15),
-    /**
-     * <code>SignalTypeMState = 16;</code>
-     *
-     * <pre>
-     * 消息状态
-     * </pre>
-     */
-    SignalTypeMState(15, 16),
-    /**
-     * <code>SignalTypeHeadline = 17;</code>
-     *
-     * <pre>
-     * 系统通知消息
-     * </pre>
-     */
-    SignalTypeHeadline(16, 17),
-    /**
-     * <code>SignalTypeShareLocation = 20;</code>
-     *
-     * <pre>
-     * 分享位置消息
-     * </pre>
-     */
-    SignalTypeShareLocation(17, 20),
-    /**
-     * <code>SignalTypeHeartBeat = 30;</code>
-     */
-    SignalTypeHeartBeat(18, 30),
-    /**
-     * <code>SignalTypeAuth = 45;</code>
-     */
-    SignalTypeAuth(19, 45),
-    /**
-     * <code>SignalTypeStreamBegin = 50;</code>
-     */
-    SignalTypeStreamBegin(20, 50),
-    /**
-     * <code>SignalTypeStreamEnd = 51;</code>
-     */
-    SignalTypeStreamEnd(21, 51),
-    /**
-     * <code>SignalTypeWelcome = 100;</code>
-     */
-    SignalTypeWelcome(22, 100),
-    /**
-     * <code>SignalTypeUserConnect = 101;</code>
-     */
-    SignalTypeUserConnect(23, 101),
-    /**
-     * <code>SignalTypeChallenge = 102;</code>
-     */
-    SignalTypeChallenge(24, 102),
-    /**
-     * <code>SignalStartTLS = 106;</code>
-     */
-    SignalStartTLS(25, 106),
-    /**
-     * <code>SignalProceedTLS = 108;</code>
-     */
-    SignalProceedTLS(26, 108),
-    /**
-     * <code>SignalTypeWebRtc = 110;</code>
-     */
-    SignalTypeWebRtc(27, 110),
-    /**
-     * <code>SignalTypeCarbon = 128;</code>
-     */
-    SignalTypeCarbon(28, 128),
-    /**
-     * <code>SignalTypeConsult = 132;</code>
-     */
-    SignalTypeConsult(29, 132),
-    /**
-     * <code>SignalTypeEncryption = 136;</code>
-     */
-    SignalTypeEncryption(30, 136),
-    /**
-     * <code>SignalTypeCollection = 140;</code>
-     */
-    SignalTypeCollection(31, 140),
-    ;
-
-    /**
-     * <code>SignalTypePresence = 1;</code>
-     */
-    public static final int SignalTypePresence_VALUE = 1;
-    /**
-     * <code>SignalTypeIQ = 2;</code>
-     */
-    public static final int SignalTypeIQ_VALUE = 2;
-    /**
-     * <code>SignalTypeIQResponse = 3;</code>
-     */
-    public static final int SignalTypeIQResponse_VALUE = 3;
-    /**
-     * <code>SignalTypeSucceededResponse = 4;</code>
-     */
-    public static final int SignalTypeSucceededResponse_VALUE = 4;
-    /**
-     * <code>SignalTypeFailureResponse = 5;</code>
-     */
-    public static final int SignalTypeFailureResponse_VALUE = 5;
-    /**
-     * <code>SignalTypeChat = 6;</code>
-     *
-     * <pre>
-     * 二人消息
-     * </pre>
-     */
-    public static final int SignalTypeChat_VALUE = 6;
-    /**
-     * <code>SignalTypeGroupChat = 7;</code>
-     *
-     * <pre>
-     * 群消息
-     * </pre>
-     */
-    public static final int SignalTypeGroupChat_VALUE = 7;
-    /**
-     * <code>SignalTypeNormal = 8;</code>
-     *
-     * <pre>
-     * 不知干啥的
-     * </pre>
-     */
-    public static final int SignalTypeNormal_VALUE = 8;
-    /**
-     * <code>SignalTypeError = 9;</code>
-     *
-     * <pre>
-     * 不知干啥的
-     * </pre>
-     */
-    public static final int SignalTypeError_VALUE = 9;
-    /**
-     * <code>SignalTypeTyping = 10;</code>
-     *
-     * <pre>
-     * 正在输入中
-     * </pre>
-     */
-    public static final int SignalTypeTyping_VALUE = 10;
-    /**
-     * <code>SignalTypeNote = 11;</code>
-     *
-     * <pre>
-     * 来生意了
-     * </pre>
-     */
-    public static final int SignalTypeNote_VALUE = 11;
-    /**
-     * <code>SignalTypeTransfor = 12;</code>
-     *
-     * <pre>
-     * 会话转移
-     * </pre>
-     */
-    public static final int SignalTypeTransfor_VALUE = 12;
-    /**
-     * <code>SignalTypeReadmark = 13;</code>
-     *
-     * <pre>
-     * 阅读指针
-     * </pre>
-     */
-    public static final int SignalTypeReadmark_VALUE = 13;
-    /**
-     * <code>SignalTypeRevoke = 14;</code>
-     *
-     * <pre>
-     * 撤销消息
-     * </pre>
-     */
-    public static final int SignalTypeRevoke_VALUE = 14;
-    /**
-     * <code>SignalTypeSubscription = 15;</code>
-     *
-     * <pre>
-     * 机器人消息
-     * </pre>
-     */
-    public static final int SignalTypeSubscription_VALUE = 15;
-    /**
-     * <code>SignalTypeMState = 16;</code>
-     *
-     * <pre>
-     * 消息状态
-     * </pre>
-     */
-    public static final int SignalTypeMState_VALUE = 16;
-    /**
-     * <code>SignalTypeHeadline = 17;</code>
-     *
-     * <pre>
-     * 系统通知消息
-     * </pre>
-     */
-    public static final int SignalTypeHeadline_VALUE = 17;
-    /**
-     * <code>SignalTypeShareLocation = 20;</code>
-     *
-     * <pre>
-     * 分享位置消息
-     * </pre>
-     */
-    public static final int SignalTypeShareLocation_VALUE = 20;
-    /**
-     * <code>SignalTypeHeartBeat = 30;</code>
-     */
-    public static final int SignalTypeHeartBeat_VALUE = 30;
-    /**
-     * <code>SignalTypeAuth = 45;</code>
-     */
-    public static final int SignalTypeAuth_VALUE = 45;
-    /**
-     * <code>SignalTypeStreamBegin = 50;</code>
-     */
-    public static final int SignalTypeStreamBegin_VALUE = 50;
-    /**
-     * <code>SignalTypeStreamEnd = 51;</code>
-     */
-    public static final int SignalTypeStreamEnd_VALUE = 51;
-    /**
-     * <code>SignalTypeWelcome = 100;</code>
-     */
-    public static final int SignalTypeWelcome_VALUE = 100;
-    /**
-     * <code>SignalTypeUserConnect = 101;</code>
-     */
-    public static final int SignalTypeUserConnect_VALUE = 101;
-    /**
-     * <code>SignalTypeChallenge = 102;</code>
-     */
-    public static final int SignalTypeChallenge_VALUE = 102;
-    /**
-     * <code>SignalStartTLS = 106;</code>
-     */
-    public static final int SignalStartTLS_VALUE = 106;
-    /**
-     * <code>SignalProceedTLS = 108;</code>
-     */
-    public static final int SignalProceedTLS_VALUE = 108;
-    /**
-     * <code>SignalTypeWebRtc = 110;</code>
-     */
-    public static final int SignalTypeWebRtc_VALUE = 110;
-    /**
-     * <code>SignalTypeCarbon = 128;</code>
-     */
-    public static final int SignalTypeCarbon_VALUE = 128;
-    /**
-     * <code>SignalTypeConsult = 132;</code>
-     */
-    public static final int SignalTypeConsult_VALUE = 132;
-    /**
-     * <code>SignalTypeEncryption = 136;</code>
-     */
-    public static final int SignalTypeEncryption_VALUE = 136;
-    /**
-     * <code>SignalTypeCollection = 140;</code>
-     */
-    public static final int SignalTypeCollection_VALUE = 140;
-
-
-    public final int getNumber() { return value; }
-
-    public static SignalType valueOf(int value) {
-      switch (value) {
-        case 1: return SignalTypePresence;
-        case 2: return SignalTypeIQ;
-        case 3: return SignalTypeIQResponse;
-        case 4: return SignalTypeSucceededResponse;
-        case 5: return SignalTypeFailureResponse;
-        case 6: return SignalTypeChat;
-        case 7: return SignalTypeGroupChat;
-        case 8: return SignalTypeNormal;
-        case 9: return SignalTypeError;
-        case 10: return SignalTypeTyping;
-        case 11: return SignalTypeNote;
-        case 12: return SignalTypeTransfor;
-        case 13: return SignalTypeReadmark;
-        case 14: return SignalTypeRevoke;
-        case 15: return SignalTypeSubscription;
-        case 16: return SignalTypeMState;
-        case 17: return SignalTypeHeadline;
-        case 20: return SignalTypeShareLocation;
-        case 30: return SignalTypeHeartBeat;
-        case 45: return SignalTypeAuth;
-        case 50: return SignalTypeStreamBegin;
-        case 51: return SignalTypeStreamEnd;
-        case 100: return SignalTypeWelcome;
-        case 101: return SignalTypeUserConnect;
-        case 102: return SignalTypeChallenge;
-        case 106: return SignalStartTLS;
-        case 108: return SignalProceedTLS;
-        case 110: return SignalTypeWebRtc;
-        case 128: return SignalTypeCarbon;
-        case 132: return SignalTypeConsult;
-        case 136: return SignalTypeEncryption;
-        case 140: return SignalTypeCollection;
-        default: return null;
-      }
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProtoMessageOuterClass.class);
+    public static void registerAllExtensions(
+            com.google.protobuf.ExtensionRegistry registry) {
     }
+    /**
+     * Protobuf enum {@code SignalType}
+     */
+    public enum SignalType
+            implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>SignalTypePresence = 1;</code>
+         */
+        SignalTypePresence(0, 1),
+        /**
+         * <code>SignalTypeIQ = 2;</code>
+         */
+        SignalTypeIQ(1, 2),
+        /**
+         * <code>SignalTypeIQResponse = 3;</code>
+         */
+        SignalTypeIQResponse(2, 3),
+        /**
+         * <code>SignalTypeSucceededResponse = 4;</code>
+         */
+        SignalTypeSucceededResponse(3, 4),
+        /**
+         * <code>SignalTypeFailureResponse = 5;</code>
+         */
+        SignalTypeFailureResponse(4, 5),
+        /**
+         * <code>SignalTypeChat = 6;</code>
+         *
+         * <pre>
+         * 二人消息
+         * </pre>
+         */
+        SignalTypeChat(5, 6),
+        /**
+         * <code>SignalTypeGroupChat = 7;</code>
+         *
+         * <pre>
+         * 群消息
+         * </pre>
+         */
+        SignalTypeGroupChat(6, 7),
+        /**
+         * <code>SignalTypeNormal = 8;</code>
+         *
+         * <pre>
+         * 不知干啥的
+         * </pre>
+         */
+        SignalTypeNormal(7, 8),
+        /**
+         * <code>SignalTypeError = 9;</code>
+         *
+         * <pre>
+         * 不知干啥的
+         * </pre>
+         */
+        SignalTypeError(8, 9),
+        /**
+         * <code>SignalTypeTyping = 10;</code>
+         *
+         * <pre>
+         * 正在输入中
+         * </pre>
+         */
+        SignalTypeTyping(9, 10),
+        /**
+         * <code>SignalTypeNote = 11;</code>
+         *
+         * <pre>
+         * 来生意了
+         * </pre>
+         */
+        SignalTypeNote(10, 11),
+        /**
+         * <code>SignalTypeTransfor = 12;</code>
+         *
+         * <pre>
+         * 会话转移
+         * </pre>
+         */
+        SignalTypeTransfor(11, 12),
+        /**
+         * <code>SignalTypeReadmark = 13;</code>
+         *
+         * <pre>
+         * 阅读指针
+         * </pre>
+         */
+        SignalTypeReadmark(12, 13),
+        /**
+         * <code>SignalTypeRevoke = 14;</code>
+         *
+         * <pre>
+         * 撤销消息
+         * </pre>
+         */
+        SignalTypeRevoke(13, 14),
+        /**
+         * <code>SignalTypeSubscription = 15;</code>
+         *
+         * <pre>
+         * 机器人消息
+         * </pre>
+         */
+        SignalTypeSubscription(14, 15),
+        /**
+         * <code>SignalTypeMState = 16;</code>
+         *
+         * <pre>
+         * 消息状态
+         * </pre>
+         */
+        SignalTypeMState(15, 16),
+        /**
+         * <code>SignalTypeHeadline = 17;</code>
+         *
+         * <pre>
+         * 系统通知消息
+         * </pre>
+         */
+        SignalTypeHeadline(16, 17),
+        /**
+         * <code>SignalTypeShareLocation = 20;</code>
+         *
+         * <pre>
+         * 分享位置消息
+         * </pre>
+         */
+        SignalTypeShareLocation(17, 20),
+        /**
+         * <code>SignalTypeHeartBeat = 30;</code>
+         */
+        SignalTypeHeartBeat(18, 30),
+        /**
+         * <code>SignalTypeAuth = 45;</code>
+         */
+        SignalTypeAuth(19, 45),
+        /**
+         * <code>SignalTypeStreamBegin = 50;</code>
+         */
+        SignalTypeStreamBegin(20, 50),
+        /**
+         * <code>SignalTypeStreamEnd = 51;</code>
+         */
+        SignalTypeStreamEnd(21, 51),
+        /**
+         * <code>SignalTypeWelcome = 100;</code>
+         */
+        SignalTypeWelcome(22, 100),
+        /**
+         * <code>SignalTypeUserConnect = 101;</code>
+         */
+        SignalTypeUserConnect(23, 101),
+        /**
+         * <code>SignalTypeChallenge = 102;</code>
+         */
+        SignalTypeChallenge(24, 102),
+        /**
+         * <code>SignalStartTLS = 106;</code>
+         */
+        SignalStartTLS(25, 106),
+        /**
+         * <code>SignalProceedTLS = 108;</code>
+         */
+        SignalProceedTLS(26, 108),
+        /**
+         * <code>SignalTypeWebRtc = 110;</code>
+         */
+        SignalTypeWebRtc(27, 110),
+        /**
+         * <code>SignalTypeCarbon = 128;</code>
+         */
+        SignalTypeCarbon(28, 128),
+        /**
+         * <code>SignalTypeConsult = 132;</code>
+         */
+        SignalTypeConsult(29, 132),
+        /**
+         * <code>SignalTypeEncryption = 136;</code>
+         */
+        SignalTypeEncryption(30, 136),
+        /**
+         * <code>SignalTypeCollection = 140;</code>
+         */
+        SignalTypeCollection(31, 140),
+        /**
+         * <code>SignalTypeTrans = 141;</code>
+         */
+        SignalTypeTrans(32, 141),
+        ;
 
-    public static com.google.protobuf.Internal.EnumLiteMap<SignalType>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<SignalType>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<SignalType>() {
-            public SignalType findValueByNumber(int number) {
-              return SignalType.valueOf(number);
+        /**
+         * <code>SignalTypePresence = 1;</code>
+         */
+        public static final int SignalTypePresence_VALUE = 1;
+        /**
+         * <code>SignalTypeIQ = 2;</code>
+         */
+        public static final int SignalTypeIQ_VALUE = 2;
+        /**
+         * <code>SignalTypeIQResponse = 3;</code>
+         */
+        public static final int SignalTypeIQResponse_VALUE = 3;
+        /**
+         * <code>SignalTypeSucceededResponse = 4;</code>
+         */
+        public static final int SignalTypeSucceededResponse_VALUE = 4;
+        /**
+         * <code>SignalTypeFailureResponse = 5;</code>
+         */
+        public static final int SignalTypeFailureResponse_VALUE = 5;
+        /**
+         * <code>SignalTypeChat = 6;</code>
+         *
+         * <pre>
+         * 二人消息
+         * </pre>
+         */
+        public static final int SignalTypeChat_VALUE = 6;
+        /**
+         * <code>SignalTypeGroupChat = 7;</code>
+         *
+         * <pre>
+         * 群消息
+         * </pre>
+         */
+        public static final int SignalTypeGroupChat_VALUE = 7;
+        /**
+         * <code>SignalTypeNormal = 8;</code>
+         *
+         * <pre>
+         * 不知干啥的
+         * </pre>
+         */
+        public static final int SignalTypeNormal_VALUE = 8;
+        /**
+         * <code>SignalTypeError = 9;</code>
+         *
+         * <pre>
+         * 不知干啥的
+         * </pre>
+         */
+        public static final int SignalTypeError_VALUE = 9;
+        /**
+         * <code>SignalTypeTyping = 10;</code>
+         *
+         * <pre>
+         * 正在输入中
+         * </pre>
+         */
+        public static final int SignalTypeTyping_VALUE = 10;
+        /**
+         * <code>SignalTypeNote = 11;</code>
+         *
+         * <pre>
+         * 来生意了
+         * </pre>
+         */
+        public static final int SignalTypeNote_VALUE = 11;
+        /**
+         * <code>SignalTypeTransfor = 12;</code>
+         *
+         * <pre>
+         * 会话转移
+         * </pre>
+         */
+        public static final int SignalTypeTransfor_VALUE = 12;
+        /**
+         * <code>SignalTypeReadmark = 13;</code>
+         *
+         * <pre>
+         * 阅读指针
+         * </pre>
+         */
+        public static final int SignalTypeReadmark_VALUE = 13;
+        /**
+         * <code>SignalTypeRevoke = 14;</code>
+         *
+         * <pre>
+         * 撤销消息
+         * </pre>
+         */
+        public static final int SignalTypeRevoke_VALUE = 14;
+        /**
+         * <code>SignalTypeSubscription = 15;</code>
+         *
+         * <pre>
+         * 机器人消息
+         * </pre>
+         */
+        public static final int SignalTypeSubscription_VALUE = 15;
+        /**
+         * <code>SignalTypeMState = 16;</code>
+         *
+         * <pre>
+         * 消息状态
+         * </pre>
+         */
+        public static final int SignalTypeMState_VALUE = 16;
+        /**
+         * <code>SignalTypeHeadline = 17;</code>
+         *
+         * <pre>
+         * 系统通知消息
+         * </pre>
+         */
+        public static final int SignalTypeHeadline_VALUE = 17;
+        /**
+         * <code>SignalTypeShareLocation = 20;</code>
+         *
+         * <pre>
+         * 分享位置消息
+         * </pre>
+         */
+        public static final int SignalTypeShareLocation_VALUE = 20;
+        /**
+         * <code>SignalTypeHeartBeat = 30;</code>
+         */
+        public static final int SignalTypeHeartBeat_VALUE = 30;
+        /**
+         * <code>SignalTypeAuth = 45;</code>
+         */
+        public static final int SignalTypeAuth_VALUE = 45;
+        /**
+         * <code>SignalTypeStreamBegin = 50;</code>
+         */
+        public static final int SignalTypeStreamBegin_VALUE = 50;
+        /**
+         * <code>SignalTypeStreamEnd = 51;</code>
+         */
+        public static final int SignalTypeStreamEnd_VALUE = 51;
+        /**
+         * <code>SignalTypeWelcome = 100;</code>
+         */
+        public static final int SignalTypeWelcome_VALUE = 100;
+        /**
+         * <code>SignalTypeUserConnect = 101;</code>
+         */
+        public static final int SignalTypeUserConnect_VALUE = 101;
+        /**
+         * <code>SignalTypeChallenge = 102;</code>
+         */
+        public static final int SignalTypeChallenge_VALUE = 102;
+        /**
+         * <code>SignalStartTLS = 106;</code>
+         */
+        public static final int SignalStartTLS_VALUE = 106;
+        /**
+         * <code>SignalProceedTLS = 108;</code>
+         */
+        public static final int SignalProceedTLS_VALUE = 108;
+        /**
+         * <code>SignalTypeWebRtc = 110;</code>
+         */
+        public static final int SignalTypeWebRtc_VALUE = 110;
+        /**
+         * <code>SignalTypeCarbon = 128;</code>
+         */
+        public static final int SignalTypeCarbon_VALUE = 128;
+        /**
+         * <code>SignalTypeConsult = 132;</code>
+         */
+        public static final int SignalTypeConsult_VALUE = 132;
+        /**
+         * <code>SignalTypeEncryption = 136;</code>
+         */
+        public static final int SignalTypeEncryption_VALUE = 136;
+        /**
+         * <code>SignalTypeCollection = 140;</code>
+         */
+        public static final int SignalTypeCollection_VALUE = 140;
+        /**
+         * <code>SignalTypeTrans = 141;</code>
+         */
+        public static final int SignalTypeTrans_VALUE = 141;
+
+
+        public final int getNumber() { return value; }
+
+        public static SignalType valueOf(int value) {
+            switch (value) {
+                case 1: return SignalTypePresence;
+                case 2: return SignalTypeIQ;
+                case 3: return SignalTypeIQResponse;
+                case 4: return SignalTypeSucceededResponse;
+                case 5: return SignalTypeFailureResponse;
+                case 6: return SignalTypeChat;
+                case 7: return SignalTypeGroupChat;
+                case 8: return SignalTypeNormal;
+                case 9: return SignalTypeError;
+                case 10: return SignalTypeTyping;
+                case 11: return SignalTypeNote;
+                case 12: return SignalTypeTransfor;
+                case 13: return SignalTypeReadmark;
+                case 14: return SignalTypeRevoke;
+                case 15: return SignalTypeSubscription;
+                case 16: return SignalTypeMState;
+                case 17: return SignalTypeHeadline;
+                case 20: return SignalTypeShareLocation;
+                case 30: return SignalTypeHeartBeat;
+                case 45: return SignalTypeAuth;
+                case 50: return SignalTypeStreamBegin;
+                case 51: return SignalTypeStreamEnd;
+                case 100: return SignalTypeWelcome;
+                case 101: return SignalTypeUserConnect;
+                case 102: return SignalTypeChallenge;
+                case 106: return SignalStartTLS;
+                case 108: return SignalProceedTLS;
+                case 110: return SignalTypeWebRtc;
+                case 128: return SignalTypeCarbon;
+                case 132: return SignalTypeConsult;
+                case 136: return SignalTypeEncryption;
+                case 140: return SignalTypeCollection;
+                case 141: return SignalTypeTrans;
+                default: return null;
             }
-          };
+        }
 
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(0);
-    }
-
-    private static final SignalType[] VALUES = values();
-
-    public static SignalType valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private SignalType(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:SignalType)
-  }
-
-  /**
-   * Protobuf enum {@code ClientType}
-   */
-  public enum ClientType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>ClientTypeMac = 1;</code>
-     */
-    ClientTypeMac(0, 1),
-    /**
-     * <code>ClientTypeiOS = 2;</code>
-     */
-    ClientTypeiOS(1, 2),
-    /**
-     * <code>ClientTypePC = 3;</code>
-     */
-    ClientTypePC(2, 3),
-    /**
-     * <code>ClientTypeAndroid = 4;</code>
-     */
-    ClientTypeAndroid(3, 4),
-    /**
-     * <code>ClientTypeLinux = 5;</code>
-     */
-    ClientTypeLinux(4, 5),
-    /**
-     * <code>ClientTypeWeb = 6;</code>
-     */
-    ClientTypeWeb(5, 6),
-    ;
-
-    /**
-     * <code>ClientTypeMac = 1;</code>
-     */
-    public static final int ClientTypeMac_VALUE = 1;
-    /**
-     * <code>ClientTypeiOS = 2;</code>
-     */
-    public static final int ClientTypeiOS_VALUE = 2;
-    /**
-     * <code>ClientTypePC = 3;</code>
-     */
-    public static final int ClientTypePC_VALUE = 3;
-    /**
-     * <code>ClientTypeAndroid = 4;</code>
-     */
-    public static final int ClientTypeAndroid_VALUE = 4;
-    /**
-     * <code>ClientTypeLinux = 5;</code>
-     */
-    public static final int ClientTypeLinux_VALUE = 5;
-    /**
-     * <code>ClientTypeWeb = 6;</code>
-     */
-    public static final int ClientTypeWeb_VALUE = 6;
-
-
-    public final int getNumber() { return value; }
-
-    public static ClientType valueOf(int value) {
-      switch (value) {
-        case 1: return ClientTypeMac;
-        case 2: return ClientTypeiOS;
-        case 3: return ClientTypePC;
-        case 4: return ClientTypeAndroid;
-        case 5: return ClientTypeLinux;
-        case 6: return ClientTypeWeb;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<ClientType>
+        public static com.google.protobuf.Internal.EnumLiteMap<SignalType>
         internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<ClientType>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<ClientType>() {
-            public ClientType findValueByNumber(int number) {
-              return ClientType.valueOf(number);
-            }
-          };
+            return internalValueMap;
+        }
+        private static com.google.protobuf.Internal.EnumLiteMap<SignalType>
+                internalValueMap =
+                new com.google.protobuf.Internal.EnumLiteMap<SignalType>() {
+                    public SignalType findValueByNumber(int number) {
+                        return SignalType.valueOf(number);
+                    }
+                };
 
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
+            return getDescriptor().getValues().get(index);
+        }
+        public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
+            return getDescriptor();
+        }
+        public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(1);
+            return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(0);
+        }
+
+        private static final SignalType[] VALUES = values();
+
+        public static SignalType valueOf(
+                com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            if (desc.getType() != getDescriptor()) {
+                throw new IllegalArgumentException(
+                        "EnumValueDescriptor is not for this type.");
+            }
+            return VALUES[desc.getIndex()];
+        }
+
+        private final int index;
+        private final int value;
+
+        private SignalType(int index, int value) {
+            this.index = index;
+            this.value = value;
+        }
+
+        // @@protoc_insertion_point(enum_scope:SignalType)
     }
 
-    private static final ClientType[] VALUES = values();
+    /**
+     * Protobuf enum {@code ClientType}
+     */
+    public enum ClientType
+            implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>ClientTypeMac = 1;</code>
+         */
+        ClientTypeMac(0, 1),
+        /**
+         * <code>ClientTypeiOS = 2;</code>
+         */
+        ClientTypeiOS(1, 2),
+        /**
+         * <code>ClientTypePC = 3;</code>
+         */
+        ClientTypePC(2, 3),
+        /**
+         * <code>ClientTypeAndroid = 4;</code>
+         */
+        ClientTypeAndroid(3, 4),
+        /**
+         * <code>ClientTypeLinux = 5;</code>
+         */
+        ClientTypeLinux(4, 5),
+        /**
+         * <code>ClientTypeWeb = 6;</code>
+         */
+        ClientTypeWeb(5, 6),
+        ;
 
-    public static ClientType valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private ClientType(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:ClientType)
-  }
-
-  /**
-   * Protobuf enum {@code MessageType}
-   */
-  public enum MessageType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>MessageTypePNote = -11;</code>
-     */
-    MessageTypePNote(0, -11),
-    /**
-     * <code>MessageTypeRevoke = -1;</code>
-     */
-    MessageTypeRevoke(1, -1),
-    /**
-     * <code>MessageTypeText = 1;</code>
-     */
-    MessageTypeText(2, 1),
-    /**
-     * <code>MessageTypeVoice = 2;</code>
-     */
-    MessageTypeVoice(3, 2),
-    /**
-     * <code>MessageTypePhoto = 3;</code>
-     */
-    MessageTypePhoto(4, 3),
-    /**
-     * <code>MessageTypeSogouIcon = 4;</code>
-     */
-    MessageTypeSogouIcon(5, 4),
-    /**
-     * <code>MessageTypeFile = 5;</code>
-     */
-    MessageTypeFile(6, 5),
-    /**
-     * <code>MessageTypeTopic = 6;</code>
-     *
-     * <pre>
-     *(群公告)
-     * </pre>
-     */
-    MessageTypeTopic(7, 6),
-    /**
-     * <code>MessageTypeRichText = 7;</code>
-     *
-     * <pre>
-     *（富文本）
-     * </pre>
-     */
-    MessageTypeRichText(8, 7),
-    /**
-     * <code>MessageTypeActionRichText = 8;</code>
-     *
-     * <pre>
-     *(富文本)
-     * </pre>
-     */
-    MessageTypeActionRichText(9, 8),
-    /**
-     * <code>MessageTypeReply = 9;</code>
-     *
-     * <pre>
-     *(群回复)
-     * </pre>
-     */
-    MessageTypeReply(10, 9),
-    /**
-     * <code>MessageTypeShock = 10;</code>
-     *
-     * <pre>
-     *(震动)
-     * </pre>
-     */
-    MessageTypeShock(11, 10),
-    /**
-     * <code>MessageTypeNote = 11;</code>
-     */
-    MessageTypeNote(12, 11),
-    /**
-     * <code>MessageTypeGroupAt = 12;</code>
-     *
-     * <pre>
-     *(群消息At)
-     * </pre>
-     */
-    MessageTypeGroupAt(13, 12),
-    /**
-     * <code>MessageTypeGroupNotify = 15;</code>
-     *
-     * <pre>
-     *(通知类消息)
-     * </pre>
-     */
-    MessageTypeGroupNotify(14, 15),
-    /**
-     * <code>MessageTypeLocalShare = 16;</code>
-     *
-     * <pre>
-     *(位置共享)
-     * </pre>
-     */
-    MessageTypeLocalShare(15, 16),
-    /**
-     * <code>MessageTypeWebRTCAudio = 20;</code>
-     */
-    MessageTypeWebRTCAudio(16, 20),
-    /**
-     * <code>MessageTypeWebRTCVidio = 21;</code>
-     */
-    MessageTypeWebRTCVidio(17, 21),
-    /**
-     * <code>MessageTypeSmallVideo = 32;</code>
-     *
-     * <pre>
-     *(小视频)
-     * </pre>
-     */
-    MessageTypeSmallVideo(18, 32),
-    /**
-     * <code>MessageTypeSourceCode = 64;</code>
-     *
-     * <pre>
-     *(源代码)
-     * </pre>
-     */
-    MessageTypeSourceCode(19, 64),
-    /**
-     * <code>MessageTypeTime = 101;</code>
-     *
-     * <pre>
-     *(时间戳，本地使用)
-     * </pre>
-     */
-    MessageTypeTime(20, 101),
-    /**
-     * <code>MessageTypeBurnAfterRead = 128;</code>
-     *
-     * <pre>
-     *(阅后即焚)
-     * </pre>
-     */
-    MessageTypeBurnAfterRead(21, 128),
-    /**
-     * <code>MessageTypeCardShare = 256;</code>
-     *
-     * <pre>
-     *(分享名片)
-     * </pre>
-     */
-    MessageTypeCardShare(22, 256),
-    /**
-     * <code>MessageTypeActivity = 511;</code>
-     */
-    MessageTypeActivity(23, 511),
-    /**
-     * <code>MessageTypeRedPack = 512;</code>
-     *
-     * <pre>
-     *(红包)
-     * </pre>
-     */
-    MessageTypeRedPack(24, 512),
-    /**
-     * <code>MessageTypeAA = 513;</code>
-     *
-     * <pre>
-     *  (AA)
-     * </pre>
-     */
-    MessageTypeAA(25, 513),
-    /**
-     * <code>MessageTypeCommonTrdInfo = 666;</code>
-     *
-     * <pre>
-     *(通用气泡)
-     * </pre>
-     */
-    MessageTypeCommonTrdInfo(26, 666),
-    /**
-     * <code>MessageTypeCommonProductInfo = 888;</code>
-     *
-     * <pre>
-     * (通用气泡)&amp;nbsp;
-     * </pre>
-     */
-    MessageTypeCommonProductInfo(27, 888),
-    /**
-     * <code>MessageTypeRedPackInfo = 1024;</code>
-     *
-     * <pre>
-     * (红包消息通知)
-     * </pre>
-     */
-    MessageTypeRedPackInfo(28, 1024),
-    /**
-     * <code>MessageTypeAAInfo = 1025;</code>
-     *
-     * <pre>
-     *(AA消息通知)
-     * </pre>
-     */
-    MessageTypeAAInfo(29, 1025),
-    /**
-     * <code>MessageTypeConsult = 2001;</code>
-     *
-     * <pre>
-     *(微信抢单)
-     * </pre>
-     */
-    MessageTypeConsult(30, 2001),
-    /**
-     * <code>MessageTypeConsultResult = 2002;</code>
-     *
-     * <pre>
-     *(微信抢单结果)
-     * </pre>
-     */
-    MessageTypeConsultResult(31, 2002),
-    /**
-     * <code>MessageTypeGrabMenuVcard = 2003;</code>
-     *
-     * <pre>
-     *(抢单卡片)
-     * </pre>
-     */
-    MessageTypeGrabMenuVcard(32, 2003),
-    /**
-     * <code>MessageTypeGrabMenuResult = 2004;</code>
-     *
-     * <pre>
-     *(抢单结果)
-     * </pre>
-     */
-    MessageTypeGrabMenuResult(33, 2004),
-    /**
-     * <code>MessageTypeQCZhongbao = 2005;</code>
-     *
-     * <pre>
-     *(众包消息)
-     * </pre>
-     */
-    MessageTypeQCZhongbao(34, 2005),
-    /**
-     * <code>MessageTypeMicroTourGuide = 3001;</code>
-     *
-     * <pre>
-     *(微导游抢单)
-     * </pre>
-     */
-    MessageTypeMicroTourGuide(35, 3001),
-    /**
-     * <code>MessageTypeProduct = 4096;</code>
-     *
-     * <pre>
-     *(产品信息)
-     * </pre>
-     */
-    MessageTypeProduct(36, 4096),
-    /**
-     * <code>MessageTypeShareLocation = 8192;</code>
-     *
-     * <pre>
-     * (位置共享)
-     * </pre>
-     */
-    MessageTypeShareLocation(37, 8192),
-    /**
-     * <code>MessageTypeNotice = 134217728;</code>
-     *
-     * <pre>
-     *(通知类信息)
-     * </pre>
-     */
-    MessageTypeNotice(38, 134217728),
-    /**
-     * <code>WebRTC_MsgType_Audio = 131072;</code>
-     */
-    WebRTC_MsgType_Audio(39, 131072),
-    /**
-     * <code>WebRTC_MsgType_Video = 65536;</code>
-     *
-     * <pre>
-     *机器人问题列表/音视频
-     * </pre>
-     */
-    WebRTC_MsgType_Video(40, 65536),
-    /**
-     * <code>MessageTypeTurnToUser = 65537;</code>
-     *
-     * <pre>
-     *机器人转人工提示
-     * </pre>
-     */
-    MessageTypeTurnToUser(41, 65537),
-    /**
-     * <code>WebRTC_MsgType_VideoMeeting = 5001;</code>
-     */
-    WebRTC_MsgType_VideoMeeting(42, 5001),
-    /**
-     * <code>MessageTypeMarkdown = 13;</code>
-     *
-     * <pre>
-     *(markdown)
-     * </pre>
-     */
-    MessageTypeMarkdown(43, 13),
-    /**
-     * <code>MessageTypeSystem = 268435456;</code>
-     */
-    MessageTypeSystem(44, 268435456),
-    /**
-     * <code>MediaTypeSystemLY = 268435457;</code>
-     */
-    MediaTypeSystemLY(45, 268435457),
-    /**
-     * <code>MessageTypeEncrypt = 404;</code>
-     */
-    MessageTypeEncrypt(46, 404),
-    /**
-     * <code>MessageTypeTransChatToCustomer = 1001;</code>
-     */
-    MessageTypeTransChatToCustomer(47, 1001),
-    /**
-     * <code>MessageTypeTransChatToCustomer_Feedback = 1003;</code>
-     */
-    MessageTypeTransChatToCustomer_Feedback(48, 1003),
-    /**
-     * <code>MessageTypeTransChatToCustomerService = 1002;</code>
-     */
-    MessageTypeTransChatToCustomerService(49, 1002),
-    /**
-     * <code>MessageTypeTransChatToCustomerService_Feedback = 1004;</code>
-     */
-    MessageTypeTransChatToCustomerService_Feedback(50, 1004),
-    ;
-
-    /**
-     * <code>MessageTypePNote = -11;</code>
-     */
-    public static final int MessageTypePNote_VALUE = -11;
-    /**
-     * <code>MessageTypeRevoke = -1;</code>
-     */
-    public static final int MessageTypeRevoke_VALUE = -1;
-    /**
-     * <code>MessageTypeText = 1;</code>
-     */
-    public static final int MessageTypeText_VALUE = 1;
-    /**
-     * <code>MessageTypeVoice = 2;</code>
-     */
-    public static final int MessageTypeVoice_VALUE = 2;
-    /**
-     * <code>MessageTypePhoto = 3;</code>
-     */
-    public static final int MessageTypePhoto_VALUE = 3;
-    /**
-     * <code>MessageTypeSogouIcon = 4;</code>
-     */
-    public static final int MessageTypeSogouIcon_VALUE = 4;
-    /**
-     * <code>MessageTypeFile = 5;</code>
-     */
-    public static final int MessageTypeFile_VALUE = 5;
-    /**
-     * <code>MessageTypeTopic = 6;</code>
-     *
-     * <pre>
-     *(群公告)
-     * </pre>
-     */
-    public static final int MessageTypeTopic_VALUE = 6;
-    /**
-     * <code>MessageTypeRichText = 7;</code>
-     *
-     * <pre>
-     *（富文本）
-     * </pre>
-     */
-    public static final int MessageTypeRichText_VALUE = 7;
-    /**
-     * <code>MessageTypeActionRichText = 8;</code>
-     *
-     * <pre>
-     *(富文本)
-     * </pre>
-     */
-    public static final int MessageTypeActionRichText_VALUE = 8;
-    /**
-     * <code>MessageTypeReply = 9;</code>
-     *
-     * <pre>
-     *(群回复)
-     * </pre>
-     */
-    public static final int MessageTypeReply_VALUE = 9;
-    /**
-     * <code>MessageTypeShock = 10;</code>
-     *
-     * <pre>
-     *(震动)
-     * </pre>
-     */
-    public static final int MessageTypeShock_VALUE = 10;
-    /**
-     * <code>MessageTypeNote = 11;</code>
-     */
-    public static final int MessageTypeNote_VALUE = 11;
-    /**
-     * <code>MessageTypeGroupAt = 12;</code>
-     *
-     * <pre>
-     *(群消息At)
-     * </pre>
-     */
-    public static final int MessageTypeGroupAt_VALUE = 12;
-    /**
-     * <code>MessageTypeGroupNotify = 15;</code>
-     *
-     * <pre>
-     *(通知类消息)
-     * </pre>
-     */
-    public static final int MessageTypeGroupNotify_VALUE = 15;
-    /**
-     * <code>MessageTypeLocalShare = 16;</code>
-     *
-     * <pre>
-     *(位置共享)
-     * </pre>
-     */
-    public static final int MessageTypeLocalShare_VALUE = 16;
-    /**
-     * <code>MessageTypeWebRTCAudio = 20;</code>
-     */
-    public static final int MessageTypeWebRTCAudio_VALUE = 20;
-    /**
-     * <code>MessageTypeWebRTCVidio = 21;</code>
-     */
-    public static final int MessageTypeWebRTCVidio_VALUE = 21;
-    /**
-     * <code>MessageTypeSmallVideo = 32;</code>
-     *
-     * <pre>
-     *(小视频)
-     * </pre>
-     */
-    public static final int MessageTypeSmallVideo_VALUE = 32;
-    /**
-     * <code>MessageTypeSourceCode = 64;</code>
-     *
-     * <pre>
-     *(源代码)
-     * </pre>
-     */
-    public static final int MessageTypeSourceCode_VALUE = 64;
-    /**
-     * <code>MessageTypeTime = 101;</code>
-     *
-     * <pre>
-     *(时间戳，本地使用)
-     * </pre>
-     */
-    public static final int MessageTypeTime_VALUE = 101;
-    /**
-     * <code>MessageTypeBurnAfterRead = 128;</code>
-     *
-     * <pre>
-     *(阅后即焚)
-     * </pre>
-     */
-    public static final int MessageTypeBurnAfterRead_VALUE = 128;
-    /**
-     * <code>MessageTypeCardShare = 256;</code>
-     *
-     * <pre>
-     *(分享名片)
-     * </pre>
-     */
-    public static final int MessageTypeCardShare_VALUE = 256;
-    /**
-     * <code>MessageTypeActivity = 511;</code>
-     */
-    public static final int MessageTypeActivity_VALUE = 511;
-    /**
-     * <code>MessageTypeRedPack = 512;</code>
-     *
-     * <pre>
-     *(红包)
-     * </pre>
-     */
-    public static final int MessageTypeRedPack_VALUE = 512;
-    /**
-     * <code>MessageTypeAA = 513;</code>
-     *
-     * <pre>
-     *  (AA)
-     * </pre>
-     */
-    public static final int MessageTypeAA_VALUE = 513;
-    /**
-     * <code>MessageTypeCommonTrdInfo = 666;</code>
-     *
-     * <pre>
-     *(通用气泡)
-     * </pre>
-     */
-    public static final int MessageTypeCommonTrdInfo_VALUE = 666;
-    /**
-     * <code>MessageTypeCommonProductInfo = 888;</code>
-     *
-     * <pre>
-     * (通用气泡)&amp;nbsp;
-     * </pre>
-     */
-    public static final int MessageTypeCommonProductInfo_VALUE = 888;
-    /**
-     * <code>MessageTypeRedPackInfo = 1024;</code>
-     *
-     * <pre>
-     * (红包消息通知)
-     * </pre>
-     */
-    public static final int MessageTypeRedPackInfo_VALUE = 1024;
-    /**
-     * <code>MessageTypeAAInfo = 1025;</code>
-     *
-     * <pre>
-     *(AA消息通知)
-     * </pre>
-     */
-    public static final int MessageTypeAAInfo_VALUE = 1025;
-    /**
-     * <code>MessageTypeConsult = 2001;</code>
-     *
-     * <pre>
-     *(微信抢单)
-     * </pre>
-     */
-    public static final int MessageTypeConsult_VALUE = 2001;
-    /**
-     * <code>MessageTypeConsultResult = 2002;</code>
-     *
-     * <pre>
-     *(微信抢单结果)
-     * </pre>
-     */
-    public static final int MessageTypeConsultResult_VALUE = 2002;
-    /**
-     * <code>MessageTypeGrabMenuVcard = 2003;</code>
-     *
-     * <pre>
-     *(抢单卡片)
-     * </pre>
-     */
-    public static final int MessageTypeGrabMenuVcard_VALUE = 2003;
-    /**
-     * <code>MessageTypeGrabMenuResult = 2004;</code>
-     *
-     * <pre>
-     *(抢单结果)
-     * </pre>
-     */
-    public static final int MessageTypeGrabMenuResult_VALUE = 2004;
-    /**
-     * <code>MessageTypeQCZhongbao = 2005;</code>
-     *
-     * <pre>
-     *(众包消息)
-     * </pre>
-     */
-    public static final int MessageTypeQCZhongbao_VALUE = 2005;
-    /**
-     * <code>MessageTypeMicroTourGuide = 3001;</code>
-     *
-     * <pre>
-     *(微导游抢单)
-     * </pre>
-     */
-    public static final int MessageTypeMicroTourGuide_VALUE = 3001;
-    /**
-     * <code>MessageTypeProduct = 4096;</code>
-     *
-     * <pre>
-     *(产品信息)
-     * </pre>
-     */
-    public static final int MessageTypeProduct_VALUE = 4096;
-    /**
-     * <code>MessageTypeShareLocation = 8192;</code>
-     *
-     * <pre>
-     * (位置共享)
-     * </pre>
-     */
-    public static final int MessageTypeShareLocation_VALUE = 8192;
-    /**
-     * <code>MessageTypeNotice = 134217728;</code>
-     *
-     * <pre>
-     *(通知类信息)
-     * </pre>
-     */
-    public static final int MessageTypeNotice_VALUE = 134217728;
-    /**
-     * <code>WebRTC_MsgType_Audio = 131072;</code>
-     */
-    public static final int WebRTC_MsgType_Audio_VALUE = 131072;
-    /**
-     * <code>WebRTC_MsgType_Video = 65536;</code>
-     *
-     * <pre>
-     *机器人问题列表/音视频
-     * </pre>
-     */
-    public static final int WebRTC_MsgType_Video_VALUE = 65536;
-    /**
-     * <code>MessageTypeTurnToUser = 65537;</code>
-     *
-     * <pre>
-     *机器人转人工提示
-     * </pre>
-     */
-    public static final int MessageTypeTurnToUser_VALUE = 65537;
-    /**
-     * <code>WebRTC_MsgType_VideoMeeting = 5001;</code>
-     */
-    public static final int WebRTC_MsgType_VideoMeeting_VALUE = 5001;
-    /**
-     * <code>MessageTypeMarkdown = 13;</code>
-     *
-     * <pre>
-     *(markdown)
-     * </pre>
-     */
-    public static final int MessageTypeMarkdown_VALUE = 13;
-    /**
-     * <code>MessageTypeSystem = 268435456;</code>
-     */
-    public static final int MessageTypeSystem_VALUE = 268435456;
-    /**
-     * <code>MediaTypeSystemLY = 268435457;</code>
-     */
-    public static final int MediaTypeSystemLY_VALUE = 268435457;
-    /**
-     * <code>MessageTypeEncrypt = 404;</code>
-     */
-    public static final int MessageTypeEncrypt_VALUE = 404;
-    /**
-     * <code>MessageTypeTransChatToCustomer = 1001;</code>
-     */
-    public static final int MessageTypeTransChatToCustomer_VALUE = 1001;
-    /**
-     * <code>MessageTypeTransChatToCustomer_Feedback = 1003;</code>
-     */
-    public static final int MessageTypeTransChatToCustomer_Feedback_VALUE = 1003;
-    /**
-     * <code>MessageTypeTransChatToCustomerService = 1002;</code>
-     */
-    public static final int MessageTypeTransChatToCustomerService_VALUE = 1002;
-    /**
-     * <code>MessageTypeTransChatToCustomerService_Feedback = 1004;</code>
-     */
-    public static final int MessageTypeTransChatToCustomerService_Feedback_VALUE = 1004;
+        /**
+         * <code>ClientTypeMac = 1;</code>
+         */
+        public static final int ClientTypeMac_VALUE = 1;
+        /**
+         * <code>ClientTypeiOS = 2;</code>
+         */
+        public static final int ClientTypeiOS_VALUE = 2;
+        /**
+         * <code>ClientTypePC = 3;</code>
+         */
+        public static final int ClientTypePC_VALUE = 3;
+        /**
+         * <code>ClientTypeAndroid = 4;</code>
+         */
+        public static final int ClientTypeAndroid_VALUE = 4;
+        /**
+         * <code>ClientTypeLinux = 5;</code>
+         */
+        public static final int ClientTypeLinux_VALUE = 5;
+        /**
+         * <code>ClientTypeWeb = 6;</code>
+         */
+        public static final int ClientTypeWeb_VALUE = 6;
 
 
-    public final int getNumber() { return value; }
+        public final int getNumber() { return value; }
 
-    public static MessageType valueOf(int value) {
-      switch (value) {
-        case -11: return MessageTypePNote;
-        case -1: return MessageTypeRevoke;
-        case 1: return MessageTypeText;
-        case 2: return MessageTypeVoice;
-        case 3: return MessageTypePhoto;
-        case 4: return MessageTypeSogouIcon;
-        case 5: return MessageTypeFile;
-        case 6: return MessageTypeTopic;
-        case 7: return MessageTypeRichText;
-        case 8: return MessageTypeActionRichText;
-        case 9: return MessageTypeReply;
-        case 10: return MessageTypeShock;
-        case 11: return MessageTypeNote;
-        case 12: return MessageTypeGroupAt;
-        case 15: return MessageTypeGroupNotify;
-        case 16: return MessageTypeLocalShare;
-        case 20: return MessageTypeWebRTCAudio;
-        case 21: return MessageTypeWebRTCVidio;
-        case 32: return MessageTypeSmallVideo;
-        case 64: return MessageTypeSourceCode;
-        case 101: return MessageTypeTime;
-        case 128: return MessageTypeBurnAfterRead;
-        case 256: return MessageTypeCardShare;
-        case 511: return MessageTypeActivity;
-        case 512: return MessageTypeRedPack;
-        case 513: return MessageTypeAA;
-        case 666: return MessageTypeCommonTrdInfo;
-        case 888: return MessageTypeCommonProductInfo;
-        case 1024: return MessageTypeRedPackInfo;
-        case 1025: return MessageTypeAAInfo;
-        case 2001: return MessageTypeConsult;
-        case 2002: return MessageTypeConsultResult;
-        case 2003: return MessageTypeGrabMenuVcard;
-        case 2004: return MessageTypeGrabMenuResult;
-        case 2005: return MessageTypeQCZhongbao;
-        case 3001: return MessageTypeMicroTourGuide;
-        case 4096: return MessageTypeProduct;
-        case 8192: return MessageTypeShareLocation;
-        case 134217728: return MessageTypeNotice;
-        case 131072: return WebRTC_MsgType_Audio;
-        case 65536: return WebRTC_MsgType_Video;
-        case 65537: return MessageTypeTurnToUser;
-        case 5001: return WebRTC_MsgType_VideoMeeting;
-        case 13: return MessageTypeMarkdown;
-        case 268435456: return MessageTypeSystem;
-        case 268435457: return MediaTypeSystemLY;
-        case 404: return MessageTypeEncrypt;
-        case 1001: return MessageTypeTransChatToCustomer;
-        case 1003: return MessageTypeTransChatToCustomer_Feedback;
-        case 1002: return MessageTypeTransChatToCustomerService;
-        case 1004: return MessageTypeTransChatToCustomerService_Feedback;
-        default: return null;
-      }
-    }
+        public static ClientType valueOf(int value) {
+            switch (value) {
+                case 1: return ClientTypeMac;
+                case 2: return ClientTypeiOS;
+                case 3: return ClientTypePC;
+                case 4: return ClientTypeAndroid;
+                case 5: return ClientTypeLinux;
+                case 6: return ClientTypeWeb;
+                default: return null;
+            }
+        }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<MessageType>
+        public static com.google.protobuf.Internal.EnumLiteMap<ClientType>
         internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<MessageType>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<MessageType>() {
-            public MessageType findValueByNumber(int number) {
-              return MessageType.valueOf(number);
-            }
-          };
+            return internalValueMap;
+        }
+        private static com.google.protobuf.Internal.EnumLiteMap<ClientType>
+                internalValueMap =
+                new com.google.protobuf.Internal.EnumLiteMap<ClientType>() {
+                    public ClientType findValueByNumber(int number) {
+                        return ClientType.valueOf(number);
+                    }
+                };
 
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
+            return getDescriptor().getValues().get(index);
+        }
+        public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
+            return getDescriptor();
+        }
+        public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(2);
+            return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(1);
+        }
+
+        private static final ClientType[] VALUES = values();
+
+        public static ClientType valueOf(
+                com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            if (desc.getType() != getDescriptor()) {
+                throw new IllegalArgumentException(
+                        "EnumValueDescriptor is not for this type.");
+            }
+            return VALUES[desc.getIndex()];
+        }
+
+        private final int index;
+        private final int value;
+
+        private ClientType(int index, int value) {
+            this.index = index;
+            this.value = value;
+        }
+
+        // @@protoc_insertion_point(enum_scope:ClientType)
     }
 
-    private static final MessageType[] VALUES = values();
+    /**
+     * Protobuf enum {@code MessageType}
+     */
+    public enum MessageType
+            implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>MessageTypePNote = -11;</code>
+         */
+        MessageTypePNote(0, -11),
+        /**
+         * <code>MessageTypeRevoke = -1;</code>
+         */
+        MessageTypeRevoke(1, -1),
+        /**
+         * <code>MessageTypeText = 1;</code>
+         */
+        MessageTypeText(2, 1),
+        /**
+         * <code>MessageTypeVoice = 2;</code>
+         */
+        MessageTypeVoice(3, 2),
+        /**
+         * <code>MessageTypePhoto = 3;</code>
+         */
+        MessageTypePhoto(4, 3),
+        /**
+         * <code>MessageTypeSogouIcon = 4;</code>
+         */
+        MessageTypeSogouIcon(5, 4),
+        /**
+         * <code>MessageTypeFile = 5;</code>
+         */
+        MessageTypeFile(6, 5),
+        /**
+         * <code>MessageTypeTopic = 6;</code>
+         *
+         * <pre>
+         *(群公告)
+         * </pre>
+         */
+        MessageTypeTopic(7, 6),
+        /**
+         * <code>MessageTypeRichText = 7;</code>
+         *
+         * <pre>
+         *（富文本）
+         * </pre>
+         */
+        MessageTypeRichText(8, 7),
+        /**
+         * <code>MessageTypeActionRichText = 8;</code>
+         *
+         * <pre>
+         *(富文本)
+         * </pre>
+         */
+        MessageTypeActionRichText(9, 8),
+        /**
+         * <code>MessageTypeReply = 9;</code>
+         *
+         * <pre>
+         *(群回复)
+         * </pre>
+         */
+        MessageTypeReply(10, 9),
+        /**
+         * <code>MessageTypeShock = 10;</code>
+         *
+         * <pre>
+         *(震动)
+         * </pre>
+         */
+        MessageTypeShock(11, 10),
+        /**
+         * <code>MessageTypeNote = 11;</code>
+         */
+        MessageTypeNote(12, 11),
+        /**
+         * <code>MessageTypeGroupAt = 12;</code>
+         *
+         * <pre>
+         *(群消息At)
+         * </pre>
+         */
+        MessageTypeGroupAt(13, 12),
+        /**
+         * <code>MessageTypeMarkdown = 13;</code>
+         *
+         * <pre>
+         *(markdown)
+         * </pre>
+         */
+        MessageTypeMarkdown(14, 13),
+        /**
+         * <code>MessageTypeExtText = 14;</code>
+         *
+         * <pre>
+         *文本消息，带extinfo
+         * </pre>
+         */
+        MessageTypeExtText(15, 14),
+        /**
+         * <code>MessageTypeGroupNotify = 15;</code>
+         *
+         * <pre>
+         *(通知类消息)
+         * </pre>
+         */
+        MessageTypeGroupNotify(16, 15),
+        /**
+         * <code>MessageTypeLocalShare = 16;</code>
+         *
+         * <pre>
+         *(位置共享)
+         * </pre>
+         */
+        MessageTypeLocalShare(17, 16),
+        /**
+         * <code>MessageTypeWebRTCAudio = 20;</code>
+         */
+        MessageTypeWebRTCAudio(18, 20),
+        /**
+         * <code>MessageTypeWebRTCVidio = 21;</code>
+         */
+        MessageTypeWebRTCVidio(19, 21),
+        /**
+         * <code>MessageTypeImageNew = 30;</code>
+         *
+         * <pre>
+         *(发送图片，单张，无背景用)
+         * </pre>
+         */
+        MessageTypeImageNew(20, 30),
+        /**
+         * <code>MessageTypeSmallVideo = 32;</code>
+         *
+         * <pre>
+         *(小视频)
+         * </pre>
+         */
+        MessageTypeSmallVideo(21, 32),
+        /**
+         * <code>MessageTypeRobotAnswer = 47;</code>
+         *
+         * <pre>
+         *(机器人答案)
+         * </pre>
+         */
+        MessageTypeRobotAnswer(22, 47),
+        /**
+         * <code>MessageTypeSourceCode = 64;</code>
+         *
+         * <pre>
+         *(源代码)
+         * </pre>
+         */
+        MessageTypeSourceCode(23, 64),
+        /**
+         * <code>MessageTypeTime = 101;</code>
+         *
+         * <pre>
+         *(时间戳，本地使用)
+         * </pre>
+         */
+        MessageTypeTime(24, 101),
+        /**
+         * <code>MessageTypeBurnAfterRead = 128;</code>
+         *
+         * <pre>
+         *(阅后即焚)
+         * </pre>
+         */
+        MessageTypeBurnAfterRead(25, 128),
+        /**
+         * <code>MessageTypeCardShare = 256;</code>
+         *
+         * <pre>
+         *(分享名片)
+         * </pre>
+         */
+        MessageTypeCardShare(26, 256),
+        /**
+         * <code>MessageTypeMeetingRemind = 257;</code>
+         *
+         * <pre>
+         *会议室提醒
+         * </pre>
+         */
+        MessageTypeMeetingRemind(27, 257),
+        /**
+         * <code>MessageTypeWorkWorldAtRemind = 258;</code>
+         *
+         * <pre>
+         *工作圈提醒
+         * </pre>
+         */
+        MessageTypeWorkWorldAtRemind(28, 258),
+        /**
+         * <code>MessageTypeEncrypt = 404;</code>
+         *
+         * <pre>
+         *加密消息
+         * </pre>
+         */
+        MessageTypeEncrypt(29, 404),
+        /**
+         * <code>MessageTypeActivity = 511;</code>
+         */
+        MessageTypeActivity(30, 511),
+        /**
+         * <code>MessageTypeRedPack = 512;</code>
+         *
+         * <pre>
+         *(红包)
+         * </pre>
+         */
+        MessageTypeRedPack(31, 512),
+        /**
+         * <code>MessageTypeAA = 513;</code>
+         *
+         * <pre>
+         *  (AA)
+         * </pre>
+         */
+        MessageTypeAA(32, 513),
+        /**
+         * <code>MessageTypeCommonTrdInfo = 666;</code>
+         *
+         * <pre>
+         *(通用气泡)
+         * </pre>
+         */
+        MessageTypeCommonTrdInfo(33, 666),
+        /**
+         * <code>MessageTypeCommonProductInfo = 888;</code>
+         *
+         * <pre>
+         * (通用气泡，详情 http://wiki.corp.qunar.com/pages/viewpage.action?pageId=125057861)&amp;nbsp;
+         * </pre>
+         */
+        MessageTypeCommonProductInfo(34, 888),
+        /**
+         * <code>MessageTypeTransChatToCustomer = 1001;</code>
+         */
+        MessageTypeTransChatToCustomer(35, 1001),
+        /**
+         * <code>MessageTypeTransChatToCustomer_Feedback = 1003;</code>
+         */
+        MessageTypeTransChatToCustomer_Feedback(36, 1003),
+        /**
+         * <code>MessageTypeTransChatToCustomerService = 1002;</code>
+         */
+        MessageTypeTransChatToCustomerService(37, 1002),
+        /**
+         * <code>MessageTypeTransChatToCustomerService_Feedback = 1004;</code>
+         */
+        MessageTypeTransChatToCustomerService_Feedback(38, 1004),
+        /**
+         * <code>MessageTypeRedPackInfo = 1024;</code>
+         *
+         * <pre>
+         * (红包消息通知)
+         * </pre>
+         */
+        MessageTypeRedPackInfo(39, 1024),
+        /**
+         * <code>MessageTypeAAInfo = 1025;</code>
+         *
+         * <pre>
+         *(AA消息通知)
+         * </pre>
+         */
+        MessageTypeAAInfo(40, 1025),
+        /**
+         * <code>MessageTypeConsult = 2001;</code>
+         *
+         * <pre>
+         *(微信抢单)
+         * </pre>
+         */
+        MessageTypeConsult(41, 2001),
+        /**
+         * <code>MessageTypeConsultResult = 2002;</code>
+         *
+         * <pre>
+         *(微信抢单结果)
+         * </pre>
+         */
+        MessageTypeConsultResult(42, 2002),
+        /**
+         * <code>MessageTypeGrabMenuVcard = 2003;</code>
+         *
+         * <pre>
+         *(抢单卡片)
+         * </pre>
+         */
+        MessageTypeGrabMenuVcard(43, 2003),
+        /**
+         * <code>MessageTypeGrabMenuResult = 2004;</code>
+         *
+         * <pre>
+         *(抢单结果)
+         * </pre>
+         */
+        MessageTypeGrabMenuResult(44, 2004),
+        /**
+         * <code>MessageTypeQCZhongbao = 2005;</code>
+         *
+         * <pre>
+         *(众包消息)
+         * </pre>
+         */
+        MessageTypeQCZhongbao(45, 2005),
+        /**
+         * <code>MessageTypeMicroTourGuide = 3001;</code>
+         *
+         * <pre>
+         *(微导游抢单)
+         * </pre>
+         */
+        MessageTypeMicroTourGuide(46, 3001),
+        /**
+         * <code>MessageTypeProduct = 4096;</code>
+         *
+         * <pre>
+         *(产品信息)
+         * </pre>
+         */
+        MessageTypeProduct(47, 4096),
+        /**
+         * <code>WebRTC_MsgType_VideoMeeting = 5001;</code>
+         */
+        WebRTC_MsgType_VideoMeeting(48, 5001),
+        /**
+         * <code>MessageTypeShareLocation = 8192;</code>
+         *
+         * <pre>
+         * (位置共享)
+         * </pre>
+         */
+        MessageTypeShareLocation(49, 8192),
+        /**
+         * <code>MessageTypeTransNormal = 10081;</code>
+         *
+         * <pre>
+         *(普通透传消息)
+         * </pre>
+         */
+        MessageTypeTransNormal(50, 10081),
+        /**
+         * <code>WebRTC_MsgType_Live = 65501;</code>
+         *
+         * <pre>
+         *(直播消息)
+         * </pre>
+         */
+        WebRTC_MsgType_Live(51, 65501),
+        /**
+         * <code>WebRTC_MsgType_VideoCall = 65505;</code>
+         *
+         * <pre>
+         *(实时视频20190926新版)
+         * </pre>
+         */
+        WebRTC_MsgType_VideoCall(52, 65505),
+        /**
+         * <code>WebRTC_MsgType_AudioCall = 65506;</code>
+         *
+         * <pre>
+         *(实时音频20190926新版)
+         * </pre>
+         */
+        WebRTC_MsgType_AudioCall(53, 65506),
+        /**
+         * <code>WebRTC_MsgType_Video_Group = 65534;</code>
+         *
+         * <pre>
+         *(新版群视频)
+         * </pre>
+         */
+        WebRTC_MsgType_Video_Group(54, 65534),
+        /**
+         * <code>WebRTC_MsgType_Video = 65535;</code>
+         *
+         * <pre>
+         *音视频
+         * </pre>
+         */
+        WebRTC_MsgType_Video(55, 65535),
+        /**
+         * <code>MessageTypeRobotQuestionList = 65536;</code>
+         *
+         * <pre>
+         *机器人问题列表
+         * </pre>
+         */
+        MessageTypeRobotQuestionList(56, 65536),
+        /**
+         * <code>MessageTypeRobotTurnToUser = 65537;</code>
+         *
+         * <pre>
+         *机器人转人工提示
+         * </pre>
+         */
+        MessageTypeRobotTurnToUser(57, 65537),
+        /**
+         * <code>MessageTypeRobotQuestionListNew = 65538;</code>
+         *
+         * <pre>
+         *new机器人问题列表
+         * </pre>
+         */
+        MessageTypeRobotQuestionListNew(58, 65538),
+        /**
+         * <code>MessageTypeFlightRemind = 65550;</code>
+         *
+         * <pre>
+         *机票航班动态提醒消息
+         * </pre>
+         */
+        MessageTypeFlightRemind(59, 65550),
+        /**
+         * <code>MessageTypeCommonServiceCard = 65551;</code>
+         *
+         * <pre>
+         *通用的服务通知类卡片消息
+         * </pre>
+         */
+        MessageTypeCommonServiceCard(60, 65551),
+        /**
+         * <code>WebRTC_MsgType_Audio = 131072;</code>
+         */
+        WebRTC_MsgType_Audio(61, 131072),
+        /**
+         * <code>MessageTypeNotice = 134217728;</code>
+         *
+         * <pre>
+         *(通知类信息)
+         * </pre>
+         */
+        MessageTypeNotice(62, 134217728),
+        /**
+         * <code>MessageTypeSystem = 268435456;</code>
+         */
+        MessageTypeSystem(63, 268435456),
+        /**
+         * <code>MediaTypeSystemLY = 268435457;</code>
+         */
+        MediaTypeSystemLY(64, 268435457),
+        ;
 
-    public static MessageType valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
+        /**
+         * <code>MessageTypePNote = -11;</code>
+         */
+        public static final int MessageTypePNote_VALUE = -11;
+        /**
+         * <code>MessageTypeRevoke = -1;</code>
+         */
+        public static final int MessageTypeRevoke_VALUE = -1;
+        /**
+         * <code>MessageTypeText = 1;</code>
+         */
+        public static final int MessageTypeText_VALUE = 1;
+        /**
+         * <code>MessageTypeVoice = 2;</code>
+         */
+        public static final int MessageTypeVoice_VALUE = 2;
+        /**
+         * <code>MessageTypePhoto = 3;</code>
+         */
+        public static final int MessageTypePhoto_VALUE = 3;
+        /**
+         * <code>MessageTypeSogouIcon = 4;</code>
+         */
+        public static final int MessageTypeSogouIcon_VALUE = 4;
+        /**
+         * <code>MessageTypeFile = 5;</code>
+         */
+        public static final int MessageTypeFile_VALUE = 5;
+        /**
+         * <code>MessageTypeTopic = 6;</code>
+         *
+         * <pre>
+         *(群公告)
+         * </pre>
+         */
+        public static final int MessageTypeTopic_VALUE = 6;
+        /**
+         * <code>MessageTypeRichText = 7;</code>
+         *
+         * <pre>
+         *（富文本）
+         * </pre>
+         */
+        public static final int MessageTypeRichText_VALUE = 7;
+        /**
+         * <code>MessageTypeActionRichText = 8;</code>
+         *
+         * <pre>
+         *(富文本)
+         * </pre>
+         */
+        public static final int MessageTypeActionRichText_VALUE = 8;
+        /**
+         * <code>MessageTypeReply = 9;</code>
+         *
+         * <pre>
+         *(群回复)
+         * </pre>
+         */
+        public static final int MessageTypeReply_VALUE = 9;
+        /**
+         * <code>MessageTypeShock = 10;</code>
+         *
+         * <pre>
+         *(震动)
+         * </pre>
+         */
+        public static final int MessageTypeShock_VALUE = 10;
+        /**
+         * <code>MessageTypeNote = 11;</code>
+         */
+        public static final int MessageTypeNote_VALUE = 11;
+        /**
+         * <code>MessageTypeGroupAt = 12;</code>
+         *
+         * <pre>
+         *(群消息At)
+         * </pre>
+         */
+        public static final int MessageTypeGroupAt_VALUE = 12;
+        /**
+         * <code>MessageTypeMarkdown = 13;</code>
+         *
+         * <pre>
+         *(markdown)
+         * </pre>
+         */
+        public static final int MessageTypeMarkdown_VALUE = 13;
+        /**
+         * <code>MessageTypeExtText = 14;</code>
+         *
+         * <pre>
+         *文本消息，带extinfo
+         * </pre>
+         */
+        public static final int MessageTypeExtText_VALUE = 14;
+        /**
+         * <code>MessageTypeGroupNotify = 15;</code>
+         *
+         * <pre>
+         *(通知类消息)
+         * </pre>
+         */
+        public static final int MessageTypeGroupNotify_VALUE = 15;
+        /**
+         * <code>MessageTypeLocalShare = 16;</code>
+         *
+         * <pre>
+         *(位置共享)
+         * </pre>
+         */
+        public static final int MessageTypeLocalShare_VALUE = 16;
+        /**
+         * <code>MessageTypeWebRTCAudio = 20;</code>
+         */
+        public static final int MessageTypeWebRTCAudio_VALUE = 20;
+        /**
+         * <code>MessageTypeWebRTCVidio = 21;</code>
+         */
+        public static final int MessageTypeWebRTCVidio_VALUE = 21;
+        /**
+         * <code>MessageTypeImageNew = 30;</code>
+         *
+         * <pre>
+         *(发送图片，单张，无背景用)
+         * </pre>
+         */
+        public static final int MessageTypeImageNew_VALUE = 30;
+        /**
+         * <code>MessageTypeSmallVideo = 32;</code>
+         *
+         * <pre>
+         *(小视频)
+         * </pre>
+         */
+        public static final int MessageTypeSmallVideo_VALUE = 32;
+        /**
+         * <code>MessageTypeRobotAnswer = 47;</code>
+         *
+         * <pre>
+         *(机器人答案)
+         * </pre>
+         */
+        public static final int MessageTypeRobotAnswer_VALUE = 47;
+        /**
+         * <code>MessageTypeSourceCode = 64;</code>
+         *
+         * <pre>
+         *(源代码)
+         * </pre>
+         */
+        public static final int MessageTypeSourceCode_VALUE = 64;
+        /**
+         * <code>MessageTypeTime = 101;</code>
+         *
+         * <pre>
+         *(时间戳，本地使用)
+         * </pre>
+         */
+        public static final int MessageTypeTime_VALUE = 101;
+        /**
+         * <code>MessageTypeBurnAfterRead = 128;</code>
+         *
+         * <pre>
+         *(阅后即焚)
+         * </pre>
+         */
+        public static final int MessageTypeBurnAfterRead_VALUE = 128;
+        /**
+         * <code>MessageTypeCardShare = 256;</code>
+         *
+         * <pre>
+         *(分享名片)
+         * </pre>
+         */
+        public static final int MessageTypeCardShare_VALUE = 256;
+        /**
+         * <code>MessageTypeMeetingRemind = 257;</code>
+         *
+         * <pre>
+         *会议室提醒
+         * </pre>
+         */
+        public static final int MessageTypeMeetingRemind_VALUE = 257;
+        /**
+         * <code>MessageTypeWorkWorldAtRemind = 258;</code>
+         *
+         * <pre>
+         *工作圈提醒
+         * </pre>
+         */
+        public static final int MessageTypeWorkWorldAtRemind_VALUE = 258;
+        /**
+         * <code>MessageTypeEncrypt = 404;</code>
+         *
+         * <pre>
+         *加密消息
+         * </pre>
+         */
+        public static final int MessageTypeEncrypt_VALUE = 404;
+        /**
+         * <code>MessageTypeActivity = 511;</code>
+         */
+        public static final int MessageTypeActivity_VALUE = 511;
+        /**
+         * <code>MessageTypeRedPack = 512;</code>
+         *
+         * <pre>
+         *(红包)
+         * </pre>
+         */
+        public static final int MessageTypeRedPack_VALUE = 512;
+        /**
+         * <code>MessageTypeAA = 513;</code>
+         *
+         * <pre>
+         *  (AA)
+         * </pre>
+         */
+        public static final int MessageTypeAA_VALUE = 513;
+        /**
+         * <code>MessageTypeCommonTrdInfo = 666;</code>
+         *
+         * <pre>
+         *(通用气泡)
+         * </pre>
+         */
+        public static final int MessageTypeCommonTrdInfo_VALUE = 666;
+        /**
+         * <code>MessageTypeCommonProductInfo = 888;</code>
+         *
+         * <pre>
+         * (通用气泡，详情 http://wiki.corp.qunar.com/pages/viewpage.action?pageId=125057861)&amp;nbsp;
+         * </pre>
+         */
+        public static final int MessageTypeCommonProductInfo_VALUE = 888;
+        /**
+         * <code>MessageTypeTransChatToCustomer = 1001;</code>
+         */
+        public static final int MessageTypeTransChatToCustomer_VALUE = 1001;
+        /**
+         * <code>MessageTypeTransChatToCustomer_Feedback = 1003;</code>
+         */
+        public static final int MessageTypeTransChatToCustomer_Feedback_VALUE = 1003;
+        /**
+         * <code>MessageTypeTransChatToCustomerService = 1002;</code>
+         */
+        public static final int MessageTypeTransChatToCustomerService_VALUE = 1002;
+        /**
+         * <code>MessageTypeTransChatToCustomerService_Feedback = 1004;</code>
+         */
+        public static final int MessageTypeTransChatToCustomerService_Feedback_VALUE = 1004;
+        /**
+         * <code>MessageTypeRedPackInfo = 1024;</code>
+         *
+         * <pre>
+         * (红包消息通知)
+         * </pre>
+         */
+        public static final int MessageTypeRedPackInfo_VALUE = 1024;
+        /**
+         * <code>MessageTypeAAInfo = 1025;</code>
+         *
+         * <pre>
+         *(AA消息通知)
+         * </pre>
+         */
+        public static final int MessageTypeAAInfo_VALUE = 1025;
+        /**
+         * <code>MessageTypeConsult = 2001;</code>
+         *
+         * <pre>
+         *(微信抢单)
+         * </pre>
+         */
+        public static final int MessageTypeConsult_VALUE = 2001;
+        /**
+         * <code>MessageTypeConsultResult = 2002;</code>
+         *
+         * <pre>
+         *(微信抢单结果)
+         * </pre>
+         */
+        public static final int MessageTypeConsultResult_VALUE = 2002;
+        /**
+         * <code>MessageTypeGrabMenuVcard = 2003;</code>
+         *
+         * <pre>
+         *(抢单卡片)
+         * </pre>
+         */
+        public static final int MessageTypeGrabMenuVcard_VALUE = 2003;
+        /**
+         * <code>MessageTypeGrabMenuResult = 2004;</code>
+         *
+         * <pre>
+         *(抢单结果)
+         * </pre>
+         */
+        public static final int MessageTypeGrabMenuResult_VALUE = 2004;
+        /**
+         * <code>MessageTypeQCZhongbao = 2005;</code>
+         *
+         * <pre>
+         *(众包消息)
+         * </pre>
+         */
+        public static final int MessageTypeQCZhongbao_VALUE = 2005;
+        /**
+         * <code>MessageTypeMicroTourGuide = 3001;</code>
+         *
+         * <pre>
+         *(微导游抢单)
+         * </pre>
+         */
+        public static final int MessageTypeMicroTourGuide_VALUE = 3001;
+        /**
+         * <code>MessageTypeProduct = 4096;</code>
+         *
+         * <pre>
+         *(产品信息)
+         * </pre>
+         */
+        public static final int MessageTypeProduct_VALUE = 4096;
+        /**
+         * <code>WebRTC_MsgType_VideoMeeting = 5001;</code>
+         */
+        public static final int WebRTC_MsgType_VideoMeeting_VALUE = 5001;
+        /**
+         * <code>MessageTypeShareLocation = 8192;</code>
+         *
+         * <pre>
+         * (位置共享)
+         * </pre>
+         */
+        public static final int MessageTypeShareLocation_VALUE = 8192;
+        /**
+         * <code>MessageTypeTransNormal = 10081;</code>
+         *
+         * <pre>
+         *(普通透传消息)
+         * </pre>
+         */
+        public static final int MessageTypeTransNormal_VALUE = 10081;
+        /**
+         * <code>WebRTC_MsgType_Live = 65501;</code>
+         *
+         * <pre>
+         *(直播消息)
+         * </pre>
+         */
+        public static final int WebRTC_MsgType_Live_VALUE = 65501;
+        /**
+         * <code>WebRTC_MsgType_VideoCall = 65505;</code>
+         *
+         * <pre>
+         *(实时视频20190926新版)
+         * </pre>
+         */
+        public static final int WebRTC_MsgType_VideoCall_VALUE = 65505;
+        /**
+         * <code>WebRTC_MsgType_AudioCall = 65506;</code>
+         *
+         * <pre>
+         *(实时音频20190926新版)
+         * </pre>
+         */
+        public static final int WebRTC_MsgType_AudioCall_VALUE = 65506;
+        /**
+         * <code>WebRTC_MsgType_Video_Group = 65534;</code>
+         *
+         * <pre>
+         *(新版群视频)
+         * </pre>
+         */
+        public static final int WebRTC_MsgType_Video_Group_VALUE = 65534;
+        /**
+         * <code>WebRTC_MsgType_Video = 65535;</code>
+         *
+         * <pre>
+         *音视频
+         * </pre>
+         */
+        public static final int WebRTC_MsgType_Video_VALUE = 65535;
+        /**
+         * <code>MessageTypeRobotQuestionList = 65536;</code>
+         *
+         * <pre>
+         *机器人问题列表
+         * </pre>
+         */
+        public static final int MessageTypeRobotQuestionList_VALUE = 65536;
+        /**
+         * <code>MessageTypeRobotTurnToUser = 65537;</code>
+         *
+         * <pre>
+         *机器人转人工提示
+         * </pre>
+         */
+        public static final int MessageTypeRobotTurnToUser_VALUE = 65537;
+        /**
+         * <code>MessageTypeRobotQuestionListNew = 65538;</code>
+         *
+         * <pre>
+         *new机器人问题列表
+         * </pre>
+         */
+        public static final int MessageTypeRobotQuestionListNew_VALUE = 65538;
+        /**
+         * <code>MessageTypeFlightRemind = 65550;</code>
+         *
+         * <pre>
+         *机票航班动态提醒消息
+         * </pre>
+         */
+        public static final int MessageTypeFlightRemind_VALUE = 65550;
+        /**
+         * <code>MessageTypeCommonServiceCard = 65551;</code>
+         *
+         * <pre>
+         *通用的服务通知类卡片消息
+         * </pre>
+         */
+        public static final int MessageTypeCommonServiceCard_VALUE = 65551;
+        /**
+         * <code>WebRTC_MsgType_Audio = 131072;</code>
+         */
+        public static final int WebRTC_MsgType_Audio_VALUE = 131072;
+        /**
+         * <code>MessageTypeNotice = 134217728;</code>
+         *
+         * <pre>
+         *(通知类信息)
+         * </pre>
+         */
+        public static final int MessageTypeNotice_VALUE = 134217728;
+        /**
+         * <code>MessageTypeSystem = 268435456;</code>
+         */
+        public static final int MessageTypeSystem_VALUE = 268435456;
+        /**
+         * <code>MediaTypeSystemLY = 268435457;</code>
+         */
+        public static final int MediaTypeSystemLY_VALUE = 268435457;
 
-    private final int index;
-    private final int value;
 
-    private MessageType(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
+        public final int getNumber() { return value; }
 
-    // @@protoc_insertion_point(enum_scope:MessageType)
-  }
+        public static MessageType valueOf(int value) {
+            switch (value) {
+                case -11: return MessageTypePNote;
+                case -1: return MessageTypeRevoke;
+                case 1: return MessageTypeText;
+                case 2: return MessageTypeVoice;
+                case 3: return MessageTypePhoto;
+                case 4: return MessageTypeSogouIcon;
+                case 5: return MessageTypeFile;
+                case 6: return MessageTypeTopic;
+                case 7: return MessageTypeRichText;
+                case 8: return MessageTypeActionRichText;
+                case 9: return MessageTypeReply;
+                case 10: return MessageTypeShock;
+                case 11: return MessageTypeNote;
+                case 12: return MessageTypeGroupAt;
+                case 13: return MessageTypeMarkdown;
+                case 14: return MessageTypeExtText;
+                case 15: return MessageTypeGroupNotify;
+                case 16: return MessageTypeLocalShare;
+                case 20: return MessageTypeWebRTCAudio;
+                case 21: return MessageTypeWebRTCVidio;
+                case 30: return MessageTypeImageNew;
+                case 32: return MessageTypeSmallVideo;
+                case 47: return MessageTypeRobotAnswer;
+                case 64: return MessageTypeSourceCode;
+                case 101: return MessageTypeTime;
+                case 128: return MessageTypeBurnAfterRead;
+                case 256: return MessageTypeCardShare;
+                case 257: return MessageTypeMeetingRemind;
+                case 258: return MessageTypeWorkWorldAtRemind;
+                case 404: return MessageTypeEncrypt;
+                case 511: return MessageTypeActivity;
+                case 512: return MessageTypeRedPack;
+                case 513: return MessageTypeAA;
+                case 666: return MessageTypeCommonTrdInfo;
+                case 888: return MessageTypeCommonProductInfo;
+                case 1001: return MessageTypeTransChatToCustomer;
+                case 1003: return MessageTypeTransChatToCustomer_Feedback;
+                case 1002: return MessageTypeTransChatToCustomerService;
+                case 1004: return MessageTypeTransChatToCustomerService_Feedback;
+                case 1024: return MessageTypeRedPackInfo;
+                case 1025: return MessageTypeAAInfo;
+                case 2001: return MessageTypeConsult;
+                case 2002: return MessageTypeConsultResult;
+                case 2003: return MessageTypeGrabMenuVcard;
+                case 2004: return MessageTypeGrabMenuResult;
+                case 2005: return MessageTypeQCZhongbao;
+                case 3001: return MessageTypeMicroTourGuide;
+                case 4096: return MessageTypeProduct;
+                case 5001: return WebRTC_MsgType_VideoMeeting;
+                case 8192: return MessageTypeShareLocation;
+                case 10081: return MessageTypeTransNormal;
+                case 65501: return WebRTC_MsgType_Live;
+                case 65505: return WebRTC_MsgType_VideoCall;
+                case 65506: return WebRTC_MsgType_AudioCall;
+                case 65534: return WebRTC_MsgType_Video_Group;
+                case 65535: return WebRTC_MsgType_Video;
+                case 65536: return MessageTypeRobotQuestionList;
+                case 65537: return MessageTypeRobotTurnToUser;
+                case 65538: return MessageTypeRobotQuestionListNew;
+                case 65550: return MessageTypeFlightRemind;
+                case 65551: return MessageTypeCommonServiceCard;
+                case 131072: return WebRTC_MsgType_Audio;
+                case 134217728: return MessageTypeNotice;
+                case 268435456: return MessageTypeSystem;
+                case 268435457: return MediaTypeSystemLY;
+                default: return null;
+            }
+        }
 
-  /**
-   * Protobuf enum {@code StringHeaderType}
-   */
-  public enum StringHeaderType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>StringHeaderTypeChatId = 1;</code>
-     */
-    StringHeaderTypeChatId(0, 1),
-    /**
-     * <code>StringHeaderTypeChannelId = 2;</code>
-     */
-    StringHeaderTypeChannelId(1, 2),
-    /**
-     * <code>StringHeaderTypeExtendInfo = 3;</code>
-     */
-    StringHeaderTypeExtendInfo(2, 3),
-    /**
-     * <code>StringHeaderTypeBackupInfo = 4;</code>
-     */
-    StringHeaderTypeBackupInfo(3, 4),
-    /**
-     * <code>StringHeaderTypeReadType = 5;</code>
-     */
-    StringHeaderTypeReadType(4, 5),
-    /**
-     * <code>StringHeaderTypeJid = 7;</code>
-     */
-    StringHeaderTypeJid(5, 7),
-    /**
-     * <code>StringHeaderTypeRealJid = 8;</code>
-     */
-    StringHeaderTypeRealJid(6, 8),
-    /**
-     * <code>StringHeaderTypeInviteJid = 9;</code>
-     */
-    StringHeaderTypeInviteJid(7, 9),
-    /**
-     * <code>StringHeaderTypeDeleleJid = 10;</code>
-     */
-    StringHeaderTypeDeleleJid(8, 10),
-    /**
-     * <code>StringHeaderTypeNick = 12;</code>
-     */
-    StringHeaderTypeNick(9, 12),
-    /**
-     * <code>StringHeaderTypeTitle = 16;</code>
-     */
-    StringHeaderTypeTitle(10, 16),
-    /**
-     * <code>StringHeaderTypePic = 18;</code>
-     */
-    StringHeaderTypePic(11, 18),
-    /**
-     * <code>StringHeaderTypeVersion = 20;</code>
-     */
-    StringHeaderTypeVersion(12, 20),
-    /**
-     * <code>StringHeaderTypeMethod = 22;</code>
-     */
-    StringHeaderTypeMethod(13, 22),
-    /**
-     * <code>StringHeaderTypeBody = 24;</code>
-     */
-    StringHeaderTypeBody(14, 24),
-    /**
-     * <code>StringHeaderTypeAffiliation = 28;</code>
-     */
-    StringHeaderTypeAffiliation(15, 28),
-    /**
-     * <code>StringHeaderTypeType = 30;</code>
-     */
-    StringHeaderTypeType(16, 30),
-    /**
-     * <code>StringHeaderTypeResult = 32;</code>
-     */
-    StringHeaderTypeResult(17, 32),
-    /**
-     * <code>StringHeaderTypeReason = 34;</code>
-     */
-    StringHeaderTypeReason(18, 34),
-    /**
-     * <code>StringHeaderTypeRole = 36;</code>
-     */
-    StringHeaderTypeRole(19, 36),
-    /**
-     * <code>StringHeaderTypeDomain = 38;</code>
-     */
-    StringHeaderTypeDomain(20, 38),
-    /**
-     * <code>StringHeaderTypeStatus = 40;</code>
-     */
-    StringHeaderTypeStatus(21, 40),
-    /**
-     * <code>StringHeaderTypeCode = 42;</code>
-     */
-    StringHeaderTypeCode(22, 42),
-    /**
-     * <code>StringHeaderTypeCdata = 50;</code>
-     */
-    StringHeaderTypeCdata(23, 50),
-    /**
-     * <code>StringHeaderTypeTimeValue = 52;</code>
-     */
-    StringHeaderTypeTimeValue(24, 52),
-    /**
-     * <code>StringHeaderTypeKeyValue = 54;</code>
-     */
-    StringHeaderTypeKeyValue(25, 54),
-    /**
-     * <code>StringHeaderTypeName = 56;</code>
-     */
-    StringHeaderTypeName(26, 56),
-    /**
-     * <code>StringHeaderTypeHost = 58;</code>
-     */
-    StringHeaderTypeHost(27, 58),
-    /**
-     * <code>StringHeaderTypeQuestion = 60;</code>
-     */
-    StringHeaderTypeQuestion(28, 60),
-    /**
-     * <code>StringHeaderTypeAnswer = 62;</code>
-     */
-    StringHeaderTypeAnswer(29, 62),
-    /**
-     * <code>StringHeaderTypeFriends = 64;</code>
-     */
-    StringHeaderTypeFriends(30, 64),
-    /**
-     * <code>StringHeaderTypeValue = 66;</code>
-     */
-    StringHeaderTypeValue(31, 66),
-    /**
-     * <code>StringHeaderTypeMaskedUuser = 68;</code>
-     */
-    StringHeaderTypeMaskedUuser(32, 68),
-    /**
-     * <code>StringHeaderTypeKey = 70;</code>
-     */
-    StringHeaderTypeKey(33, 70),
-    /**
-     * <code>StringHeaderTypeCarbon = 72;</code>
-     */
-    StringHeaderTypeCarbon(34, 72),
-    /**
-     * <code>StringHeaderTypeMode = 76;</code>
-     */
-    StringHeaderTypeMode(35, 76),
-    ;
-
-    /**
-     * <code>StringHeaderTypeChatId = 1;</code>
-     */
-    public static final int StringHeaderTypeChatId_VALUE = 1;
-    /**
-     * <code>StringHeaderTypeChannelId = 2;</code>
-     */
-    public static final int StringHeaderTypeChannelId_VALUE = 2;
-    /**
-     * <code>StringHeaderTypeExtendInfo = 3;</code>
-     */
-    public static final int StringHeaderTypeExtendInfo_VALUE = 3;
-    /**
-     * <code>StringHeaderTypeBackupInfo = 4;</code>
-     */
-    public static final int StringHeaderTypeBackupInfo_VALUE = 4;
-    /**
-     * <code>StringHeaderTypeReadType = 5;</code>
-     */
-    public static final int StringHeaderTypeReadType_VALUE = 5;
-    /**
-     * <code>StringHeaderTypeJid = 7;</code>
-     */
-    public static final int StringHeaderTypeJid_VALUE = 7;
-    /**
-     * <code>StringHeaderTypeRealJid = 8;</code>
-     */
-    public static final int StringHeaderTypeRealJid_VALUE = 8;
-    /**
-     * <code>StringHeaderTypeInviteJid = 9;</code>
-     */
-    public static final int StringHeaderTypeInviteJid_VALUE = 9;
-    /**
-     * <code>StringHeaderTypeDeleleJid = 10;</code>
-     */
-    public static final int StringHeaderTypeDeleleJid_VALUE = 10;
-    /**
-     * <code>StringHeaderTypeNick = 12;</code>
-     */
-    public static final int StringHeaderTypeNick_VALUE = 12;
-    /**
-     * <code>StringHeaderTypeTitle = 16;</code>
-     */
-    public static final int StringHeaderTypeTitle_VALUE = 16;
-    /**
-     * <code>StringHeaderTypePic = 18;</code>
-     */
-    public static final int StringHeaderTypePic_VALUE = 18;
-    /**
-     * <code>StringHeaderTypeVersion = 20;</code>
-     */
-    public static final int StringHeaderTypeVersion_VALUE = 20;
-    /**
-     * <code>StringHeaderTypeMethod = 22;</code>
-     */
-    public static final int StringHeaderTypeMethod_VALUE = 22;
-    /**
-     * <code>StringHeaderTypeBody = 24;</code>
-     */
-    public static final int StringHeaderTypeBody_VALUE = 24;
-    /**
-     * <code>StringHeaderTypeAffiliation = 28;</code>
-     */
-    public static final int StringHeaderTypeAffiliation_VALUE = 28;
-    /**
-     * <code>StringHeaderTypeType = 30;</code>
-     */
-    public static final int StringHeaderTypeType_VALUE = 30;
-    /**
-     * <code>StringHeaderTypeResult = 32;</code>
-     */
-    public static final int StringHeaderTypeResult_VALUE = 32;
-    /**
-     * <code>StringHeaderTypeReason = 34;</code>
-     */
-    public static final int StringHeaderTypeReason_VALUE = 34;
-    /**
-     * <code>StringHeaderTypeRole = 36;</code>
-     */
-    public static final int StringHeaderTypeRole_VALUE = 36;
-    /**
-     * <code>StringHeaderTypeDomain = 38;</code>
-     */
-    public static final int StringHeaderTypeDomain_VALUE = 38;
-    /**
-     * <code>StringHeaderTypeStatus = 40;</code>
-     */
-    public static final int StringHeaderTypeStatus_VALUE = 40;
-    /**
-     * <code>StringHeaderTypeCode = 42;</code>
-     */
-    public static final int StringHeaderTypeCode_VALUE = 42;
-    /**
-     * <code>StringHeaderTypeCdata = 50;</code>
-     */
-    public static final int StringHeaderTypeCdata_VALUE = 50;
-    /**
-     * <code>StringHeaderTypeTimeValue = 52;</code>
-     */
-    public static final int StringHeaderTypeTimeValue_VALUE = 52;
-    /**
-     * <code>StringHeaderTypeKeyValue = 54;</code>
-     */
-    public static final int StringHeaderTypeKeyValue_VALUE = 54;
-    /**
-     * <code>StringHeaderTypeName = 56;</code>
-     */
-    public static final int StringHeaderTypeName_VALUE = 56;
-    /**
-     * <code>StringHeaderTypeHost = 58;</code>
-     */
-    public static final int StringHeaderTypeHost_VALUE = 58;
-    /**
-     * <code>StringHeaderTypeQuestion = 60;</code>
-     */
-    public static final int StringHeaderTypeQuestion_VALUE = 60;
-    /**
-     * <code>StringHeaderTypeAnswer = 62;</code>
-     */
-    public static final int StringHeaderTypeAnswer_VALUE = 62;
-    /**
-     * <code>StringHeaderTypeFriends = 64;</code>
-     */
-    public static final int StringHeaderTypeFriends_VALUE = 64;
-    /**
-     * <code>StringHeaderTypeValue = 66;</code>
-     */
-    public static final int StringHeaderTypeValue_VALUE = 66;
-    /**
-     * <code>StringHeaderTypeMaskedUuser = 68;</code>
-     */
-    public static final int StringHeaderTypeMaskedUuser_VALUE = 68;
-    /**
-     * <code>StringHeaderTypeKey = 70;</code>
-     */
-    public static final int StringHeaderTypeKey_VALUE = 70;
-    /**
-     * <code>StringHeaderTypeCarbon = 72;</code>
-     */
-    public static final int StringHeaderTypeCarbon_VALUE = 72;
-    /**
-     * <code>StringHeaderTypeMode = 76;</code>
-     */
-    public static final int StringHeaderTypeMode_VALUE = 76;
-
-
-    public final int getNumber() { return value; }
-
-    public static StringHeaderType valueOf(int value) {
-      switch (value) {
-        case 1: return StringHeaderTypeChatId;
-        case 2: return StringHeaderTypeChannelId;
-        case 3: return StringHeaderTypeExtendInfo;
-        case 4: return StringHeaderTypeBackupInfo;
-        case 5: return StringHeaderTypeReadType;
-        case 7: return StringHeaderTypeJid;
-        case 8: return StringHeaderTypeRealJid;
-        case 9: return StringHeaderTypeInviteJid;
-        case 10: return StringHeaderTypeDeleleJid;
-        case 12: return StringHeaderTypeNick;
-        case 16: return StringHeaderTypeTitle;
-        case 18: return StringHeaderTypePic;
-        case 20: return StringHeaderTypeVersion;
-        case 22: return StringHeaderTypeMethod;
-        case 24: return StringHeaderTypeBody;
-        case 28: return StringHeaderTypeAffiliation;
-        case 30: return StringHeaderTypeType;
-        case 32: return StringHeaderTypeResult;
-        case 34: return StringHeaderTypeReason;
-        case 36: return StringHeaderTypeRole;
-        case 38: return StringHeaderTypeDomain;
-        case 40: return StringHeaderTypeStatus;
-        case 42: return StringHeaderTypeCode;
-        case 50: return StringHeaderTypeCdata;
-        case 52: return StringHeaderTypeTimeValue;
-        case 54: return StringHeaderTypeKeyValue;
-        case 56: return StringHeaderTypeName;
-        case 58: return StringHeaderTypeHost;
-        case 60: return StringHeaderTypeQuestion;
-        case 62: return StringHeaderTypeAnswer;
-        case 64: return StringHeaderTypeFriends;
-        case 66: return StringHeaderTypeValue;
-        case 68: return StringHeaderTypeMaskedUuser;
-        case 70: return StringHeaderTypeKey;
-        case 72: return StringHeaderTypeCarbon;
-        case 76: return StringHeaderTypeMode;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<StringHeaderType>
+        public static com.google.protobuf.Internal.EnumLiteMap<MessageType>
         internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<StringHeaderType>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<StringHeaderType>() {
-            public StringHeaderType findValueByNumber(int number) {
-              return StringHeaderType.valueOf(number);
-            }
-          };
+            return internalValueMap;
+        }
+        private static com.google.protobuf.Internal.EnumLiteMap<MessageType>
+                internalValueMap =
+                new com.google.protobuf.Internal.EnumLiteMap<MessageType>() {
+                    public MessageType findValueByNumber(int number) {
+                        return MessageType.valueOf(number);
+                    }
+                };
 
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
+            return getDescriptor().getValues().get(index);
+        }
+        public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
+            return getDescriptor();
+        }
+        public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(3);
+            return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(2);
+        }
+
+        private static final MessageType[] VALUES = values();
+
+        public static MessageType valueOf(
+                com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            if (desc.getType() != getDescriptor()) {
+                throw new IllegalArgumentException(
+                        "EnumValueDescriptor is not for this type.");
+            }
+            return VALUES[desc.getIndex()];
+        }
+
+        private final int index;
+        private final int value;
+
+        private MessageType(int index, int value) {
+            this.index = index;
+            this.value = value;
+        }
+
+        // @@protoc_insertion_point(enum_scope:MessageType)
     }
 
-    private static final StringHeaderType[] VALUES = values();
+    /**
+     * Protobuf enum {@code StringHeaderType}
+     */
+    public enum StringHeaderType
+            implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>StringHeaderTypeChatId = 1;</code>
+         */
+        StringHeaderTypeChatId(0, 1),
+        /**
+         * <code>StringHeaderTypeChannelId = 2;</code>
+         */
+        StringHeaderTypeChannelId(1, 2),
+        /**
+         * <code>StringHeaderTypeExtendInfo = 3;</code>
+         */
+        StringHeaderTypeExtendInfo(2, 3),
+        /**
+         * <code>StringHeaderTypeBackupInfo = 4;</code>
+         */
+        StringHeaderTypeBackupInfo(3, 4),
+        /**
+         * <code>StringHeaderTypeReadType = 5;</code>
+         */
+        StringHeaderTypeReadType(4, 5),
+        /**
+         * <code>StringHeaderTypeJid = 7;</code>
+         */
+        StringHeaderTypeJid(5, 7),
+        /**
+         * <code>StringHeaderTypeRealJid = 8;</code>
+         */
+        StringHeaderTypeRealJid(6, 8),
+        /**
+         * <code>StringHeaderTypeInviteJid = 9;</code>
+         */
+        StringHeaderTypeInviteJid(7, 9),
+        /**
+         * <code>StringHeaderTypeDeleleJid = 10;</code>
+         */
+        StringHeaderTypeDeleleJid(8, 10),
+        /**
+         * <code>StringHeaderTypeNick = 12;</code>
+         */
+        StringHeaderTypeNick(9, 12),
+        /**
+         * <code>StringHeaderTypeTitle = 16;</code>
+         */
+        StringHeaderTypeTitle(10, 16),
+        /**
+         * <code>StringHeaderTypePic = 18;</code>
+         */
+        StringHeaderTypePic(11, 18),
+        /**
+         * <code>StringHeaderTypeVersion = 20;</code>
+         */
+        StringHeaderTypeVersion(12, 20),
+        /**
+         * <code>StringHeaderTypeMethod = 22;</code>
+         */
+        StringHeaderTypeMethod(13, 22),
+        /**
+         * <code>StringHeaderTypeBody = 24;</code>
+         */
+        StringHeaderTypeBody(14, 24),
+        /**
+         * <code>StringHeaderTypeAffiliation = 28;</code>
+         */
+        StringHeaderTypeAffiliation(15, 28),
+        /**
+         * <code>StringHeaderTypeType = 30;</code>
+         */
+        StringHeaderTypeType(16, 30),
+        /**
+         * <code>StringHeaderTypeResult = 32;</code>
+         */
+        StringHeaderTypeResult(17, 32),
+        /**
+         * <code>StringHeaderTypeReason = 34;</code>
+         */
+        StringHeaderTypeReason(18, 34),
+        /**
+         * <code>StringHeaderTypeRole = 36;</code>
+         */
+        StringHeaderTypeRole(19, 36),
+        /**
+         * <code>StringHeaderTypeDomain = 38;</code>
+         */
+        StringHeaderTypeDomain(20, 38),
+        /**
+         * <code>StringHeaderTypeStatus = 40;</code>
+         */
+        StringHeaderTypeStatus(21, 40),
+        /**
+         * <code>StringHeaderTypeCode = 42;</code>
+         */
+        StringHeaderTypeCode(22, 42),
+        /**
+         * <code>StringHeaderTypeCdata = 50;</code>
+         */
+        StringHeaderTypeCdata(23, 50),
+        /**
+         * <code>StringHeaderTypeTimeValue = 52;</code>
+         */
+        StringHeaderTypeTimeValue(24, 52),
+        /**
+         * <code>StringHeaderTypeKeyValue = 54;</code>
+         */
+        StringHeaderTypeKeyValue(25, 54),
+        /**
+         * <code>StringHeaderTypeName = 56;</code>
+         */
+        StringHeaderTypeName(26, 56),
+        /**
+         * <code>StringHeaderTypeHost = 58;</code>
+         */
+        StringHeaderTypeHost(27, 58),
+        /**
+         * <code>StringHeaderTypeQuestion = 60;</code>
+         */
+        StringHeaderTypeQuestion(28, 60),
+        /**
+         * <code>StringHeaderTypeAnswer = 62;</code>
+         */
+        StringHeaderTypeAnswer(29, 62),
+        /**
+         * <code>StringHeaderTypeFriends = 64;</code>
+         */
+        StringHeaderTypeFriends(30, 64),
+        /**
+         * <code>StringHeaderTypeValue = 66;</code>
+         */
+        StringHeaderTypeValue(31, 66),
+        /**
+         * <code>StringHeaderTypeMaskedUuser = 68;</code>
+         */
+        StringHeaderTypeMaskedUuser(32, 68),
+        /**
+         * <code>StringHeaderTypeKey = 70;</code>
+         */
+        StringHeaderTypeKey(33, 70),
+        /**
+         * <code>StringHeaderTypeCarbon = 72;</code>
+         */
+        StringHeaderTypeCarbon(34, 72),
+        /**
+         * <code>StringHeaderTypeMode = 76;</code>
+         */
+        StringHeaderTypeMode(35, 76),
+        ;
 
-    public static StringHeaderType valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private StringHeaderType(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:StringHeaderType)
-  }
-
-  /**
-   * Protobuf enum {@code IQMessageKeyType}
-   */
-  public enum IQMessageKeyType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>IQKeyBind = 1;</code>
-     */
-    IQKeyBind(0, 1),
-    /**
-     * <code>IQKeyMucCreate = 2;</code>
-     */
-    IQKeyMucCreate(1, 2),
-    /**
-     * <code>IQKeyMucCreateV2 = 3;</code>
-     */
-    IQKeyMucCreateV2(2, 3),
-    /**
-     * <code>IQKeyMucInviteV2 = 4;</code>
-     */
-    IQKeyMucInviteV2(3, 4),
-    /**
-     * <code>IQKeyGetMucUser = 5;</code>
-     */
-    IQKeyGetMucUser(4, 5),
-    /**
-     * <code>IQKeySetMucUser = 6;</code>
-     */
-    IQKeySetMucUser(5, 6),
-    /**
-     * <code>IQKeyDelMucUser = 7;</code>
-     */
-    IQKeyDelMucUser(6, 7),
-    /**
-     * <code>IQKeyAddUserSubscribe = 8;</code>
-     */
-    IQKeyAddUserSubscribe(7, 8),
-    /**
-     * <code>IQKeyDelUserSubscribe = 9;</code>
-     */
-    IQKeyDelUserSubscribe(8, 9),
-    /**
-     * <code>IQKeyGetUserSubScribe = 10;</code>
-     */
-    IQKeyGetUserSubScribe(9, 10),
-    /**
-     * <code>IQKeyGetVerifyFriendOpt = 11;</code>
-     */
-    IQKeyGetVerifyFriendOpt(10, 11),
-    /**
-     * <code>IQKeySetVerifyFriendOpt = 12;</code>
-     */
-    IQKeySetVerifyFriendOpt(11, 12),
-    /**
-     * <code>IQKeySetUserSubScribeV2 = 13;</code>
-     */
-    IQKeySetUserSubScribeV2(12, 13),
-    /**
-     * <code>IQKeyGetUserSubScribeV2 = 14;</code>
-     */
-    IQKeyGetUserSubScribeV2(13, 14),
-    /**
-     * <code>IQKeyGetUserFriend = 16;</code>
-     */
-    IQKeyGetUserFriend(14, 16),
-    /**
-     * <code>IQKeyDelUserFriend = 18;</code>
-     */
-    IQKeyDelUserFriend(15, 18),
-    /**
-     * <code>IQKeyGetUserKey = 20;</code>
-     */
-    IQKeyGetUserKey(16, 20),
-    /**
-     * <code>IQKeyGetUserMask = 22;</code>
-     */
-    IQKeyGetUserMask(17, 22),
-    /**
-     * <code>IQKeySetUserMask = 24;</code>
-     */
-    IQKeySetUserMask(18, 24),
-    /**
-     * <code>IQKeyCancelUSerMask = 26;</code>
-     */
-    IQKeyCancelUSerMask(19, 26),
-    /**
-     * <code>IQKeySetAdmin = 28;</code>
-     */
-    IQKeySetAdmin(20, 28),
-    /**
-     * <code>IQKeySetMember = 30;</code>
-     */
-    IQKeySetMember(21, 30),
-    /**
-     * <code>IQKeyCancelMember = 32;</code>
-     */
-    IQKeyCancelMember(22, 32),
-    /**
-     * <code>IQKeyGetUserMucs = 36;</code>
-     */
-    IQKeyGetUserMucs(23, 36),
-    /**
-     * <code>IQKeyDestroyMuc = 40;</code>
-     */
-    IQKeyDestroyMuc(24, 40),
-    /**
-     * <code>IQKeyPing = 50;</code>
-     */
-    IQKeyPing(25, 50),
-    /**
-     * <code>IQKeyAddPush = 52;</code>
-     */
-    IQKeyAddPush(26, 52),
-    /**
-     * <code>IQKeyCancelPush = 60;</code>
-     */
-    IQKeyCancelPush(27, 60),
-    /**
-     * <code>IQKeyResult = 80;</code>
-     */
-    IQKeyResult(28, 80),
-    /**
-     * <code>IQKeyError = 90;</code>
-     */
-    IQKeyError(29, 90),
-    /**
-     * <code>IQKeyGetVUser = 92;</code>
-     */
-    IQKeyGetVUser(30, 92),
-    /**
-     * <code>IQKeyGetVUserRole = 94;</code>
-     */
-    IQKeyGetVUserRole(31, 94),
-    /**
-     * <code>IQKeyStartSession = 96;</code>
-     */
-    IQKeyStartSession(32, 96),
-    /**
-     * <code>IQKeyEndSession = 98;</code>
-     */
-    IQKeyEndSession(33, 98),
-    ;
-
-    /**
-     * <code>IQKeyBind = 1;</code>
-     */
-    public static final int IQKeyBind_VALUE = 1;
-    /**
-     * <code>IQKeyMucCreate = 2;</code>
-     */
-    public static final int IQKeyMucCreate_VALUE = 2;
-    /**
-     * <code>IQKeyMucCreateV2 = 3;</code>
-     */
-    public static final int IQKeyMucCreateV2_VALUE = 3;
-    /**
-     * <code>IQKeyMucInviteV2 = 4;</code>
-     */
-    public static final int IQKeyMucInviteV2_VALUE = 4;
-    /**
-     * <code>IQKeyGetMucUser = 5;</code>
-     */
-    public static final int IQKeyGetMucUser_VALUE = 5;
-    /**
-     * <code>IQKeySetMucUser = 6;</code>
-     */
-    public static final int IQKeySetMucUser_VALUE = 6;
-    /**
-     * <code>IQKeyDelMucUser = 7;</code>
-     */
-    public static final int IQKeyDelMucUser_VALUE = 7;
-    /**
-     * <code>IQKeyAddUserSubscribe = 8;</code>
-     */
-    public static final int IQKeyAddUserSubscribe_VALUE = 8;
-    /**
-     * <code>IQKeyDelUserSubscribe = 9;</code>
-     */
-    public static final int IQKeyDelUserSubscribe_VALUE = 9;
-    /**
-     * <code>IQKeyGetUserSubScribe = 10;</code>
-     */
-    public static final int IQKeyGetUserSubScribe_VALUE = 10;
-    /**
-     * <code>IQKeyGetVerifyFriendOpt = 11;</code>
-     */
-    public static final int IQKeyGetVerifyFriendOpt_VALUE = 11;
-    /**
-     * <code>IQKeySetVerifyFriendOpt = 12;</code>
-     */
-    public static final int IQKeySetVerifyFriendOpt_VALUE = 12;
-    /**
-     * <code>IQKeySetUserSubScribeV2 = 13;</code>
-     */
-    public static final int IQKeySetUserSubScribeV2_VALUE = 13;
-    /**
-     * <code>IQKeyGetUserSubScribeV2 = 14;</code>
-     */
-    public static final int IQKeyGetUserSubScribeV2_VALUE = 14;
-    /**
-     * <code>IQKeyGetUserFriend = 16;</code>
-     */
-    public static final int IQKeyGetUserFriend_VALUE = 16;
-    /**
-     * <code>IQKeyDelUserFriend = 18;</code>
-     */
-    public static final int IQKeyDelUserFriend_VALUE = 18;
-    /**
-     * <code>IQKeyGetUserKey = 20;</code>
-     */
-    public static final int IQKeyGetUserKey_VALUE = 20;
-    /**
-     * <code>IQKeyGetUserMask = 22;</code>
-     */
-    public static final int IQKeyGetUserMask_VALUE = 22;
-    /**
-     * <code>IQKeySetUserMask = 24;</code>
-     */
-    public static final int IQKeySetUserMask_VALUE = 24;
-    /**
-     * <code>IQKeyCancelUSerMask = 26;</code>
-     */
-    public static final int IQKeyCancelUSerMask_VALUE = 26;
-    /**
-     * <code>IQKeySetAdmin = 28;</code>
-     */
-    public static final int IQKeySetAdmin_VALUE = 28;
-    /**
-     * <code>IQKeySetMember = 30;</code>
-     */
-    public static final int IQKeySetMember_VALUE = 30;
-    /**
-     * <code>IQKeyCancelMember = 32;</code>
-     */
-    public static final int IQKeyCancelMember_VALUE = 32;
-    /**
-     * <code>IQKeyGetUserMucs = 36;</code>
-     */
-    public static final int IQKeyGetUserMucs_VALUE = 36;
-    /**
-     * <code>IQKeyDestroyMuc = 40;</code>
-     */
-    public static final int IQKeyDestroyMuc_VALUE = 40;
-    /**
-     * <code>IQKeyPing = 50;</code>
-     */
-    public static final int IQKeyPing_VALUE = 50;
-    /**
-     * <code>IQKeyAddPush = 52;</code>
-     */
-    public static final int IQKeyAddPush_VALUE = 52;
-    /**
-     * <code>IQKeyCancelPush = 60;</code>
-     */
-    public static final int IQKeyCancelPush_VALUE = 60;
-    /**
-     * <code>IQKeyResult = 80;</code>
-     */
-    public static final int IQKeyResult_VALUE = 80;
-    /**
-     * <code>IQKeyError = 90;</code>
-     */
-    public static final int IQKeyError_VALUE = 90;
-    /**
-     * <code>IQKeyGetVUser = 92;</code>
-     */
-    public static final int IQKeyGetVUser_VALUE = 92;
-    /**
-     * <code>IQKeyGetVUserRole = 94;</code>
-     */
-    public static final int IQKeyGetVUserRole_VALUE = 94;
-    /**
-     * <code>IQKeyStartSession = 96;</code>
-     */
-    public static final int IQKeyStartSession_VALUE = 96;
-    /**
-     * <code>IQKeyEndSession = 98;</code>
-     */
-    public static final int IQKeyEndSession_VALUE = 98;
+        /**
+         * <code>StringHeaderTypeChatId = 1;</code>
+         */
+        public static final int StringHeaderTypeChatId_VALUE = 1;
+        /**
+         * <code>StringHeaderTypeChannelId = 2;</code>
+         */
+        public static final int StringHeaderTypeChannelId_VALUE = 2;
+        /**
+         * <code>StringHeaderTypeExtendInfo = 3;</code>
+         */
+        public static final int StringHeaderTypeExtendInfo_VALUE = 3;
+        /**
+         * <code>StringHeaderTypeBackupInfo = 4;</code>
+         */
+        public static final int StringHeaderTypeBackupInfo_VALUE = 4;
+        /**
+         * <code>StringHeaderTypeReadType = 5;</code>
+         */
+        public static final int StringHeaderTypeReadType_VALUE = 5;
+        /**
+         * <code>StringHeaderTypeJid = 7;</code>
+         */
+        public static final int StringHeaderTypeJid_VALUE = 7;
+        /**
+         * <code>StringHeaderTypeRealJid = 8;</code>
+         */
+        public static final int StringHeaderTypeRealJid_VALUE = 8;
+        /**
+         * <code>StringHeaderTypeInviteJid = 9;</code>
+         */
+        public static final int StringHeaderTypeInviteJid_VALUE = 9;
+        /**
+         * <code>StringHeaderTypeDeleleJid = 10;</code>
+         */
+        public static final int StringHeaderTypeDeleleJid_VALUE = 10;
+        /**
+         * <code>StringHeaderTypeNick = 12;</code>
+         */
+        public static final int StringHeaderTypeNick_VALUE = 12;
+        /**
+         * <code>StringHeaderTypeTitle = 16;</code>
+         */
+        public static final int StringHeaderTypeTitle_VALUE = 16;
+        /**
+         * <code>StringHeaderTypePic = 18;</code>
+         */
+        public static final int StringHeaderTypePic_VALUE = 18;
+        /**
+         * <code>StringHeaderTypeVersion = 20;</code>
+         */
+        public static final int StringHeaderTypeVersion_VALUE = 20;
+        /**
+         * <code>StringHeaderTypeMethod = 22;</code>
+         */
+        public static final int StringHeaderTypeMethod_VALUE = 22;
+        /**
+         * <code>StringHeaderTypeBody = 24;</code>
+         */
+        public static final int StringHeaderTypeBody_VALUE = 24;
+        /**
+         * <code>StringHeaderTypeAffiliation = 28;</code>
+         */
+        public static final int StringHeaderTypeAffiliation_VALUE = 28;
+        /**
+         * <code>StringHeaderTypeType = 30;</code>
+         */
+        public static final int StringHeaderTypeType_VALUE = 30;
+        /**
+         * <code>StringHeaderTypeResult = 32;</code>
+         */
+        public static final int StringHeaderTypeResult_VALUE = 32;
+        /**
+         * <code>StringHeaderTypeReason = 34;</code>
+         */
+        public static final int StringHeaderTypeReason_VALUE = 34;
+        /**
+         * <code>StringHeaderTypeRole = 36;</code>
+         */
+        public static final int StringHeaderTypeRole_VALUE = 36;
+        /**
+         * <code>StringHeaderTypeDomain = 38;</code>
+         */
+        public static final int StringHeaderTypeDomain_VALUE = 38;
+        /**
+         * <code>StringHeaderTypeStatus = 40;</code>
+         */
+        public static final int StringHeaderTypeStatus_VALUE = 40;
+        /**
+         * <code>StringHeaderTypeCode = 42;</code>
+         */
+        public static final int StringHeaderTypeCode_VALUE = 42;
+        /**
+         * <code>StringHeaderTypeCdata = 50;</code>
+         */
+        public static final int StringHeaderTypeCdata_VALUE = 50;
+        /**
+         * <code>StringHeaderTypeTimeValue = 52;</code>
+         */
+        public static final int StringHeaderTypeTimeValue_VALUE = 52;
+        /**
+         * <code>StringHeaderTypeKeyValue = 54;</code>
+         */
+        public static final int StringHeaderTypeKeyValue_VALUE = 54;
+        /**
+         * <code>StringHeaderTypeName = 56;</code>
+         */
+        public static final int StringHeaderTypeName_VALUE = 56;
+        /**
+         * <code>StringHeaderTypeHost = 58;</code>
+         */
+        public static final int StringHeaderTypeHost_VALUE = 58;
+        /**
+         * <code>StringHeaderTypeQuestion = 60;</code>
+         */
+        public static final int StringHeaderTypeQuestion_VALUE = 60;
+        /**
+         * <code>StringHeaderTypeAnswer = 62;</code>
+         */
+        public static final int StringHeaderTypeAnswer_VALUE = 62;
+        /**
+         * <code>StringHeaderTypeFriends = 64;</code>
+         */
+        public static final int StringHeaderTypeFriends_VALUE = 64;
+        /**
+         * <code>StringHeaderTypeValue = 66;</code>
+         */
+        public static final int StringHeaderTypeValue_VALUE = 66;
+        /**
+         * <code>StringHeaderTypeMaskedUuser = 68;</code>
+         */
+        public static final int StringHeaderTypeMaskedUuser_VALUE = 68;
+        /**
+         * <code>StringHeaderTypeKey = 70;</code>
+         */
+        public static final int StringHeaderTypeKey_VALUE = 70;
+        /**
+         * <code>StringHeaderTypeCarbon = 72;</code>
+         */
+        public static final int StringHeaderTypeCarbon_VALUE = 72;
+        /**
+         * <code>StringHeaderTypeMode = 76;</code>
+         */
+        public static final int StringHeaderTypeMode_VALUE = 76;
 
 
-    public final int getNumber() { return value; }
+        public final int getNumber() { return value; }
 
-    public static IQMessageKeyType valueOf(int value) {
-      switch (value) {
-        case 1: return IQKeyBind;
-        case 2: return IQKeyMucCreate;
-        case 3: return IQKeyMucCreateV2;
-        case 4: return IQKeyMucInviteV2;
-        case 5: return IQKeyGetMucUser;
-        case 6: return IQKeySetMucUser;
-        case 7: return IQKeyDelMucUser;
-        case 8: return IQKeyAddUserSubscribe;
-        case 9: return IQKeyDelUserSubscribe;
-        case 10: return IQKeyGetUserSubScribe;
-        case 11: return IQKeyGetVerifyFriendOpt;
-        case 12: return IQKeySetVerifyFriendOpt;
-        case 13: return IQKeySetUserSubScribeV2;
-        case 14: return IQKeyGetUserSubScribeV2;
-        case 16: return IQKeyGetUserFriend;
-        case 18: return IQKeyDelUserFriend;
-        case 20: return IQKeyGetUserKey;
-        case 22: return IQKeyGetUserMask;
-        case 24: return IQKeySetUserMask;
-        case 26: return IQKeyCancelUSerMask;
-        case 28: return IQKeySetAdmin;
-        case 30: return IQKeySetMember;
-        case 32: return IQKeyCancelMember;
-        case 36: return IQKeyGetUserMucs;
-        case 40: return IQKeyDestroyMuc;
-        case 50: return IQKeyPing;
-        case 52: return IQKeyAddPush;
-        case 60: return IQKeyCancelPush;
-        case 80: return IQKeyResult;
-        case 90: return IQKeyError;
-        case 92: return IQKeyGetVUser;
-        case 94: return IQKeyGetVUserRole;
-        case 96: return IQKeyStartSession;
-        case 98: return IQKeyEndSession;
-        default: return null;
-      }
-    }
+        public static StringHeaderType valueOf(int value) {
+            switch (value) {
+                case 1: return StringHeaderTypeChatId;
+                case 2: return StringHeaderTypeChannelId;
+                case 3: return StringHeaderTypeExtendInfo;
+                case 4: return StringHeaderTypeBackupInfo;
+                case 5: return StringHeaderTypeReadType;
+                case 7: return StringHeaderTypeJid;
+                case 8: return StringHeaderTypeRealJid;
+                case 9: return StringHeaderTypeInviteJid;
+                case 10: return StringHeaderTypeDeleleJid;
+                case 12: return StringHeaderTypeNick;
+                case 16: return StringHeaderTypeTitle;
+                case 18: return StringHeaderTypePic;
+                case 20: return StringHeaderTypeVersion;
+                case 22: return StringHeaderTypeMethod;
+                case 24: return StringHeaderTypeBody;
+                case 28: return StringHeaderTypeAffiliation;
+                case 30: return StringHeaderTypeType;
+                case 32: return StringHeaderTypeResult;
+                case 34: return StringHeaderTypeReason;
+                case 36: return StringHeaderTypeRole;
+                case 38: return StringHeaderTypeDomain;
+                case 40: return StringHeaderTypeStatus;
+                case 42: return StringHeaderTypeCode;
+                case 50: return StringHeaderTypeCdata;
+                case 52: return StringHeaderTypeTimeValue;
+                case 54: return StringHeaderTypeKeyValue;
+                case 56: return StringHeaderTypeName;
+                case 58: return StringHeaderTypeHost;
+                case 60: return StringHeaderTypeQuestion;
+                case 62: return StringHeaderTypeAnswer;
+                case 64: return StringHeaderTypeFriends;
+                case 66: return StringHeaderTypeValue;
+                case 68: return StringHeaderTypeMaskedUuser;
+                case 70: return StringHeaderTypeKey;
+                case 72: return StringHeaderTypeCarbon;
+                case 76: return StringHeaderTypeMode;
+                default: return null;
+            }
+        }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<IQMessageKeyType>
+        public static com.google.protobuf.Internal.EnumLiteMap<StringHeaderType>
         internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<IQMessageKeyType>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<IQMessageKeyType>() {
-            public IQMessageKeyType findValueByNumber(int number) {
-              return IQMessageKeyType.valueOf(number);
-            }
-          };
+            return internalValueMap;
+        }
+        private static com.google.protobuf.Internal.EnumLiteMap<StringHeaderType>
+                internalValueMap =
+                new com.google.protobuf.Internal.EnumLiteMap<StringHeaderType>() {
+                    public StringHeaderType findValueByNumber(int number) {
+                        return StringHeaderType.valueOf(number);
+                    }
+                };
 
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
+            return getDescriptor().getValues().get(index);
+        }
+        public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
+            return getDescriptor();
+        }
+        public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(4);
+            return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(3);
+        }
+
+        private static final StringHeaderType[] VALUES = values();
+
+        public static StringHeaderType valueOf(
+                com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            if (desc.getType() != getDescriptor()) {
+                throw new IllegalArgumentException(
+                        "EnumValueDescriptor is not for this type.");
+            }
+            return VALUES[desc.getIndex()];
+        }
+
+        private final int index;
+        private final int value;
+
+        private StringHeaderType(int index, int value) {
+            this.index = index;
+            this.value = value;
+        }
+
+        // @@protoc_insertion_point(enum_scope:StringHeaderType)
     }
 
-    private static final IQMessageKeyType[] VALUES = values();
-
-    public static IQMessageKeyType valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private IQMessageKeyType(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:IQMessageKeyType)
-  }
-
-  /**
-   * Protobuf enum {@code StreamEndCode}
-   */
-  public enum StreamEndCode
-      implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>StreamEndCodeReloginBase = 100;</code>
-     *
-     * <pre>
-     * 100 &lt;= code &lt; 200 全部重新登录
-     * </pre>
+     * Protobuf enum {@code IQMessageKeyType}
      */
-    StreamEndCodeReloginBase(0, 100),
-    /**
-     * <code>StreamEndCodeReloginFromNav = 101;</code>
-     *
-     * <pre>
-     * 重新登录且重新获取导航
-     * </pre>
-     */
-    StreamEndCodeReloginFromNav(1, 101),
-    /**
-     * <code>StreamEndCodeNoReloginBase = 200;</code>
-     *
-     * <pre>
-     * 200 &lt;= code ;1 退到登录界面&amp; 2 不重新登录&amp; 3 提示被踢文案
-     * </pre>
-     */
-    StreamEndCodeNoReloginBase(2, 200),
-    ;
+    public enum IQMessageKeyType
+            implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>IQKeyBind = 1;</code>
+         */
+        IQKeyBind(0, 1),
+        /**
+         * <code>IQKeyMucCreate = 2;</code>
+         */
+        IQKeyMucCreate(1, 2),
+        /**
+         * <code>IQKeyMucCreateV2 = 3;</code>
+         */
+        IQKeyMucCreateV2(2, 3),
+        /**
+         * <code>IQKeyMucInviteV2 = 4;</code>
+         */
+        IQKeyMucInviteV2(3, 4),
+        /**
+         * <code>IQKeyGetMucUser = 5;</code>
+         */
+        IQKeyGetMucUser(4, 5),
+        /**
+         * <code>IQKeySetMucUser = 6;</code>
+         */
+        IQKeySetMucUser(5, 6),
+        /**
+         * <code>IQKeyDelMucUser = 7;</code>
+         */
+        IQKeyDelMucUser(6, 7),
+        /**
+         * <code>IQKeyAddUserSubscribe = 8;</code>
+         */
+        IQKeyAddUserSubscribe(7, 8),
+        /**
+         * <code>IQKeyDelUserSubscribe = 9;</code>
+         */
+        IQKeyDelUserSubscribe(8, 9),
+        /**
+         * <code>IQKeyGetUserSubScribe = 10;</code>
+         */
+        IQKeyGetUserSubScribe(9, 10),
+        /**
+         * <code>IQKeyGetVerifyFriendOpt = 11;</code>
+         */
+        IQKeyGetVerifyFriendOpt(10, 11),
+        /**
+         * <code>IQKeySetVerifyFriendOpt = 12;</code>
+         */
+        IQKeySetVerifyFriendOpt(11, 12),
+        /**
+         * <code>IQKeySetUserSubScribeV2 = 13;</code>
+         */
+        IQKeySetUserSubScribeV2(12, 13),
+        /**
+         * <code>IQKeyGetUserSubScribeV2 = 14;</code>
+         */
+        IQKeyGetUserSubScribeV2(13, 14),
+        /**
+         * <code>IQKeyGetUserFriend = 16;</code>
+         */
+        IQKeyGetUserFriend(14, 16),
+        /**
+         * <code>IQKeyDelUserFriend = 18;</code>
+         */
+        IQKeyDelUserFriend(15, 18),
+        /**
+         * <code>IQKeyGetUserKey = 20;</code>
+         */
+        IQKeyGetUserKey(16, 20),
+        /**
+         * <code>IQKeyGetUserMask = 22;</code>
+         */
+        IQKeyGetUserMask(17, 22),
+        /**
+         * <code>IQKeySetUserMask = 24;</code>
+         */
+        IQKeySetUserMask(18, 24),
+        /**
+         * <code>IQKeyCancelUSerMask = 26;</code>
+         */
+        IQKeyCancelUSerMask(19, 26),
+        /**
+         * <code>IQKeySetAdmin = 28;</code>
+         */
+        IQKeySetAdmin(20, 28),
+        /**
+         * <code>IQKeySetMember = 30;</code>
+         */
+        IQKeySetMember(21, 30),
+        /**
+         * <code>IQKeyCancelMember = 32;</code>
+         */
+        IQKeyCancelMember(22, 32),
+        /**
+         * <code>IQKeyGetUserMucs = 36;</code>
+         */
+        IQKeyGetUserMucs(23, 36),
+        /**
+         * <code>IQKeyDestroyMuc = 40;</code>
+         */
+        IQKeyDestroyMuc(24, 40),
+        /**
+         * <code>IQKeyPing = 50;</code>
+         */
+        IQKeyPing(25, 50),
+        /**
+         * <code>IQKeyAddPush = 52;</code>
+         */
+        IQKeyAddPush(26, 52),
+        /**
+         * <code>IQKeyCancelPush = 60;</code>
+         */
+        IQKeyCancelPush(27, 60),
+        /**
+         * <code>IQKeyResult = 80;</code>
+         */
+        IQKeyResult(28, 80),
+        /**
+         * <code>IQKeyError = 90;</code>
+         */
+        IQKeyError(29, 90),
+        /**
+         * <code>IQKeyGetVUser = 92;</code>
+         */
+        IQKeyGetVUser(30, 92),
+        /**
+         * <code>IQKeyGetVUserRole = 94;</code>
+         */
+        IQKeyGetVUserRole(31, 94),
+        /**
+         * <code>IQKeyStartSession = 96;</code>
+         */
+        IQKeyStartSession(32, 96),
+        /**
+         * <code>IQKeyEndSession = 98;</code>
+         */
+        IQKeyEndSession(33, 98),
+        /**
+         * <code>IQKeySessionEvent = 99;</code>
+         */
+        IQKeySessionEvent(34, 99),
+        ;
 
-    /**
-     * <code>StreamEndCodeReloginBase = 100;</code>
-     *
-     * <pre>
-     * 100 &lt;= code &lt; 200 全部重新登录
-     * </pre>
-     */
-    public static final int StreamEndCodeReloginBase_VALUE = 100;
-    /**
-     * <code>StreamEndCodeReloginFromNav = 101;</code>
-     *
-     * <pre>
-     * 重新登录且重新获取导航
-     * </pre>
-     */
-    public static final int StreamEndCodeReloginFromNav_VALUE = 101;
-    /**
-     * <code>StreamEndCodeNoReloginBase = 200;</code>
-     *
-     * <pre>
-     * 200 &lt;= code ;1 退到登录界面&amp; 2 不重新登录&amp; 3 提示被踢文案
-     * </pre>
-     */
-    public static final int StreamEndCodeNoReloginBase_VALUE = 200;
+        /**
+         * <code>IQKeyBind = 1;</code>
+         */
+        public static final int IQKeyBind_VALUE = 1;
+        /**
+         * <code>IQKeyMucCreate = 2;</code>
+         */
+        public static final int IQKeyMucCreate_VALUE = 2;
+        /**
+         * <code>IQKeyMucCreateV2 = 3;</code>
+         */
+        public static final int IQKeyMucCreateV2_VALUE = 3;
+        /**
+         * <code>IQKeyMucInviteV2 = 4;</code>
+         */
+        public static final int IQKeyMucInviteV2_VALUE = 4;
+        /**
+         * <code>IQKeyGetMucUser = 5;</code>
+         */
+        public static final int IQKeyGetMucUser_VALUE = 5;
+        /**
+         * <code>IQKeySetMucUser = 6;</code>
+         */
+        public static final int IQKeySetMucUser_VALUE = 6;
+        /**
+         * <code>IQKeyDelMucUser = 7;</code>
+         */
+        public static final int IQKeyDelMucUser_VALUE = 7;
+        /**
+         * <code>IQKeyAddUserSubscribe = 8;</code>
+         */
+        public static final int IQKeyAddUserSubscribe_VALUE = 8;
+        /**
+         * <code>IQKeyDelUserSubscribe = 9;</code>
+         */
+        public static final int IQKeyDelUserSubscribe_VALUE = 9;
+        /**
+         * <code>IQKeyGetUserSubScribe = 10;</code>
+         */
+        public static final int IQKeyGetUserSubScribe_VALUE = 10;
+        /**
+         * <code>IQKeyGetVerifyFriendOpt = 11;</code>
+         */
+        public static final int IQKeyGetVerifyFriendOpt_VALUE = 11;
+        /**
+         * <code>IQKeySetVerifyFriendOpt = 12;</code>
+         */
+        public static final int IQKeySetVerifyFriendOpt_VALUE = 12;
+        /**
+         * <code>IQKeySetUserSubScribeV2 = 13;</code>
+         */
+        public static final int IQKeySetUserSubScribeV2_VALUE = 13;
+        /**
+         * <code>IQKeyGetUserSubScribeV2 = 14;</code>
+         */
+        public static final int IQKeyGetUserSubScribeV2_VALUE = 14;
+        /**
+         * <code>IQKeyGetUserFriend = 16;</code>
+         */
+        public static final int IQKeyGetUserFriend_VALUE = 16;
+        /**
+         * <code>IQKeyDelUserFriend = 18;</code>
+         */
+        public static final int IQKeyDelUserFriend_VALUE = 18;
+        /**
+         * <code>IQKeyGetUserKey = 20;</code>
+         */
+        public static final int IQKeyGetUserKey_VALUE = 20;
+        /**
+         * <code>IQKeyGetUserMask = 22;</code>
+         */
+        public static final int IQKeyGetUserMask_VALUE = 22;
+        /**
+         * <code>IQKeySetUserMask = 24;</code>
+         */
+        public static final int IQKeySetUserMask_VALUE = 24;
+        /**
+         * <code>IQKeyCancelUSerMask = 26;</code>
+         */
+        public static final int IQKeyCancelUSerMask_VALUE = 26;
+        /**
+         * <code>IQKeySetAdmin = 28;</code>
+         */
+        public static final int IQKeySetAdmin_VALUE = 28;
+        /**
+         * <code>IQKeySetMember = 30;</code>
+         */
+        public static final int IQKeySetMember_VALUE = 30;
+        /**
+         * <code>IQKeyCancelMember = 32;</code>
+         */
+        public static final int IQKeyCancelMember_VALUE = 32;
+        /**
+         * <code>IQKeyGetUserMucs = 36;</code>
+         */
+        public static final int IQKeyGetUserMucs_VALUE = 36;
+        /**
+         * <code>IQKeyDestroyMuc = 40;</code>
+         */
+        public static final int IQKeyDestroyMuc_VALUE = 40;
+        /**
+         * <code>IQKeyPing = 50;</code>
+         */
+        public static final int IQKeyPing_VALUE = 50;
+        /**
+         * <code>IQKeyAddPush = 52;</code>
+         */
+        public static final int IQKeyAddPush_VALUE = 52;
+        /**
+         * <code>IQKeyCancelPush = 60;</code>
+         */
+        public static final int IQKeyCancelPush_VALUE = 60;
+        /**
+         * <code>IQKeyResult = 80;</code>
+         */
+        public static final int IQKeyResult_VALUE = 80;
+        /**
+         * <code>IQKeyError = 90;</code>
+         */
+        public static final int IQKeyError_VALUE = 90;
+        /**
+         * <code>IQKeyGetVUser = 92;</code>
+         */
+        public static final int IQKeyGetVUser_VALUE = 92;
+        /**
+         * <code>IQKeyGetVUserRole = 94;</code>
+         */
+        public static final int IQKeyGetVUserRole_VALUE = 94;
+        /**
+         * <code>IQKeyStartSession = 96;</code>
+         */
+        public static final int IQKeyStartSession_VALUE = 96;
+        /**
+         * <code>IQKeyEndSession = 98;</code>
+         */
+        public static final int IQKeyEndSession_VALUE = 98;
+        /**
+         * <code>IQKeySessionEvent = 99;</code>
+         */
+        public static final int IQKeySessionEvent_VALUE = 99;
 
 
-    public final int getNumber() { return value; }
+        public final int getNumber() { return value; }
 
-    public static StreamEndCode valueOf(int value) {
-      switch (value) {
-        case 100: return StreamEndCodeReloginBase;
-        case 101: return StreamEndCodeReloginFromNav;
-        case 200: return StreamEndCodeNoReloginBase;
-        default: return null;
-      }
-    }
+        public static IQMessageKeyType valueOf(int value) {
+            switch (value) {
+                case 1: return IQKeyBind;
+                case 2: return IQKeyMucCreate;
+                case 3: return IQKeyMucCreateV2;
+                case 4: return IQKeyMucInviteV2;
+                case 5: return IQKeyGetMucUser;
+                case 6: return IQKeySetMucUser;
+                case 7: return IQKeyDelMucUser;
+                case 8: return IQKeyAddUserSubscribe;
+                case 9: return IQKeyDelUserSubscribe;
+                case 10: return IQKeyGetUserSubScribe;
+                case 11: return IQKeyGetVerifyFriendOpt;
+                case 12: return IQKeySetVerifyFriendOpt;
+                case 13: return IQKeySetUserSubScribeV2;
+                case 14: return IQKeyGetUserSubScribeV2;
+                case 16: return IQKeyGetUserFriend;
+                case 18: return IQKeyDelUserFriend;
+                case 20: return IQKeyGetUserKey;
+                case 22: return IQKeyGetUserMask;
+                case 24: return IQKeySetUserMask;
+                case 26: return IQKeyCancelUSerMask;
+                case 28: return IQKeySetAdmin;
+                case 30: return IQKeySetMember;
+                case 32: return IQKeyCancelMember;
+                case 36: return IQKeyGetUserMucs;
+                case 40: return IQKeyDestroyMuc;
+                case 50: return IQKeyPing;
+                case 52: return IQKeyAddPush;
+                case 60: return IQKeyCancelPush;
+                case 80: return IQKeyResult;
+                case 90: return IQKeyError;
+                case 92: return IQKeyGetVUser;
+                case 94: return IQKeyGetVUserRole;
+                case 96: return IQKeyStartSession;
+                case 98: return IQKeyEndSession;
+                case 99: return IQKeySessionEvent;
+                default: return null;
+            }
+        }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<StreamEndCode>
+        public static com.google.protobuf.Internal.EnumLiteMap<IQMessageKeyType>
         internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<StreamEndCode>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<StreamEndCode>() {
-            public StreamEndCode findValueByNumber(int number) {
-              return StreamEndCode.valueOf(number);
-            }
-          };
+            return internalValueMap;
+        }
+        private static com.google.protobuf.Internal.EnumLiteMap<IQMessageKeyType>
+                internalValueMap =
+                new com.google.protobuf.Internal.EnumLiteMap<IQMessageKeyType>() {
+                    public IQMessageKeyType findValueByNumber(int number) {
+                        return IQMessageKeyType.valueOf(number);
+                    }
+                };
 
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
+            return getDescriptor().getValues().get(index);
+        }
+        public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
+            return getDescriptor();
+        }
+        public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(5);
+            return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(4);
+        }
+
+        private static final IQMessageKeyType[] VALUES = values();
+
+        public static IQMessageKeyType valueOf(
+                com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            if (desc.getType() != getDescriptor()) {
+                throw new IllegalArgumentException(
+                        "EnumValueDescriptor is not for this type.");
+            }
+            return VALUES[desc.getIndex()];
+        }
+
+        private final int index;
+        private final int value;
+
+        private IQMessageKeyType(int index, int value) {
+            this.index = index;
+            this.value = value;
+        }
+
+        // @@protoc_insertion_point(enum_scope:IQMessageKeyType)
     }
 
-    private static final StreamEndCode[] VALUES = values();
+    /**
+     * Protobuf enum {@code StreamEndCode}
+     */
+    public enum StreamEndCode
+            implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>StreamEndCodeReloginBase = 100;</code>
+         *
+         * <pre>
+         * 100 &lt;= code &lt; 200 全部重新登录
+         * </pre>
+         */
+        StreamEndCodeReloginBase(0, 100),
+        /**
+         * <code>StreamEndCodeReloginFromNav = 101;</code>
+         *
+         * <pre>
+         * 重新登录且重新获取导航
+         * </pre>
+         */
+        StreamEndCodeReloginFromNav(1, 101),
+        /**
+         * <code>StreamEndCodeNoReloginBase = 200;</code>
+         *
+         * <pre>
+         * 200 &lt;= code ;1 退到登录界面&amp; 2 不重新登录&amp; 3 提示被踢文案
+         * </pre>
+         */
+        StreamEndCodeNoReloginBase(2, 200),
+        ;
 
-    public static StreamEndCode valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
+        /**
+         * <code>StreamEndCodeReloginBase = 100;</code>
+         *
+         * <pre>
+         * 100 &lt;= code &lt; 200 全部重新登录
+         * </pre>
+         */
+        public static final int StreamEndCodeReloginBase_VALUE = 100;
+        /**
+         * <code>StreamEndCodeReloginFromNav = 101;</code>
+         *
+         * <pre>
+         * 重新登录且重新获取导航
+         * </pre>
+         */
+        public static final int StreamEndCodeReloginFromNav_VALUE = 101;
+        /**
+         * <code>StreamEndCodeNoReloginBase = 200;</code>
+         *
+         * <pre>
+         * 200 &lt;= code ;1 退到登录界面&amp; 2 不重新登录&amp; 3 提示被踢文案
+         * </pre>
+         */
+        public static final int StreamEndCodeNoReloginBase_VALUE = 200;
+
+
+        public final int getNumber() { return value; }
+
+        public static StreamEndCode valueOf(int value) {
+            switch (value) {
+                case 100: return StreamEndCodeReloginBase;
+                case 101: return StreamEndCodeReloginFromNav;
+                case 200: return StreamEndCodeNoReloginBase;
+                default: return null;
+            }
+        }
+
+        public static com.google.protobuf.Internal.EnumLiteMap<StreamEndCode>
+        internalGetValueMap() {
+            return internalValueMap;
+        }
+        private static com.google.protobuf.Internal.EnumLiteMap<StreamEndCode>
+                internalValueMap =
+                new com.google.protobuf.Internal.EnumLiteMap<StreamEndCode>() {
+                    public StreamEndCode findValueByNumber(int number) {
+                        return StreamEndCode.valueOf(number);
+                    }
+                };
+
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+            return getDescriptor().getValues().get(index);
+        }
+        public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+            return getDescriptor();
+        }
+        public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+            return com.qunar.qchat.utils.ProtoMessageOuterClass.getDescriptor().getEnumTypes().get(5);
+        }
+
+        private static final StreamEndCode[] VALUES = values();
+
+        public static StreamEndCode valueOf(
+                com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            if (desc.getType() != getDescriptor()) {
+                throw new IllegalArgumentException(
+                        "EnumValueDescriptor is not for this type.");
+            }
+            return VALUES[desc.getIndex()];
+        }
+
+        private final int index;
+        private final int value;
+
+        private StreamEndCode(int index, int value) {
+            this.index = index;
+            this.value = value;
+        }
+
+        // @@protoc_insertion_point(enum_scope:StreamEndCode)
     }
 
-    private final int index;
-    private final int value;
+    /**
+     * Protobuf enum {@code CategoryType}
+     */
+    public enum CategoryType
+            implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>CategoryOrganizational = 1;</code>
+         */
+        CategoryOrganizational(0, 1),
+        /**
+         * <code>CategorySessionList = 2;</code>
+         */
+        CategorySessionList(1, 2),
+        /**
+         * <code>CategoryNavigation = 3;</code>
+         *
+         * <pre>
+         *下发导航版本号通知
+         * </pre>
+         */
+        CategoryNavigation(2, 3),
+        /**
+         * <code>CategoryOPSNotification = 4;</code>
+         *
+         * <pre>
+         *OPS小红点通知
+         * </pre>
+         */
+        CategoryOPSNotification(3, 4),
+        /**
+         * <code>CategoryConfigSync = 6;</code>
+         *
+         * <pre>
+         *个人配置同步通知日历功能日历通同步
+         * </pre>
+         */
+        CategoryConfigSync(4, 6),
+        /**
+         * <code>CategoryMsgNotify = 7;</code>
+         *
+         * <pre>
+         *大客户端功能
+         * </pre>
+         */
+        CategoryMsgNotify(5, 7),
+        /**
+         * <code>CategoryCalendarSync = 8;</code>
+         *
+         * <pre>
+         *日历功能同步
+         * </pre>
+         */
+        CategoryCalendarSync(6, 8),
+        /**
+         * <code>CategoryOnlineClientSync = 9;</code>
+         *
+         * <pre>
+         *客户端在线情况同步
+         * </pre>
+         */
+        CategoryOnlineClientSync(7, 9),
+        /**
+         * <code>CategoryAskLog = 10;</code>
+         */
+        CategoryAskLog(8, 10),
+        /**
+         * <code>CategoryClientSpecialNotice = 11;</code>
+         *
+         * <pre>
+         *客户端之间特殊通信
+         * </pre>
+         */
+        CategoryClientSpecialNotice(9, 11),
+        /**
+         * <code>CategoryTickUser = 100;</code>
+         */
+        CategoryTickUser(10, 100),
+        /**
+         * <code>CategoryGlobalNotification = 98;</code>
+         *
+         * <pre>
+         *全局通知
+         * </pre>
+         */
+        CategoryGlobalNotification(11, 98),
+        /**
+         * <code>CategorySpecifyNotification = 99;</code>
+         *
+         * <pre>
+         *指定通知
+         * </pre>
+         */
+        CategorySpecifyNotification(12, 99),
+        /**
+         * <code>CategoryWorkWorldNotice = 12;</code>
+         *
+         * <pre>
+         *朋友圈朋友圈通知
+         * </pre>
+         */
+        CategoryWorkWorldNotice(13, 12),
+        /**
+         * <code>CategoryHotLineSync = 13;</code>
+         *
+         * <pre>
+         *热线账号同步
+         * </pre>
+         */
+        CategoryHotLineSync(14, 13),
+        ;
 
-    private StreamEndCode(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
+        /**
+         * <code>CategoryOrganizational = 1;</code>
+         */
+        public static final int CategoryOrganizational_VALUE = 1;
+        /**
+         * <code>CategorySessionList = 2;</code>
+         */
+        public static final int CategorySessionList_VALUE = 2;
+        /**
+         * <code>CategoryNavigation = 3;</code>
+         *
+         * <pre>
+         *下发导航版本号通知
+         * </pre>
+         */
+        public static final int CategoryNavigation_VALUE = 3;
+        /**
+         * <code>CategoryOPSNotification = 4;</code>
+         *
+         * <pre>
+         *OPS小红点通知
+         * </pre>
+         */
+        public static final int CategoryOPSNotification_VALUE = 4;
+        /**
+         * <code>CategoryConfigSync = 6;</code>
+         *
+         * <pre>
+         *个人配置同步通知日历功能日历通同步
+         * </pre>
+         */
+        public static final int CategoryConfigSync_VALUE = 6;
+        /**
+         * <code>CategoryMsgNotify = 7;</code>
+         *
+         * <pre>
+         *大客户端功能
+         * </pre>
+         */
+        public static final int CategoryMsgNotify_VALUE = 7;
+        /**
+         * <code>CategoryCalendarSync = 8;</code>
+         *
+         * <pre>
+         *日历功能同步
+         * </pre>
+         */
+        public static final int CategoryCalendarSync_VALUE = 8;
+        /**
+         * <code>CategoryOnlineClientSync = 9;</code>
+         *
+         * <pre>
+         *客户端在线情况同步
+         * </pre>
+         */
+        public static final int CategoryOnlineClientSync_VALUE = 9;
+        /**
+         * <code>CategoryAskLog = 10;</code>
+         */
+        public static final int CategoryAskLog_VALUE = 10;
+        /**
+         * <code>CategoryClientSpecialNotice = 11;</code>
+         *
+         * <pre>
+         *客户端之间特殊通信
+         * </pre>
+         */
+        public static final int CategoryClientSpecialNotice_VALUE = 11;
+        /**
+         * <code>CategoryTickUser = 100;</code>
+         */
+        public static final int CategoryTickUser_VALUE = 100;
+        /**
+         * <code>CategoryGlobalNotification = 98;</code>
+         *
+         * <pre>
+         *全局通知
+         * </pre>
+         */
+        public static final int CategoryGlobalNotification_VALUE = 98;
+        /**
+         * <code>CategorySpecifyNotification = 99;</code>
+         *
+         * <pre>
+         *指定通知
+         * </pre>
+         */
+        public static final int CategorySpecifyNotification_VALUE = 99;
+        /**
+         * <code>CategoryWorkWorldNotice = 12;</code>
+         *
+         * <pre>
+         *朋友圈朋友圈通知
+         * </pre>
+         */
+        public static final int CategoryWorkWorldNotice_VALUE = 12;
+        /**
+         * <code>CategoryHotLineSync = 13;</code>
+         *
+         * <pre>
+         *热线账号同步
+         * </pre>
+         */
+        public static final int CategoryHotLineSync_VALUE = 13;
 
-    // @@protoc_insertion_point(enum_scope:StreamEndCode)
-  }
 
-  /**
-   * Protobuf enum {@code CategoryType}
-   */
-  public enum CategoryType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>CategoryOrganizational = 1;</code>
-     */
-    CategoryOrganizational(0, 1),
-    /**
-     * <code>CategorySessionList = 2;</code>
-     */
-    CategorySessionList(1, 2),
-    /**
-     * <code>CategoryNavigation = 3;</code>
-     *
-     * <pre>
-     *下发导航版本号通知
-     * </pre>
-     */
-    CategoryNavigation(2, 3),
-    /**
-     * <code>CategoryAskLog = 10;</code>
-     */
-    CategoryAskLog(3, 10),
-    /**
-     * <code>CategoryTickUser = 100;</code>
-     */
-    CategoryTickUser(4, 100),
-    ;
+        public final int getNumber() { return value; }
 
-    /**
-     * <code>CategoryOrganizational = 1;</code>
-     */
-    public static final int CategoryOrganizational_VALUE = 1;
-    /**
-     * <code>CategorySessionList = 2;</code>
-     */
-    public static final int CategorySessionList_VALUE = 2;
-    /**
-     * <code>CategoryNavigation = 3;</code>
-     *
-     * <pre>
-     *下发导航版本号通知
-     * </pre>
-     */
-    public static final int CategoryNavigation_VALUE = 3;
-    /**
-     * <code>CategoryAskLog = 10;</code>
-     */
-    public static final int CategoryAskLog_VALUE = 10;
-    /**
-     * <code>CategoryTickUser = 100;</code>
-     */
-    public static final int CategoryTickUser_VALUE = 100;
+        public static CategoryType valueOf(int value) {
+            switch (value) {
+                case 1: return CategoryOrganizational;
+                case 2: return CategorySessionList;
+                case 3: return CategoryNavigation;
+                case 4: return CategoryOPSNotification;
+                case 6: return CategoryConfigSync;
+                case 7: return CategoryMsgNotify;
+                case 8: return CategoryCalendarSync;
+                case 9: return CategoryOnlineClientSync;
+                case 10: return CategoryAskLog;
+                case 11: return CategoryClientSpecialNotice;
+                case 100: return CategoryTickUser;
+                case 98: return CategoryGlobalNotification;
+                case 99: return CategorySpecifyNotification;
+                case 12: return CategoryWorkWorldNotice;
+                case 13: return CategoryHotLineSync;
+                default: return null;
+            }
 
-
-    public final int getNumber() { return value; }
-
-    public static CategoryType valueOf(int value) {
-      switch (value) {
-        case 1: return CategoryOrganizational;
-        case 2: return CategorySessionList;
-        case 3: return CategoryNavigation;
-        case 10: return CategoryAskLog;
-        case 100: return CategoryTickUser;
-        default: return null;
-      }
-    }
+        }
 
     public static com.google.protobuf.Internal.EnumLiteMap<CategoryType>
         internalGetValueMap() {
