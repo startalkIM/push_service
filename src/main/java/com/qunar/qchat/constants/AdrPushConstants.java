@@ -9,6 +9,7 @@ public class AdrPushConstants {
     public static final String TABLE_NAME_CLIENT_CONFIG = "client_config_sync";
     public static final String TABLE_NAME_MUC_ROOM_INFO = "muc_room_info";
 
+    public static final String NAME_FCM = "fcmpush";
     public static final String NAME_XIAOMI = "mipush";
     public static final String NAME_HUAWEI = "hwpush";
     public static final String NAME_MEIZU = "mzpush";
