@@ -123,7 +123,7 @@ public class SpoolMessageService {
         try {
             PushInfo info = null;
             //获取push_info
-            int status = 0;
+            int status = MessageSettingsTag.DEFAULT_ALL;
             String pushinfocache = pushInfoService.cachePushInfo(toUser, toDomain);
             if (!TextUtils.isEmpty(pushinfocache)) {
                 try {
