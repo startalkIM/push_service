@@ -622,39 +622,9 @@
 
     <profiles>
         <profile>
-            <id>beta</id>
-            <properties>
-                <env.resources>src/main/env_resources/beta</env.resources>
-            </properties>
-        </profile>
-        <profile>
-            <id>beta_qchat</id>
-            <properties>
-                <env.resources>src/main/env_resources/beta_qchat</env.resources>
-            </properties>
-        </profile>
-        <profile>
-            <id>beta_pubim</id>
-            <properties>
-                <env.resources>src/main/env_resources/beta_pubim</env.resources>
-            </properties>
-        </profile>
-        <profile>
             <id>prod</id>
             <properties>
                 <env.resources>src/main/env_resources/prod</env.resources>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod_chat</id>
-            <properties>
-                <env.resources>src/main/env_resources/prod_qchat</env.resources>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod_pubim</id>
-            <properties>
-                <env.resources>src/main/env_resources/prod_pubim</env.resources>
             </properties>
         </profile>
     </profiles>
