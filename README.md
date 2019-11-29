@@ -122,4 +122,4 @@ post body是个json,内容为类似这样的形式:
 <br>qtalk_push_key=
 
 ## 问题反馈
-**qchat@qunar.com（邮件）**
+**push_support@startalk.im（邮件）**
