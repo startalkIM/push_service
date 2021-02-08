@@ -22,11 +22,14 @@ push服务支持qtalk消息push，同时也支持接入自己的push服务
 对于已经私有化部署的用户来说比较简单，不需要下载，更新服务，只需要按照如下步骤执行即可.
 全程只需要修改一个配置文件，重启下服务即可。
 一共有四步：
-```
+
 第一步：
+```
 $ vim /startalk/tomcat/push_service/webapps/push_service/WEB-INF/classes/app.properties
+```
 
 第二步：
+```
 在配置文件中，找到:
 qtalk_push_url=
 
