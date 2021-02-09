@@ -117,10 +117,12 @@ post body是个json,内容为类似这样的形式:
 ```
 ***
 
-#使用QTalk/Startalk客户端的情况如要使用push，需要联系客服配置下面信息
-<br>qtalk_push_url=
-<br>#使用星语push key
-<br>qtalk_push_key=
-
+# 配置
+使用QTalk/Startalk客户端的情况如要使用push，需要联系客服配置下面信息
+```
+qtalk_push_url=
+#使用星语push key
+qtalk_push_key=
+```
 ## 问题反馈
-**push_support@startalk.im（邮件）**
+**app(AT)startalk.im（邮件）**
