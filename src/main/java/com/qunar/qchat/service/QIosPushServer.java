@@ -12,7 +12,6 @@ import java.util.HashMap;
  */
 @Service
 public class QIosPushServer {
-
     private HashMap<String, IosPushModel> serviceMap = null;
     private HashMap<String, IosPushModel> serviceMapBeta = null;
 
@@ -29,6 +28,12 @@ public class QIosPushServer {
                     && !TextUtils.isEmpty(Config.IOS_PUSH_CERT_PWD)) {
                 final String qtalkpro = Config.class.getClassLoader().getResource(Config.IOS_PUSH_CERT_QTALK).getPath();
                 serviceMap.put(Config.IOS_PUSH_PKG_QTALK, new IosPushModel(qtalkpro, Config.IOS_PUSH_CERT_PWD));
+            }else if(!TextUtils.isEmpty(Config.IOS_PUSH_AUTH_TEAM_ID)
+                    && !TextUtils.isEmpty(Config.IOS_PUSH_AUTH_TOKEN_ID)
+                    && !TextUtils.isEmpty(Config.IOS_PUSH_AUTH_TOKEN_FILE)
+                    && !TextUtils.isEmpty(Config.IOS_PUSH_AUTH_TOPIC)){
+                final String qtalkpro = Config.class.getClassLoader().getResource(Config.IOS_PUSH_AUTH_TOKEN_FILE).getPath();
+                serviceMap.put(Config.IOS_PUSH_AUTH_TOPIC, new IosPushModel(qtalkpro, Config.IOS_PUSH_AUTH_TEAM_ID, Config.IOS_PUSH_AUTH_TOKEN_ID));
             }
         }
         if(serviceMapBeta == null) {
@@ -50,7 +55,6 @@ public class QIosPushServer {
     public boolean isProd(String bid) {
         return serviceMap.containsKey(bid);
     }
-
 
     public IosPushModel getBetaCert(String bid) {
         return serviceMapBeta.get(bid);
