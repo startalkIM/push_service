@@ -36,6 +36,16 @@ public class Config {
     public static final String IOS_PUSH_PKG_BETA_QTALK = getProperty("ios_push_bid_beta");
     public static final String IOS_PUSH_CERT_QTALK_BETA = getProperty("ios_push_cer_qtalk_beta");
     public static final String IOS_PUSH_CERT_PWD_QTALK_BETA = getProperty("ios_push_cer_pwd_beta");
+//    token验证
+    public static final String IOS_PUSH_AUTH_TEAM_ID = getProperty("team_id");
+    public static final String IOS_PUSH_AUTH_TOKEN_ID = getProperty("token_key_id");
+    public static final String IOS_PUSH_AUTH_TOKEN_FILE = getProperty("key_file_location");
+    public static final String IOS_PUSH_AUTH_TOPIC = getProperty("ios_push_bid");
+    public static final String IOS_TRUSTED_AAA_CERT = getProperty("ios_trusted_aaa_file");
+    public static final String IOS_TRUSTED_GEO_CERT = getProperty("ios_trusted_geo_file");
+
+
+
     /**私有化push接口url*/
     public static final String PRIVATE_PUSH_URL = getProperty("private.push.url");
 

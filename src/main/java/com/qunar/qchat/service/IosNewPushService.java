@@ -1,29 +1,36 @@
 package com.qunar.qchat.service;
 
 import com.alibaba.fastjson.JSON;
+//import com.notnoop.apns.PayloadBuilder;
 import com.qunar.qchat.constants.Config;
 import com.qunar.qchat.dao.model.NotificationInfo;
 import com.qunar.qchat.utils.JacksonUtils;
 import com.qunar.qchat.utils.ProtoMessageOuterClass;
-import com.turo.pushy.apns.ApnsClient;
-import com.turo.pushy.apns.ApnsClientBuilder;
-import com.turo.pushy.apns.DeliveryPriority;
-import com.turo.pushy.apns.PushNotificationResponse;
-import com.turo.pushy.apns.util.ApnsPayloadBuilder;
-import com.turo.pushy.apns.util.SimpleApnsPushNotification;
-import com.turo.pushy.apns.util.TokenUtil;
-import com.turo.pushy.apns.util.concurrent.PushNotificationFuture;
-import com.turo.pushy.apns.util.concurrent.PushNotificationResponseListener;
+import com.eatthepath.pushy.apns.util.SimpleApnsPayloadBuilder;
+import com.eatthepath.pushy.apns.ApnsClient;
+import com.eatthepath.pushy.apns.ApnsClientBuilder;
+import com.eatthepath.pushy.apns.DeliveryPriority;
+import com.eatthepath.pushy.apns.PushNotificationResponse;
+import com.eatthepath.pushy.apns.util.ApnsPayloadBuilder;
+import com.eatthepath.pushy.apns.util.SimpleApnsPushNotification;
+import com.eatthepath.pushy.apns.util.TokenUtil;
+import com.eatthepath.pushy.apns.util.concurrent.PushNotificationFuture;
+import com.eatthepath.pushy.apns.auth.ApnsSigningKey;
+
+import io.netty.handler.codec.http2.Http2FrameLogger;
+import io.netty.handler.logging.LogLevel;
 import org.apache.http.util.TextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.net.ssl.SSLException;
 import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.time.Instant;
 
 /**
  * Created by lffan.liu on 2018/1/23.
@@ -44,50 +51,99 @@ public class IosNewPushService {
                 serviceMap = new HashMap<>();
             }
 
-            if (serviceMap.containsKey(notificationInfo.pkgname)) {
-                client = serviceMap.get(notificationInfo.pkgname);
-            } else {
-                client = null;
-            }
+
+            client = serviceMap.getOrDefault(notificationInfo.pkgname, null);
             String cert = "";
             String pwd = "";
-            if(qIosPushServer.isBeta(notificationInfo.pkgname)) {
-                if(qIosPushServer.getBetaCert(notificationInfo.pkgname) != null) {
+            String key = "";
+            String teamId = "";
+            String keyId = "";
+//            获取证书
+            if (qIosPushServer.isBeta(notificationInfo.pkgname)) {
+                if (qIosPushServer.getBetaCert(notificationInfo.pkgname) != null) {
                     cert = qIosPushServer.getBetaCert(notificationInfo.pkgname).certPath;
                     pwd = qIosPushServer.getBetaCert(notificationInfo.pkgname).certPwd;
                 }
-            } else if(qIosPushServer.isProd(notificationInfo.pkgname)) {
-                if(qIosPushServer.getProCert(notificationInfo.pkgname) != null) {
-                    cert = qIosPushServer.getProCert(notificationInfo.pkgname).certPath;
-                    pwd = qIosPushServer.getProCert(notificationInfo.pkgname).certPwd;
+            } else if (qIosPushServer.isProd(notificationInfo.pkgname)) {
+                if (qIosPushServer.getProCert(notificationInfo.pkgname) != null) {
+                    if (qIosPushServer.getProCert(notificationInfo.pkgname).certPath != null) {
+                        cert = qIosPushServer.getProCert(notificationInfo.pkgname).certPath;
+                        pwd = qIosPushServer.getProCert(notificationInfo.pkgname).certPwd;
+                    } else if (qIosPushServer.getProCert(notificationInfo.pkgname).token != null) {
+                        key = qIosPushServer.getProCert(notificationInfo.pkgname).token;
+                        teamId = qIosPushServer.getProCert(notificationInfo.pkgname).teamId;
+                        keyId = qIosPushServer.getProCert(notificationInfo.pkgname).tokenId;
+                        LOGGER.info("ios push 证书  key={} teamid={} keyid={}", key, teamId, keyId);
+                    }
                 }
             }
-            if(TextUtils.isEmpty(cert) || TextUtils.isEmpty(pwd)) {
-                LOGGER.info("ios push 没找到证书  cert={} pwd={} info ={}", cert, pwd, JSON.toJSONString(notificationInfo));
+            if ((TextUtils.isEmpty(cert) || TextUtils.isEmpty(pwd)) && (TextUtils.isEmpty(key) || TextUtils.isEmpty(keyId) || TextUtils.isEmpty(teamId))) {
+                if ((TextUtils.isEmpty(cert) || TextUtils.isEmpty(pwd))) {
+                    LOGGER.info("ios push 没找到证书  cert={} pwd={} info={}", cert, pwd, JSON.toJSONString(notificationInfo));
+                } else {
+                    LOGGER.info("ios push 没找到证书  key={} keyId={} teamId={} info={}", key, keyId, teamId, JSON.toJSONString(notificationInfo));
+                }
                 return;
+            } else {
+                LOGGER.info("ios push 证书  cert={} pwd={} info ={}", cert, pwd, JSON.toJSONString(notificationInfo));
             }
             if (client == null) {
-                if(qIosPushServer.isBeta(notificationInfo.pkgname)) {
-                    client = new ApnsClientBuilder()
-                            .setApnsServer(ApnsClientBuilder.DEVELOPMENT_APNS_HOST)
-                            .setClientCredentials(new File(cert), pwd)
-                            .build();
-                } else if(qIosPushServer.isProd(notificationInfo.pkgname)) {
-                    client = new ApnsClientBuilder()
-                            .setApnsServer(ApnsClientBuilder.PRODUCTION_APNS_HOST)
-                            .setClientCredentials(new File(cert), pwd)
-                            .build();
-                }
+                try {
+                    if (qIosPushServer.isBeta(notificationInfo.pkgname)) {
+                        LOGGER.debug("测试环境");
+                        client = new ApnsClientBuilder()
+                                .setApnsServer(ApnsClientBuilder.DEVELOPMENT_APNS_HOST)
+                                .setClientCredentials(new File(cert), pwd)
+                                .build();
+                    } else if (qIosPushServer.isProd(notificationInfo.pkgname)) {
+//                        p8token验证
+                        if (!TextUtils.isEmpty(Config.IOS_PUSH_AUTH_TOKEN_FILE)) {
+                            try {
+                                // 创建pushy客户端
+                                client = new ApnsClientBuilder()
+                                        .setApnsServer(ApnsClientBuilder.PRODUCTION_APNS_HOST)
+                                        .setSigningKey(ApnsSigningKey.loadFromPkcs8File(new File(key), teamId, keyId))
+                                        .setConcurrentConnections(4)
+                                        // You need modify the code to import cert of X509Certificate
+//                                        .setTrustedServerCertificateChain(new File(Config.class.getClassLoader().getResource(Config.IOS_TRUSTED_AAA_CERT).getPath()))
+//                                        .setTrustedServerCertificateChain(new File(Config.class.getClassLoader().getResource(Config.IOS_TRUSTED_GEO_CERT).getPath()))
+                                        .setFrameLogger(new Http2FrameLogger(LogLevel.DEBUG))
+                                        .build();
+                                LOGGER.info("apns客户端生成成功");
 
+                            } catch (final SSLException | IllegalStateException e) {
+                                LOGGER.error("客户端实例失败", e);
+                                e.printStackTrace();
+                            }
+                        } else if (!TextUtils.isEmpty(Config.IOS_PUSH_CERT_PWD)) {
+                            client = new ApnsClientBuilder()
+                                    .setApnsServer(ApnsClientBuilder.PRODUCTION_APNS_HOST)
+                                    .setClientCredentials(new File(cert), pwd)
+                                    .build();
+                            LOGGER.info("apns客户端生成成功");
+                        }
+                        LOGGER.error("发现线上环境...");
+
+
+                    } else {
+                        LOGGER.info("无法获取prod 或者 beta, pkgname:{}", notificationInfo.pkgname);
+                        LOGGER.info("service map {}", qIosPushServer.toString());
+                    }
+                } catch (final Exception e) {
+                    LOGGER.error("客户端实例失败", e);
+                    e.printStackTrace();
+                }
             }
-            if(client == null) {
+            LOGGER.info("客户端实例完成");
+
+            if (client == null) {
                 LOGGER.info("ios push 不存在该bundleid  info ={}", JSON.toJSONString(notificationInfo));
                 return;
             }
-            final String fcert = cert;
+//            final String fcert = cert;
             serviceMap.put(notificationInfo.pkgname, client);
 
-            final ApnsPayloadBuilder payloadBuilder = new ApnsPayloadBuilder();
+            final ApnsPayloadBuilder payloadBuilder = new SimpleApnsPayloadBuilder();
             payloadBuilder.setAlertTitle(notificationInfo.title)
                     .setAlertBody(notificationInfo.description)
                     .setSound("default")
@@ -95,9 +151,7 @@ public class IosNewPushService {
                     .addCustomProperty("chattype", notificationInfo.type)
                     .addCustomProperty("jid", notificationInfo.fromjid)
                     .addCustomProperty("userid", notificationInfo.fromName + "@" + notificationInfo.fromHost);
-
             final String token = TokenUtil.sanitizeTokenString(notificationInfo.platkeys.get(0));
-
             if (notificationInfo.type == ProtoMessageOuterClass.SignalType.SignalTypeChat_VALUE
                     || notificationInfo.type == ProtoMessageOuterClass.SignalType.SignalTypeGroupChat_VALUE) {
 
@@ -112,50 +166,37 @@ public class IosNewPushService {
                 payloadBuilder.addCustomProperty("chatid", notificationInfo.chatid);
                 payloadBuilder.addCustomProperty("realjid", notificationInfo.realjid);
             }
+            LOGGER.debug("准备发送push");
+            String payload = payloadBuilder.build();
 
-            String payload = payloadBuilder.buildWithDefaultMaximumLength();
             SimpleApnsPushNotification pushNotification = new SimpleApnsPushNotification(token, notificationInfo.pkgname,
-                    payload, new Date(System.currentTimeMillis() + SimpleApnsPushNotification.DEFAULT_EXPIRATION_PERIOD_MILLIS),
+                    payload, Instant.now().plus(SimpleApnsPushNotification.DEFAULT_EXPIRATION_PERIOD),
                     DeliveryPriority.IMMEDIATE, notificationInfo.messageId);
-
             final PushNotificationFuture<SimpleApnsPushNotification, PushNotificationResponse<SimpleApnsPushNotification>>
                     sendNotificationFuture = client.sendNotification(pushNotification);
+            LOGGER.info("发送成功，等待服务器相应");
 
-            sendNotificationFuture.addListener(new PushNotificationResponseListener<SimpleApnsPushNotification>() {
+            try {
+                final PushNotificationResponse<SimpleApnsPushNotification> pushNotificationResponse =
+                        sendNotificationFuture.get();
 
-                @Override
-                public void operationComplete(final PushNotificationFuture<SimpleApnsPushNotification, PushNotificationResponse<SimpleApnsPushNotification>> future) throws Exception {
-                    // When using a listener, callers should check for a failure to send a
-                    // notification by checking whether the future itself was successful
-                    // since an exception will not be thrown.
-                    if (future.isSuccess()) {
-                        final PushNotificationResponse<SimpleApnsPushNotification> pushNotificationResponse =
-                                sendNotificationFuture.getNow();
-
-                        String result = "";
-                        if (pushNotificationResponse.isAccepted()) {
-                            result = "Push notification accepted by APNs gateway.";
-                        } else {
-                            result = "Notification rejected by the APNs gateway: " + pushNotificationResponse.getRejectionReason();
-
-                            if (pushNotificationResponse.getTokenInvalidationTimestamp() != null) {
-                                result += "\t…and the token is invalid as of " + pushNotificationResponse.getTokenInvalidationTimestamp();
-                            }
-                        }
-                        LOGGER.info("ios push send result={} cerpath={} notificationinfo={} touser={}", result, fcert, JacksonUtils.obj2String(notificationInfo), notificationInfo.toUserName);
-
-                        // Handle the push notification response as before from here.
-                    } else {
-                        // Something went wrong when trying to send the notification to the
-                        // APNs gateway. We can find the exception that caused the failure
-                        // by getting future.cause().
-                        LOGGER.info("ios push send failure reuslt={}", future.cause().getMessage());
-                    }
+                if (pushNotificationResponse.isAccepted()) {
+                    LOGGER.info("Push notification accepted by APNs gateway.");
+                } else {
+                    LOGGER.info("Notification rejected by the APNs gateway: " +
+                            pushNotificationResponse.getRejectionReason());
+                    pushNotificationResponse.getTokenInvalidationTimestamp().ifPresent(timestamp -> {
+                        LOGGER.info("\t…and the token is invalid as of " + timestamp);
+                    });
                 }
-
-            });
+            } catch (final Exception e) {
+                LOGGER.error("Failed to send push notification.");
+                e.printStackTrace();
+            }
         } catch (Exception e) {
-            LOGGER.error("IosNewPushService Exception={} msg={}", e, JacksonUtils.obj2String(notificationInfo));
+            LOGGER.error("IosNewPushService Exception={} msg={} ", e, JacksonUtils.obj2String(notificationInfo));
+            e.printStackTrace();
+
         }
     }
 
